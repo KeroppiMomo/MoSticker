@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "EditPackVC.donePressed(_:):EditPackVC.swift">
+      </ContextState>
+      <ContextState
+         contextName = "YYCGImageCreateEncodedWebPData:YYImageCoder.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "picture">
+            </PersistentString>
+            <PersistentString
+               value = "picture.buffer">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "imageMasking(_:maskImage:):Helper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "UIImage(cgImage: originalImg.cgImage!.masking(mask)!).pngData()!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

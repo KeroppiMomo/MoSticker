@@ -1,0 +1,93 @@
+html {
+    font-family: 'Avenir Next';
+    background-color: white;
+}
+body {
+    margin: 0;
+}
+.titlediv {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-image: linear-gradient(to left, #61fd7d, #5bc557);
+}
+.titlediv h1 {
+    position: relative;
+    display: inline-block;
+    width: 250px;
+    font-weight: bold;
+    color: white;
+    padding: 0;
+    margin: 20px 0px 20px 40px;
+    font-size: 50px;
+    z-index: 10;
+}
+.titlediv h2 {
+    position: relative;
+    display: inline-block;
+    font-weight: 550;
+    text-align: right;
+    color: white;
+    padding: 0;
+    margin: 20px 40px 20px 40px;
+    font-size: 40px;
+    z-index: 9;
+}
+
+.contentdiv p {
+    font-weight: 500;
+    color: black;
+    padding: 0;
+    margin: 15px 40px 15px 40px;
+    font-size: 20px;
+}
+.contentdiv h1, .contentdiv h2, .contentdiv h3, .contentdiv h4 {
+    color: rgb(120, 120, 120);
+    padding: 0;
+}
+.contentdiv h1 {
+    font-weight: 600;
+    font-size: 40px;
+    margin: 30px 40px 30px 40px;
+}
+.contentdiv h2 {
+    font-weight: 550;
+    font-size: 35px;
+    margin: 30px 40px 30px 40px;
+}
+.contentdiv h3 {
+    font-weight: 550;
+    font-size: 30px;
+    margin: 20px 40px 20px 40px;
+}
+.contentdiv h4 {
+    font-weight: 550;
+    font-size: 25px;
+    margin: 20px 40px 20px 40px;
+}
+.contentdiv h1::after, .contentdiv h2::after {
+    display: inline-block;
+    content: " ";
+    height: 3px;
+    width: 100%;
+    background-color: rgb(120, 120, 120);
+}
+ul li {
+    font-weight: 500;
+    font-size: 20px;
+    margin: 10px 40px 10px 40px;
+}
+a {
+    font-weight: 550;
+    color: black;
+}
+
+@media only screen and (min-width: 992px) {
+    .titlediv h1 {
+        margin-left: 150px;
+    }
+    ul li, .contentdiv p, .contentdiv h1, .contentdiv h2, .contentdiv h3, .contentdiv h4 {
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+}
