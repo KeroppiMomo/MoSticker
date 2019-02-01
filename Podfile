@@ -15,5 +15,8 @@ target 'MoSticker' do
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Google'
   pod 'FirebaseUI/Phone'
+  
+  pod 'Fabric'
+  pod 'Crashlytics'
 
 end

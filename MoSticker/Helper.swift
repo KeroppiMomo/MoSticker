@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 import YYImage
 import FirebaseAuth
+import Crashlytics
 
 func fractionInRange(min: CGFloat, max: CGFloat, x: CGFloat) -> CGFloat {
     return (x - min) / (max - min)
@@ -23,9 +24,17 @@ func getAppVersion() -> String? {
     return dict["CFBundleShortVersionString"] as? String
 }
 
-func printError(_ message: Any, file: String = #file, function: String = #function, line: Int = #line, column: Int = #column) {
+func printError(_ message: Any, file: String = #file, recordCrashlytics: Bool = true, function: String = #function, line: Int = #line, column: Int = #column) {
     let filename = (file as NSString).lastPathComponent
     print("\n‼️‼️‼️‼️‼️‼️ ERROR \n'\(message)'\n@ \(filename) \(line):\(column) \(function)\n‼️‼️‼️‼️‼️‼️\n")
+    
+    if recordCrashlytics {
+        if let error = message as? Error {
+            Crashlytics.sharedInstance().recordError(error)
+        } else {
+            Crashlytics.sharedInstance().recordCustomExceptionName(String(describing: message), reason: "\(filename) \(line):\(column) \(function)", frameArray: [])
+        }
+    }
 }
 func printWarning(_ message: Any, file: String = #file, function: String = #function, line: Int = #line, column: Int = #column) {
     let filename = (file as NSString).lastPathComponent

@@ -27,7 +27,7 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         do {
             packs = try StickerPackLocal.getAllPacks()
         } catch {
-            printError("Failed to get all packs: \(error)")
+            printError(error)
         }
         tableView.reloadSections([0], with: .none)
         if packs.count == 0 {

@@ -275,7 +275,7 @@ class EditPackLocalVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             isEditingMode = false
         } catch {
-            printError("Failed to save pack: \(error)")
+            printError(error)
         }
     }
     @IBAction func editPressed(_ sender: UIBarButtonItem) {

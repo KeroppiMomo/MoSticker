@@ -1,4 +1,7 @@
 PODS:
+  - Crashlytics (3.12.0):
+    - Fabric (~> 1.9.0)
+  - Fabric (1.9.0)
   - Firebase/Auth (5.15.0):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.2.0)
@@ -92,6 +95,8 @@ PODS:
     - YYImage/Core
 
 DEPENDENCIES:
+  - Crashlytics
+  - Fabric
   - Firebase/Core
   - Firebase/Database
   - FirebaseUI/Auth
@@ -102,6 +107,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Crashlytics
+    - Fabric
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -120,6 +127,8 @@ SPEC REPOS:
     - YYImage
 
 SPEC CHECKSUMS:
+  Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
+  Fabric: f988e33c97f08930a413e08123064d2e5f68d655
   Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
   FirebaseAnalytics: c06f9d70577d79074214700a71fd5d39de5550fb
   FirebaseAuth: 02e969ff430e156d99d4cb842d77b806b71ad7bb
@@ -137,6 +146,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: c56948ab162568aedc6c515270eb1b1757daa2d0
+PODFILE CHECKSUM: 14dce61d49602ab1974b93bfa8a04bc25f7a45b4
 
 COCOAPODS: 1.5.3
