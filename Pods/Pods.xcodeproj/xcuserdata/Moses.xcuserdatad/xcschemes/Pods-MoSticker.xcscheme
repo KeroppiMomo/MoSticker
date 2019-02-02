@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DE9F9045DB23124178B584245FDE1E60"
+               BlueprintIdentifier = "C97039FDDA7861CBA05C3FA0C88BF328"
                BuildableName = "Pods_MoSticker.framework"
                BlueprintName = "Pods-MoSticker"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DE9F9045DB23124178B584245FDE1E60"
+            BlueprintIdentifier = "C97039FDDA7861CBA05C3FA0C88BF328"
             BuildableName = "Pods_MoSticker.framework"
             BlueprintName = "Pods-MoSticker"
             ReferencedContainer = "container:Pods.xcodeproj">

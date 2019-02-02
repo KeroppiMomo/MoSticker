@@ -7,16 +7,22 @@ target 'MoSticker' do
 
   # Pods for MeSticker
 
+  # YYImage
   pod 'YYImage'
   pod 'YYImage/WebP'
+  
+  # Firebase Develop
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   
+  # Firebase AuthUI
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Google'
   pod 'FirebaseUI/Phone'
   
+  # Firebase Quality
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'Firebase/Performance'
 
 end
