@@ -271,6 +271,11 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
         StickerPackDB.updateUserName(name!) { (error) in
             self.dismiss(animated: true, completion: nil)
             self.displayName = name
+            
+            for i in 0..<self.packs.count {
+                self.packs[i].ownerName = name
+            }
+            
             if let error = error {
                 self.showErrorMessage(title: R.ProVC.changeNameErrorTitle, message: R.ProVC.changeNameErrorMessage)
                 printError(error)

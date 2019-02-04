@@ -171,6 +171,7 @@
 		A64D2BF421F404D600828646 /* EditPackDBVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64D2BF321F404D600828646 /* EditPackDBVC.swift */; };
 		A650264A21E4B631002E8BDF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A650264921E4B631002E8BDF /* GoogleService-Info.plist */; };
 		A655130D21FB1BD600A07E84 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = A655130C21FB1BD600A07E84 /* Resources.swift */; };
+		A660BA8622070AC300B43A65 /* DBPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = A660BA8522070AC300B43A65 /* DBPaths.swift */; };
 		A669D3FB21BB59DC001BCAEA /* PEBackRemoveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669D3FA21BB59DC001BCAEA /* PEBackRemoveVC.swift */; };
 		A669D3FF21BBBF81001BCAEA /* transparent_pattern.png in Resources */ = {isa = PBXBuildFile; fileRef = A669D3FE21BBBF81001BCAEA /* transparent_pattern.png */; };
 		A6C6DFA021E5F26200A85EE2 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C6DF9F21E5F26200A85EE2 /* SettingVC.swift */; };
@@ -446,6 +447,7 @@
 		A64D2BF321F404D600828646 /* EditPackDBVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPackDBVC.swift; sourceTree = "<group>"; };
 		A650264921E4B631002E8BDF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A655130C21FB1BD600A07E84 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		A660BA8522070AC300B43A65 /* DBPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBPaths.swift; sourceTree = "<group>"; };
 		A669D3FA21BB59DC001BCAEA /* PEBackRemoveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEBackRemoveVC.swift; sourceTree = "<group>"; };
 		A669D3FE21BBBF81001BCAEA /* transparent_pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent_pattern.png; sourceTree = "<group>"; };
 		A6C6DF9F21E5F26200A85EE2 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
@@ -1023,6 +1025,7 @@
 				A62BB9AA21E9CAF500F56FCC /* Sticker Pack Files */,
 				A63D9BF221E068B5000F84A1 /* target_bridging.h */,
 				A655130C21FB1BD600A07E84 /* Resources.swift */,
+				A660BA8522070AC300B43A65 /* DBPaths.swift */,
 			);
 			path = MoSticker;
 			sourceTree = "<group>";
@@ -1329,6 +1332,7 @@
 				A63D9B4C21E065B6000F84A1 /* alpha_enc.c in Sources */,
 				A63D9BBF21E065D1000F84A1 /* cost_neon.c in Sources */,
 				A6F52D6F21AFBA3700264105 /* HomeVC.swift in Sources */,
+				A660BA8622070AC300B43A65 /* DBPaths.swift in Sources */,
 				A63D9B5321E065B6000F84A1 /* picture_psnr_enc.c in Sources */,
 				A644328121C90D27003AA333 /* ViewImgVC.swift in Sources */,
 				A6F52DA021AFBADB00264105 /* Interoperability.swift in Sources */,
