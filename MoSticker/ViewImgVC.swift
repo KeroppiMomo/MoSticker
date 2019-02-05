@@ -21,7 +21,7 @@ class ViewImgVC: UIViewController {
     }
     
     @IBAction func sharePressed(_ sender: UIBarButtonItem) {
-        let activityVC = UIActivityViewController(activityItems: [image ?? UIImage()], applicationActivities: nil)
+        let activityVC = UIActivityViewController(activityItems: [(image ?? UIImage()).pngData()!], applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC, animated: true, completion: nil)
     }

@@ -22,8 +22,10 @@ func createCirlce(radius: CGFloat, color: UIColor) -> UIImage? {
 class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate {
     
     var curImage: UIImage!
+    var cachedImg: UIImage!
     var maskImage: UIImage!
-    
+    var maskCachedImage: UIImage!
+
     var delegate: PEDelegate?
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -76,6 +78,20 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
         UIRectFill(CGRect(origin: CGPoint.zero, size: curImage.size))
         maskImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
+        let cachedSize = CGSize(width: R.PE.BRVC.cachedImgRes, height: R.PE.BRVC.cachedImgRes)
+        UIGraphicsBeginImageContextWithOptions(cachedSize, true, 0.0)
+        UIColor.black.setFill()
+        UIRectFill(CGRect(origin: CGPoint.zero, size: cachedSize))
+        maskCachedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        UIGraphicsBeginImageContextWithOptions(cachedSize, false, 0.0)
+        UIColor.clear.setFill()
+        UIRectFill(CGRect(origin: .zero, size: cachedSize))
+        curImage.draw(in: CGRect(origin: .zero, size: cachedSize))
+        cachedImg = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -125,24 +141,52 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
     
     @IBAction func panGesture(_ sender: UIPanGestureRecognizer) {
         if modeIndex != 0,
-            let startingPoint = imageView.panningStartPoint {
-            let touchingPoint = startingPoint.added(with: sender.translation(in: imageView))
-            let pointOnImg = touchingPoint.mul(factor: curImage.size.width / view.frame.width)
-            
-            UIGraphicsBeginImageContextWithOptions(curImage.size, false, 0.0)
-            maskImage.draw(in: CGRect(origin: CGPoint.zero, size: maskImage.size))
-            
-            let maskColor = modeIndex == 1 ? UIColor.black : UIColor.white
-            let brushSize = calculateBrushSize()
-            createCirlce(radius: brushSize, color: maskColor)!.draw(at: pointOnImg.added(with: CGPoint(x: -brushSize / 2, y: -brushSize / 2)))
-            maskImage = UIGraphicsGetImageFromCurrentImageContext()
-            
-            if let maskedImage = imageMasking(curImage, maskImage: maskImage) {
-                imageView.image = maskedImage
-            } else {
-                printError("Masking fail")
+           let startingPoint = imageView.panningStartPoint {
+            func mask(brushSize: CGFloat, sourceImg: UIImage, maskImg: UIImage) -> (img: UIImage, mask: UIImage) {
+                let resultMask: UIImage!
+                let resultImg: UIImage!
+                
+                let touchingPoint = startingPoint.added(with: sender.translation(in: imageView))
+                let pointOnImg = touchingPoint.mul(factor: maskImg.size.width / view.frame.width)
+                
+                let maskColor = self.modeIndex == 1 ? UIColor.black : UIColor.white
+                UIGraphicsBeginImageContextWithOptions(maskImg.size, false, 0.0)
+                maskImg.draw(in: CGRect(origin: CGPoint.zero, size: maskImg.size))
+                
+                createCirlce(radius: brushSize, color: maskColor)!.draw(at: pointOnImg.added(with: CGPoint(x: -brushSize / 2, y: -brushSize / 2)))
+                resultMask = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                
+                UIGraphicsBeginImageContextWithOptions(sourceImg.size, false, 0.0)
+                resultMask.draw(in: CGRect(origin: .zero, size: sourceImg.size))
+                let resizedMask = UIGraphicsGetImageFromCurrentImageContext()!
+                UIGraphicsEndImageContext()
+                
+                if let maskedImage = imageMasking(sourceImg, maskImage: resizedMask) {
+                    resultImg = maskedImage
+                } else {
+                    printError("Masking fail: imageMasking(_:maskImage:) returns nil")
+                    resultImg = sourceImg
+                }
+                
+                return (resultImg, resultMask)
             }
-            UIGraphicsEndImageContext()
+            
+            let brushSize = self.calculateBrushSize()
+            if sender.state == .changed {
+//                let brushSize = self.calculateBrushSize() / (curImage.size.width / cachedImg.size.width)
+                let (resultImg, resultMask) = mask(brushSize: brushSize, sourceImg: cachedImg, maskImg: maskImage)
+                maskImage = resultMask
+                
+                self.imageView.image = resultImg
+            } else if sender.state == .ended {
+                let (resultImg, resultMask) = mask(brushSize: brushSize, sourceImg: curImage, maskImg: maskImage)
+                maskImage = resultMask
+                
+                self.imageView.image = resultImg
+
+            }
+            
         }
     }
     

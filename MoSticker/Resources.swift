@@ -172,6 +172,8 @@ class R {
             static let cropErrorMessage = "An error has occurred when cropping image."
         }
         class BRVC {
+            static let cachedImgRes = 96
+            
             static let enableScrollIcon = UIImage(named: "move_arrows_enabled")
             static let disableScrollIcon = UIImage(named: "move_arrows_disabled")
             static let enableIncludeIcon = UIImage(named: "pencil_enabled")
