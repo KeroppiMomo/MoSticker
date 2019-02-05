@@ -137,6 +137,7 @@ class R {
             static let imageSelectionCellID = "imageSelectCell"
             static let galleryCellID = "galleryCell"
             static let toPECropSegueID = "editPackLocal-peCrop"
+            static let toPECropScrollSegueID = "editPackLocal-peCropScroll"
             static let toViewImgSegueID = "editPackLocal-viewImg"
         }
         class DB {
@@ -145,6 +146,7 @@ class R {
             static let imageSelectionCellID = "imageSelectCell"
             static let galleryCellID = "galleryCell"
             static let toPECropSegueID = "editPackDB-peCrop"
+            static let toPECropScrollSegueID = "editPackDB-peCropScroll"
             static let toViewImgSegueID = "editPackDB-viewImg"
         }
     }
@@ -154,6 +156,20 @@ class R {
         class CroVC {
             static let toBackRemoveSegueID = "PECrop-PEBackRemove"
             static let minImageScale: CGFloat = 0.6
+            
+            static let selectSourceMessage = "Select image source"
+            static let fromCameraMessage = "From Camera"
+            static let fromLibraryMessage = "From Photo Library"
+        }
+        class CroSVC {
+            static let toBackRemoveSegueID = "PECropScroll-PEBackRemove"
+
+            static let selectSourceMessage = "Select image source"
+            static let fromCameraMessage = "From Camera"
+            static let fromLibraryMessage = "From Photo Library"
+            
+            static let cropErrorTitle = "Error: Failed to Crop Image"
+            static let cropErrorMessage = "An error has occurred when cropping image."
         }
         class BRVC {
             static let enableScrollIcon = UIImage(named: "move_arrows_enabled")

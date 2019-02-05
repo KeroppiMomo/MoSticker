@@ -232,9 +232,9 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isEditingMode {
             if indexPath.section == 1 && indexPath.row == 0 {
-                performSegue(withIdentifier: R.EPVCs.DB.toPECropSegueID, sender: R.EPVCs.trayIconRes)
+                performSegue(withIdentifier: R.EPVCs.DB.toPECropScrollSegueID, sender: R.EPVCs.trayIconRes)
             } else if indexPath.section == 2 && indexPath.row == 0 {
-                performSegue(withIdentifier: R.EPVCs.DB.toPECropSegueID, sender: R.EPVCs.stickerRes)
+                performSegue(withIdentifier: R.EPVCs.DB.toPECropScrollSegueID, sender: R.EPVCs.stickerRes)
             }
         } else {
             if indexPath.section == 3 {
@@ -334,8 +334,8 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     // MARK: Prepare Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == R.EPVCs.DB.toPECropSegueID,
-            let dvc = segue.destination as? PECropVC,
+        if segue.identifier == R.EPVCs.DB.toPECropScrollSegueID,
+            let dvc = segue.destination as? PECropScrollVC,
             let resolution = sender as? Int {
             dvc.resultResolution = resolution
             dvc.delegate = self

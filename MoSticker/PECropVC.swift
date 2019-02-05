@@ -34,16 +34,16 @@ class PECropVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         imagePicker.delegate = self
         imagePicker.allowsEditing = false
         
-        let alert = UIAlertController(title: nil, message: "Select image source", preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "From Camera", style: .default) { _ in
+        let alert = UIAlertController(title: nil, message: R.PE.CroVC.selectSourceMessage, preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: R.PE.CroVC.fromCameraMessage, style: .default) { _ in
             imagePicker.sourceType = .camera
             self.present(imagePicker, animated: true, completion: nil)
         }
-        let libraryAction = UIAlertAction(title: "From Photo Library", style: .default) { _ in
+        let libraryAction = UIAlertAction(title: R.PE.CroVC.fromLibraryMessage, style: .default) { _ in
             imagePicker.sourceType = .photoLibrary
             self.present(imagePicker, animated: true, completion: nil)
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+        let cancelAction = UIAlertAction(title: R.Common.cancel, style: .cancel) { _ in
             self.delegate?.peDidCancel?()
         }
         

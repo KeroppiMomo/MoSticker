@@ -119,9 +119,27 @@ extension CGRect {
     mutating func muled(factor: CGFloat) {
         self = self.mul(factor: factor)
     }
+    func add(with point: CGPoint) -> CGRect {
+        return CGRect(x: self.minX + point.x, y: self.minY + point.y, width: self.width, height: self.height)
+    }
 }
 
 extension UIView {
+    
+    @IBInspectable var borderColor: UIColor? {
+        get {
+            guard let color = self.layer.borderColor else { return nil }
+            return UIColor(cgColor: color)
+        }
+        set {
+            self.layer.borderColor = newValue?.cgColor
+        }
+    }
+    @IBInspectable var borderWidth: CGFloat {
+        get { return self.layer.borderWidth }
+        set { self.layer.borderWidth = newValue }
+    }
+    
     /// Helper to get pre transform frame
     var originalFrame: CGRect {
         let currentTransform = transform

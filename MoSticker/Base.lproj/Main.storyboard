@@ -645,6 +645,7 @@
                         <outlet property="tableView" destination="qbf-NE-3xJ" id="HZ4-1j-DpY"/>
                         <segue destination="n2Y-PS-34t" kind="show" identifier="editPackLocal-peCrop" id="f30-5u-cDn"/>
                         <segue destination="84p-Rv-lDA" kind="show" identifier="editPackLocal-viewImg" id="bUA-V8-wJ3"/>
+                        <segue destination="nFs-kM-cFp" kind="show" identifier="editPackLocal-peCropScroll" id="SZZ-oG-uw8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f94-cz-1e9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -889,6 +890,7 @@
                         <outlet property="tableView" destination="uYg-8r-1Jd" id="vpq-pZ-vme"/>
                         <segue destination="84p-Rv-lDA" kind="show" identifier="editPackDB-viewImg" id="3Jg-6q-tnQ"/>
                         <segue destination="n2Y-PS-34t" kind="show" identifier="editPackDB-peCrop" id="DL8-Im-5t9"/>
+                        <segue destination="nFs-kM-cFp" kind="show" identifier="editPackDB-peCropScroll" id="T89-hL-CIJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10v-H6-njF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -977,6 +979,115 @@
                 </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4340.579710144928" y="-458.03571428571428"/>
+        </scene>
+        <!--Cropping-->
+        <scene sceneID="VT1-ql-vfy">
+            <objects>
+                <viewController id="nFs-kM-cFp" customClass="PECropScrollVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="T5O-yH-OBF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="3" maximumZoomScale="50" translatesAutoresizingMaskIntoConstraints="NO" id="Ze0-yj-xw6">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7WO-oZ-d8D">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xDa-lx-fG8">
+                                                <rect key="frame" x="172.66666666666666" y="302" width="69" height="121"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="xDa-lx-fG8" firstAttribute="centerX" secondItem="7WO-oZ-d8D" secondAttribute="centerX" id="6AF-bU-B9U"/>
+                                            <constraint firstAttribute="height" secondItem="xDa-lx-fG8" secondAttribute="height" multiplier="6" id="OcT-Vh-M9I"/>
+                                            <constraint firstAttribute="width" secondItem="xDa-lx-fG8" secondAttribute="width" multiplier="6" id="XfZ-Tc-dSD"/>
+                                            <constraint firstItem="xDa-lx-fG8" firstAttribute="centerY" secondItem="7WO-oZ-d8D" secondAttribute="centerY" id="thI-Qe-ykb"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="7WO-oZ-d8D" firstAttribute="top" secondItem="Ze0-yj-xw6" secondAttribute="top" id="GvY-53-Byn"/>
+                                    <constraint firstItem="7WO-oZ-d8D" firstAttribute="width" secondItem="Ze0-yj-xw6" secondAttribute="width" id="JWy-Yg-LpB"/>
+                                    <constraint firstAttribute="bottom" secondItem="7WO-oZ-d8D" secondAttribute="bottom" id="PTg-iI-OCT"/>
+                                    <constraint firstAttribute="trailing" secondItem="7WO-oZ-d8D" secondAttribute="trailing" id="ZYl-SL-lbC"/>
+                                    <constraint firstItem="7WO-oZ-d8D" firstAttribute="height" secondItem="Ze0-yj-xw6" secondAttribute="height" id="oMV-DW-JbV"/>
+                                    <constraint firstItem="7WO-oZ-d8D" firstAttribute="leading" secondItem="Ze0-yj-xw6" secondAttribute="leading" id="sHF-cm-uD6"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="nFs-kM-cFp" id="ygS-nA-hOp"/>
+                                </connections>
+                            </scrollView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m2C-dm-AM7">
+                                <rect key="frame" x="0.0" y="243.66666666666663" width="414" height="414"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="m2C-dm-AM7" secondAttribute="height" id="LL1-wb-PfM"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DLU-a8-h9n">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="243.66666666666666"/>
+                                <color key="backgroundColor" white="0.5" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0i-QD-MjA">
+                                <rect key="frame" x="0.0" y="657.66666666666663" width="414" height="238.33333333333337"/>
+                                <color key="backgroundColor" white="0.5" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="m2C-dm-AM7" firstAttribute="leading" secondItem="uSU-AD-plx" secondAttribute="leading" id="1xg-ag-11F"/>
+                            <constraint firstAttribute="bottom" secondItem="a0i-QD-MjA" secondAttribute="bottom" id="3ub-Fd-HQq"/>
+                            <constraint firstItem="m2C-dm-AM7" firstAttribute="centerY" secondItem="T5O-yH-OBF" secondAttribute="centerYWithinMargins" id="6ZD-qA-XA3"/>
+                            <constraint firstItem="uSU-AD-plx" firstAttribute="trailing" secondItem="m2C-dm-AM7" secondAttribute="trailing" id="6bO-sc-oae"/>
+                            <constraint firstItem="uSU-AD-plx" firstAttribute="bottom" secondItem="Ze0-yj-xw6" secondAttribute="bottom" id="B2X-Eb-kUZ"/>
+                            <constraint firstItem="a0i-QD-MjA" firstAttribute="leading" secondItem="uSU-AD-plx" secondAttribute="leading" id="IwD-X7-RXn"/>
+                            <constraint firstItem="a0i-QD-MjA" firstAttribute="top" secondItem="m2C-dm-AM7" secondAttribute="bottom" id="NGH-Ap-3Hb"/>
+                            <constraint firstItem="DLU-a8-h9n" firstAttribute="leading" secondItem="uSU-AD-plx" secondAttribute="leading" id="QGL-d0-SpN"/>
+                            <constraint firstItem="Ze0-yj-xw6" firstAttribute="leading" secondItem="uSU-AD-plx" secondAttribute="leading" id="bjE-zL-Hap"/>
+                            <constraint firstItem="Ze0-yj-xw6" firstAttribute="top" secondItem="uSU-AD-plx" secondAttribute="top" id="iFR-uy-mdZ"/>
+                            <constraint firstItem="a0i-QD-MjA" firstAttribute="trailing" secondItem="uSU-AD-plx" secondAttribute="trailing" id="jMl-6X-HkY"/>
+                            <constraint firstItem="uSU-AD-plx" firstAttribute="trailing" secondItem="Ze0-yj-xw6" secondAttribute="trailing" id="jZB-P1-5Ex"/>
+                            <constraint firstItem="uSU-AD-plx" firstAttribute="trailing" secondItem="DLU-a8-h9n" secondAttribute="trailing" id="oU4-vi-Ij1"/>
+                            <constraint firstItem="DLU-a8-h9n" firstAttribute="top" secondItem="T5O-yH-OBF" secondAttribute="top" id="vQn-rH-rSK"/>
+                            <constraint firstItem="m2C-dm-AM7" firstAttribute="top" secondItem="DLU-a8-h9n" secondAttribute="bottom" id="vtU-yT-isy"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="uSU-AD-plx"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Cropping" id="ZZg-m0-slG">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="YDh-dN-CcT">
+                            <connections>
+                                <action selector="cancelPressed:" destination="nFs-kM-cFp" id="FOq-2c-haa"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Next" style="done" id="sBj-2d-xnB">
+                            <connections>
+                                <action selector="nextPressed:" destination="nFs-kM-cFp" id="Gu0-rK-ipC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cropWindowView" destination="m2C-dm-AM7" id="V75-yU-vq2"/>
+                        <outlet property="mainImageView" destination="xDa-lx-fG8" id="8eL-2U-Zjh"/>
+                        <outlet property="scrollView" destination="Ze0-yj-xw6" id="E3H-PK-qhs"/>
+                        <segue destination="o5Z-KD-caK" kind="show" identifier="PECropScroll-PEBackRemove" id="0UF-eP-Squ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N7q-ak-Car" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4340.579710144928" y="217.63392857142856"/>
         </scene>
         <!--Background Removing-->
         <scene sceneID="2qg-qr-Brx">
@@ -1841,6 +1952,8 @@
         <image name="undo" width="19.440000534057617" height="19.440000534057617"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="0UF-eP-Squ"/>
+        <segue reference="T89-hL-CIJ"/>
         <segue reference="DL8-Im-5t9"/>
         <segue reference="IcG-aE-qrK"/>
         <segue reference="DyE-zM-iIp"/>

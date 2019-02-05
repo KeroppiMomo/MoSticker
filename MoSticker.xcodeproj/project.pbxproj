@@ -17,6 +17,7 @@
 		A62BB9AC21E9CB4D00F56FCC /* StickerPackBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62BB9AB21E9CB4D00F56FCC /* StickerPackBase.swift */; };
 		A62E133921E8A7AE00FF5B79 /* LoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62E133721E8A7AE00FF5B79 /* LoadingVC.swift */; };
 		A62E133A21E8A7AE00FF5B79 /* LoadingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A62E133821E8A7AE00FF5B79 /* LoadingVC.xib */; };
+		A637486B2207DE71008E6F64 /* PECropScrollVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A637486A2207DE71008E6F64 /* PECropScrollVC.swift */; };
 		A638F14B21FF48E400E83447 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A638F14A21FF48E400E83447 /* SearchVC.swift */; };
 		A63C107821BCE868006160F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A63C107721BCE868006160F8 /* Assets.xcassets */; };
 		A63C107A21BD26C8006160F8 /* PanningImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63C107921BD26C8006160F8 /* PanningImageView.swift */; };
@@ -228,6 +229,7 @@
 		A62BB9AB21E9CB4D00F56FCC /* StickerPackBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPackBase.swift; sourceTree = "<group>"; };
 		A62E133721E8A7AE00FF5B79 /* LoadingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingVC.swift; sourceTree = "<group>"; };
 		A62E133821E8A7AE00FF5B79 /* LoadingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingVC.xib; sourceTree = "<group>"; };
+		A637486A2207DE71008E6F64 /* PECropScrollVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PECropScrollVC.swift; sourceTree = "<group>"; };
 		A638F14A21FF48E400E83447 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		A63C107721BCE868006160F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A63C107921BD26C8006160F8 /* PanningImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanningImageView.swift; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 			isa = PBXGroup;
 			children = (
 				A623FE4021B3757A00D3E885 /* PECropVC.swift */,
+				A637486A2207DE71008E6F64 /* PECropScrollVC.swift */,
 				A669D3FA21BB59DC001BCAEA /* PEBackRemoveVC.swift */,
 				A623A4C221C2A1850033FB95 /* PETaggingVC.swift */,
 				A6DE0D8621C5E1FE0071CFBA /* PEToolOptVC.swift */,
@@ -1220,6 +1223,7 @@
 				A63D9C2621E06A6C000F84A1 /* pngstruct.h in Sources */,
 				A63D9BB221E065D1000F84A1 /* alpha_processing_neon.c in Sources */,
 				A63D9BE021E065D1000F84A1 /* lossless_enc_neon.c in Sources */,
+				A637486B2207DE71008E6F64 /* PECropScrollVC.swift in Sources */,
 				A63D9BC621E065D1000F84A1 /* enc_neon.c in Sources */,
 				A62BB9AC21E9CB4D00F56FCC /* StickerPackBase.swift in Sources */,
 				A63D9BBB21E065D1000F84A1 /* dec.c in Sources */,

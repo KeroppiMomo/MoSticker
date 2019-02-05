@@ -225,9 +225,11 @@ class EditPackLocalVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isEditingMode {
             if indexPath.section == 1 && indexPath.row == 0 {
-                performSegue(withIdentifier: R.EPVCs.Local.toPECropSegueID, sender: R.EPVCs.trayIconRes)
+//                performSegue(withIdentifier: R.EPVCs.Local.toPECropSegueID, sender: R.EPVCs.trayIconRes)
+                performSegue(withIdentifier: R.EPVCs.Local.toPECropScrollSegueID, sender: R.EPVCs.trayIconRes)
             } else if indexPath.section == 2 && indexPath.row == 0 {
-                performSegue(withIdentifier: R.EPVCs.Local.toPECropSegueID, sender: R.EPVCs.stickerRes)
+//                performSegue(withIdentifier: R.EPVCs.Local.toPECropSegueID, sender: R.EPVCs.stickerRes)
+                performSegue(withIdentifier: R.EPVCs.Local.toPECropScrollSegueID, sender: R.EPVCs.stickerRes)
             }
         } else {
             if indexPath.section == 3 {
@@ -317,6 +319,11 @@ class EditPackLocalVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == R.EPVCs.Local.toPECropSegueID,
             let dvc = segue.destination as? PECropVC,
+            let resolution = sender as? Int {
+            dvc.resultResolution = resolution
+            dvc.delegate = self
+        } else if segue.identifier == R.EPVCs.Local.toPECropScrollSegueID,
+            let dvc = segue.destination as? PECropScrollVC,
             let resolution = sender as? Int {
             dvc.resultResolution = resolution
             dvc.delegate = self
