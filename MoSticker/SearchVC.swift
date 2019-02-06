@@ -19,7 +19,7 @@ class SearchVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate, 
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = true
         searchController.searchBar.placeholder = R.SearVC.barPlaceholder
 
         self.navigationItem.searchController = searchController

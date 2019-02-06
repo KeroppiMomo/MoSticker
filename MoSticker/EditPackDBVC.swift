@@ -259,7 +259,7 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func stickerWhatsAppUI() {
         // Send to WhatsApp
         do {
-            try self.stickerPack.sendToWhatsApp(publisherSuffix: R.EPVCs.publisherSuffix, completion: { (success) in
+            try self.stickerPack.sendToWhatsAppWithStats(publisherSuffix: R.EPVCs.publisherSuffix, completion: { (success) in
                 self.dismiss(animated: true, completion: nil)
                 if !success {
                     self.showErrorMessage(title: R.EPVCs.unknownError, message: R.EPVCs.sendWhatsAppErrorMessage)
@@ -289,10 +289,13 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         let loadingVC = LoadingVC.setup(withMessage: R.Common.uploadingMessage)
         stickerPack.upload { (error) in
             if let error = error {
-                self.showErrorMessage(title: R.Common.uploadPackErrorTitle, message: R.Common.uploadPackErrorMessage)
+                loadingVC.showErrorMessage(title: R.Common.uploadPackErrorTitle, message: R.Common.uploadPackErrorMessage) {
+                    self.dismiss(animated: true, completion: nil)
+                }
                 printError(error)
+            } else {
+                self.dismiss(animated: true, completion: nil)
             }
-            self.dismiss(animated: true, completion: nil)
         }
         
         self.present(loadingVC, animated: true, completion: nil)

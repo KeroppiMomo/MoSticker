@@ -156,25 +156,34 @@ class StickerPackDB: StickerPackBase {
         pack.stickerWebP = webpData
         pack.packID = snapshot.key
         
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
         StickerPackDB.getUserName(uid: pack.owner!) { (ownerName) in
             pack.ownerName = ownerName
+            dispatchGroup.leave()
+        }
+        
+        let downloadCountsRef = Database.database().reference(withPath: "pack_download_counts/" + pack.packID)
+        dispatchGroup.enter()
+        downloadCountsRef.observeSingleEvent(of: .value) { (snapshot) in
+            guard let downloads = snapshot.value as? Int else {
+                dispatchGroup.leave()
+                return
+            }
+            pack.downloads = downloads
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
             completion(pack)
         }
     }
     static func observe(_ changes: @escaping (Error?, PackChanges, StickerPackDB?) -> ()) {
-//        var curPacks = [StickerPackDB]()
-//        var initial = [String]() // Pack IDs
         var userPackRef: DatabaseReference?
         var packObserveRefs = [DatabaseReference]()
-//        var addedHandle: DatabaseHandle?
-//        var changedHandle: DatabaseHandle?
-//        var removedHandle: DatabaseHandle?
         Auth.auth().addStateDidChangeListener { (auth, user) in
             printInfo("Auth state changed. Attaching observers.")
-            
-//            if let handle = addedHandle { userPackRef?.removeObserver(withHandle: handle) }
-//            if let handle = changedHandle { userPackRef?.removeObserver(withHandle: handle) }
-//            if let handle = removedHandle { userPackRef?.removeObserver(withHandle: handle) }
 
             userPackRef?.removeAllObservers()
             packObserveRefs.forEach { $0.removeAllObservers() }
@@ -268,7 +277,7 @@ class StickerPackDB: StickerPackBase {
             "owner": self.owner!
         ]
         
-        packRef.setValue(dataDict) { (error, _) in
+        packRef.updateChildValues(dataDict) { (error, _) in
             if let error = error {
                 completion(error)
                 return
@@ -324,10 +333,28 @@ class StickerPackDB: StickerPackBase {
         })
     }
     
+    // MARK: - Stats
+    func sendToWhatsAppWithStats(publisherSuffix: String, completion: @escaping (Bool) -> Void) throws {
+        try self.sendToWhatsApp(publisherSuffix: publisherSuffix, completion: completion)
+        
+        let downloadsRef = Database.database().reference(withPath: "pack_download_counts/" + packID)
+        downloadsRef.runTransactionBlock({ curData -> TransactionResult in
+            let downloads = (curData.value as? Int) ?? 0
+            curData.value = downloads + 1
+            
+            return TransactionResult.success(withValue: curData)
+        }) { (error, _, _) in
+            if let error = error {
+                printError(error)
+            }
+        }
+    }
+    
     // MARK: - Fields
     var owner: String?
     var ownerName: String?
     var packID = getPackID()
+    var downloads = 0
     
     override var description: String {
         return "<\(type(of: self))>: \(packID) '\(name ?? "[nil name]")'"
