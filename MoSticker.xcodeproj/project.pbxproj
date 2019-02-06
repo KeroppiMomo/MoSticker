@@ -978,6 +978,38 @@
 			name = VC;
 			sourceTree = "<group>";
 		};
+		A646DC74220B23E10054DC70 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A669D3FE21BBBF81001BCAEA /* transparent_pattern.png */,
+				A6F52D7021AFBA3700264105 /* Main.storyboard */,
+				A63C107721BCE868006160F8 /* Assets.xcassets */,
+				A6F52D7521AFBA3800264105 /* LaunchScreen.storyboard */,
+				A655130C21FB1BD600A07E84 /* Resources.swift */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A646DC75220B241E0054DC70 /* Info.plist */ = {
+			isa = PBXGroup;
+			children = (
+				A6F52D7821AFBA3800264105 /* Info.plist */,
+				A650264921E4B631002E8BDF /* GoogleService-Info.plist */,
+			);
+			name = Info.plist;
+			sourceTree = "<group>";
+		};
+		A646DC78220B247D0054DC70 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				A63D9A9A21E06380000F84A1 /* Sticker Code */,
+				A63D9C7321E0A7B5000F84A1 /* libpng */,
+				A63D9A9B21E063A4000F84A1 /* pngquant */,
+				A63D9AA021E0642D000F84A1 /* webp */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
 		A6C6DFA121E5F26A00A85EE2 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1011,24 +1043,16 @@
 			isa = PBXGroup;
 			children = (
 				A6C6DFA221E601A100A85EE2 /* MoSticker.entitlements */,
-				A669D3FE21BBBF81001BCAEA /* transparent_pattern.png */,
 				A6F52D6C21AFBA3700264105 /* AppDelegate.swift */,
 				A640B8B121B02E36000DD30C /* VC */,
-				A6F52D7021AFBA3700264105 /* Main.storyboard */,
-				A63C107721BCE868006160F8 /* Assets.xcassets */,
-				A6F52D7521AFBA3800264105 /* LaunchScreen.storyboard */,
-				A6F52D7821AFBA3800264105 /* Info.plist */,
-				A650264921E4B631002E8BDF /* GoogleService-Info.plist */,
-				A63D9C7321E0A7B5000F84A1 /* libpng */,
-				A63D9A9B21E063A4000F84A1 /* pngquant */,
-				A63D9AA021E0642D000F84A1 /* webp */,
-				A63D9A9A21E06380000F84A1 /* Sticker Code */,
+				A646DC75220B241E0054DC70 /* Info.plist */,
+				A62BB9AA21E9CAF500F56FCC /* Sticker Pack Files */,
 				A640B8B521B03256000DD30C /* Cells.swift */,
 				A640B8B721B03649000DD30C /* Helper.swift */,
-				A62BB9AA21E9CAF500F56FCC /* Sticker Pack Files */,
 				A63D9BF221E068B5000F84A1 /* target_bridging.h */,
-				A655130C21FB1BD600A07E84 /* Resources.swift */,
 				A660BA8522070AC300B43A65 /* DBPaths.swift */,
+				A646DC78220B247D0054DC70 /* Libraries */,
+				A646DC74220B23E10054DC70 /* Resources */,
 			);
 			path = MoSticker;
 			sourceTree = "<group>";

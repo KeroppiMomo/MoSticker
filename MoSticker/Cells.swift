@@ -66,22 +66,17 @@ class PropertyEditTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var suffixLabel: UILabel!
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
         textField.delegate = self
     }
-    func setup(property: String?, value: String?, suffix: String?) {
+    func setup(property: String?, value: String?) {
         titleLabel.text = property
         textFieldLastText = property ?? ""
         textField.placeholder = property
         textField.text = value
-        
-        if let suffix = suffix {
-            suffixLabel.text = suffix
-        }
     }
     func getValue() -> String {
         return textField.text ?? ""
@@ -90,23 +85,6 @@ class PropertyEditTableViewCell: UITableViewCell, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    func setIDTextField(_ value: Bool) {
-        textField.keyboardType = value ? .asciiCapable : .default
-        if value {
-            textField.addTarget(self, action: #selector(textfieldIDCheck), for: .editingChanged)
-        } else {
-            textField.removeTarget(self, action: #selector(textfieldIDCheck), for: .editingChanged)
-        }
-    }
-    
-    @objc func textfieldIDCheck(_ sender: UITextField) {
-        if !StickerPackLocal.checkIDLegal(id: getValue()) {
-            sender.text = textFieldLastText
-        }
-        
-        textFieldLastText = getValue()
     }
 }
 

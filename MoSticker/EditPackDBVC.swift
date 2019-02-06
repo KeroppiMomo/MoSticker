@@ -101,7 +101,7 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0:  return 4
+        case 0:  return 2
         case 1:  return 1
         case 2:  return isEditingMode ? 2 : 1
         case 3:  return 1
@@ -119,16 +119,11 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             switch indexPath.row {
             case 0:     propertyName = R.EPVCs.nameProperty
                         propertyValue = stickerPack.name
-            case 1:     propertyName = R.EPVCs.idProperty
-                        propertyValue = stickerPack.id
-            case 2:     propertyName = R.EPVCs.publishProperty
-                        propertyValue = stickerPack.publisher
-            case 3:     propertyName = R.EPVCs.ownerProperty
+            case 1:     propertyName = R.EPVCs.ownerProperty
                         propertyValue = ownershipDescription(name: stickerPack.ownerName, id: stickerPack.owner ?? "")
             default:    break
             }
-            cell.setup(property: propertyName, value: propertyValue, suffix: indexPath.row == 2 ? R.EPVCs.publisherSuffix : "")
-            cell.setIDTextField(indexPath.row == 1)
+            cell.setup(property: propertyName, value: propertyValue)
             
             cell.textField.tag = indexPath.row
             cell.textField.removeTarget(self, action: #selector(fieldTextChanged(sender:)), for: .editingDidEnd)
@@ -177,15 +172,8 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         } else { return 44 }
     }
     @objc func fieldTextChanged(sender: UITextField) {
-        switch sender.tag {
-        case 0:
+        if sender.tag == 0 {
             stickerPack.name = sender.text
-        case 1:
-            stickerPack.id = sender.text
-        case 2:
-            stickerPack.publisher = sender.text
-        default:
-            break
         }
     }
     
@@ -242,12 +230,12 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func stickerWhatsAppUI() {
         // Send to WhatsApp
         do {
-            try self.stickerPack.sendToWhatsAppWithStats(publisherSuffix: R.EPVCs.publisherSuffix, completion: { (success) in
+            try self.stickerPack.sendToWhatsAppWithStats { (success) in
                 self.dismiss(animated: true, completion: nil)
                 if !success {
                     self.showErrorMessage(title: R.EPVCs.unknownError, message: R.EPVCs.sendWhatsAppErrorMessage)
                 }
-            })
+            }
         } catch {
             self.showWhatsAppError(error: error)
         }

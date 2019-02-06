@@ -40,6 +40,9 @@ class R {
         static let uploadingMessage = "Uploading..."
         static let uploadPackErrorTitle = "Error: Failed to Upload Pack"
         static let uploadPackErrorMessage = "An error has occurred when uploading packs."
+        
+        static let publisherSuffix = " @ MoSticker"
+        static let publisherLocal = "MoSticker"
     }
     
     /// Resources used by AppDelegate.
@@ -122,11 +125,10 @@ class R {
         static let addSticker = "Add Sticker"
         static let sendWhatsApp = "Send to WhatsApp"
 
-        static let nameIDFooter = "The name must be less than 128 characters. \nThe identifier should be unique and can only contain 'a-z', 'A-Z', '0-9', '-', '_', '.' and space characters. It must be less than 128 characters."
+        static let nameIDFooter = "The name must be less than 128 characters."
         static let stickerEditFooter = "Tap on a sticker to view or remove it from the pack. Each pack must have a minimum of 3 stickers and a maximum of 30 stickers."
         static let stickerNonEditFooter = "Tap on a sticker to view it."
         static let iconFooter = "Choose an image to represent the sticker pack."
-        static let publisherSuffix = " @ MoSticker"
         
         static let trayIconRes = 96
         static let stickerRes = 512

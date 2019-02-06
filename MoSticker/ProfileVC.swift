@@ -182,7 +182,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: R.ProVC.textFieldCellID, for: indexPath) as? PropertyEditTableViewCell else { return UITableViewCell() }
-            cell.setup(property: R.ProVC.displayNameProperty, value: displayName, suffix: nil)
+            cell.setup(property: R.ProVC.displayNameProperty, value: displayName)
             cell.textField.addTarget(self, action: #selector(nameTextFieldChanged(sender:)), for: .editingDidEnd)
             return cell
         } else if indexPath.section == 1 {

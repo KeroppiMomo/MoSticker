@@ -130,11 +130,9 @@ class StickerPackDB: StickerPackBase {
         }
         
         guard let dataDict = snapshot.value as? [String: Any],
-            let id = dataDict["id"] as? String,
             let lastEditTimestamp = dataDict["last_edit"] as? Int,
             let name = dataDict["name"] as? String,
             let owner = dataDict["owner"] as? String,
-            let publisher = dataDict["publisher"] as? String,
             let trayBase64 = dataDict["tray"] as? String,
             let trayData = Data(base64Encoded: trayBase64),
             let pngData = base64Dict2Array(dataDict["sticker_png"] as? [String: String]),
@@ -146,11 +144,9 @@ class StickerPackDB: StickerPackBase {
         let lastEdit = Date(timeIntervalSince1970: Double(lastEditTimestamp) / 1000)
         
         let pack = StickerPackDB()
-        pack.id = id
         pack.lastEdit = lastEdit
         pack.name = name
         pack.owner = owner
-        pack.publisher = publisher
         pack.trayData = trayData
         pack.stickerPNGData = pngData
         pack.stickerWebP = webpData
@@ -254,8 +250,6 @@ class StickerPackDB: StickerPackBase {
         let dataDict: [String: Any] = [
             "name": self.name!,
             "name_lowercased": self.name!.lowercased(),
-            "id": self.id!,
-            "publisher": self.publisher!,
             "tray": self.trayData!.base64EncodedString(),
             "last_edit": Int64(self.lastEdit!.timeIntervalSince1970 * 1000),
             "sticker_webp": webpDict,
@@ -320,8 +314,8 @@ class StickerPackDB: StickerPackBase {
     }
     
     // MARK: - Stats
-    func sendToWhatsAppWithStats(publisherSuffix: String, completion: @escaping (Bool) -> Void) throws {
-        try self.sendToWhatsApp(publisherSuffix: publisherSuffix, completion: completion)
+    func sendToWhatsAppWithStats(completion: @escaping (Bool) -> Void) throws {
+        try self.sendToWhatsApp(id: self.packID, publisher: (self.ownerName ?? "") + R.Common.publisherSuffix, completion: completion)
         
         let downloadsRef = Database.database().reference(withPath: "pack_download_counts/" + packID)
         downloadsRef.runTransactionBlock({ curData -> TransactionResult in

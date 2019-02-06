@@ -45,19 +45,17 @@ class StickerPackBase: CustomStringConvertible {
         
         // Check whether name, id and tray image exist
         guard name != nil && name != "" else { return WhatsAppPackError.fieldEmptyError(field: "Name" )}
-        guard id != nil && id != "" else { return WhatsAppPackError.fieldEmptyError(field: "Identifier" )}
         guard trayData != nil else { return WhatsAppPackError.fieldEmptyError(field: "Pack Icon")}
         // Check name and id character limit
         guard name!.count < Limits.MaxCharLimit128 else { return WhatsAppPackError.fieldCharCountError(field: "Name", count: name!.count, max: Limits.MaxCharLimit128)}
-        guard StickerPackLocal.checkIDLegal(id: id!) else { return WhatsAppPackError.fieldCharCountError(field: "Identifier", count: id!.count, max: Limits.MaxCharLimit128)}
         // Check sticker images number
         guard stickerWebP.count <= 30 && stickerWebP.count >= 3 else { return WhatsAppPackError.stickerNoError(count: stickerWebP.count) }
         
         return nil
     }
-    func sendToWhatsApp(publisherSuffix: String, completion: @escaping (Bool) -> Void) throws {
+    func sendToWhatsApp(id: String, publisher: String, completion: @escaping (Bool) -> Void) throws {
         
-        let pack = try StickerPack(identifier: id!, name: name!, publisher: (publisher ?? "") + publisherSuffix, trayImagePNGData: trayData!, publisherWebsite: nil, privacyPolicyWebsite: nil, licenseAgreementWebsite: nil)
+        let pack = try StickerPack(identifier: id, name: name!, publisher: publisher, trayImagePNGData: trayData!, publisherWebsite: nil, privacyPolicyWebsite: nil, licenseAgreementWebsite: nil)
         
         for stickerData in stickerWebP {
             try pack.addSticker(imageData: stickerData, type: .webp, emojis: nil)
@@ -65,8 +63,8 @@ class StickerPackBase: CustomStringConvertible {
         
         pack.sendToWhatsApp(completionHandler: completion)
     }
-    func toJSON(publisherSuffix: String) throws -> [String: Any] {
-        let pack = try StickerPack(identifier: id!, name: name!, publisher: (publisher ?? "") + publisherSuffix, trayImagePNGData: trayData!, publisherWebsite: nil, privacyPolicyWebsite: nil, licenseAgreementWebsite: nil)
+    func toJSON(id: String, publisher: String) throws -> [String: Any] {
+        let pack = try StickerPack(identifier: id, name: name!, publisher: publisher, trayImagePNGData: trayData!, publisherWebsite: nil, privacyPolicyWebsite: nil, licenseAgreementWebsite: nil)
         
         for stickerData in stickerWebP {
             try pack.addSticker(imageData: stickerData, type: .webp, emojis: nil)
@@ -103,8 +101,6 @@ class StickerPackBase: CustomStringConvertible {
     var stickerWebP = [Data]()
     var stickerPNGData = [Data]()
     var name: String?
-    var id: String?
-    var publisher: String?
     var lastEdit: Date?
     
     // MARK: - Pack Operation from UI
@@ -126,6 +122,6 @@ class StickerPackBase: CustomStringConvertible {
     
     // MARK: - CustomStringConvertible
     var description: String {
-        return "<\(type(of: self))>: \(id ?? "[nil id]") '\(name ?? "[nil name]")'"
+        return "<\(type(of: self))>: '\(name ?? "[nil name]")'"
     }
 }

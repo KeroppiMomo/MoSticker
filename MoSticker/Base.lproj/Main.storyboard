@@ -436,30 +436,21 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EzH-I9-Llo">
-                                                    <rect key="frame" x="124" y="11.333333333333336" width="164" height="21"/>
+                                                    <rect key="frame" x="124" y="11.333333333333336" width="274" height="21"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                                                 </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text=" @ MoSticker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5CI-wf-Pj1">
-                                                    <rect key="frame" x="296" y="11.333333333333336" width="102" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="EzH-I9-Llo" secondAttribute="trailing" constant="16" id="CkF-TA-KmV"/>
                                                 <constraint firstItem="EzH-I9-Llo" firstAttribute="centerY" secondItem="Zdt-p1-w2a" secondAttribute="centerY" id="Jun-u5-uTi"/>
                                                 <constraint firstItem="EzH-I9-Llo" firstAttribute="leading" secondItem="s4w-tc-8QO" secondAttribute="trailing" constant="8" id="Mao-50-TDd"/>
-                                                <constraint firstItem="5CI-wf-Pj1" firstAttribute="centerY" secondItem="Zdt-p1-w2a" secondAttribute="centerY" id="Wof-9W-ku3"/>
-                                                <constraint firstItem="5CI-wf-Pj1" firstAttribute="leading" secondItem="EzH-I9-Llo" secondAttribute="trailing" constant="8" id="XD2-9Y-xiR"/>
                                                 <constraint firstItem="s4w-tc-8QO" firstAttribute="centerY" secondItem="Zdt-p1-w2a" secondAttribute="centerY" id="eaV-ff-cBq"/>
                                                 <constraint firstItem="s4w-tc-8QO" firstAttribute="leading" secondItem="Zdt-p1-w2a" secondAttribute="leading" constant="16" id="k3A-vw-6cK"/>
-                                                <constraint firstAttribute="trailing" secondItem="5CI-wf-Pj1" secondAttribute="trailing" constant="16" id="lCX-gZ-92A"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="suffixLabel" destination="5CI-wf-Pj1" id="VaG-X6-fTs"/>
                                             <outlet property="textField" destination="EzH-I9-Llo" id="cMs-2H-EfU"/>
                                             <outlet property="titleLabel" destination="s4w-tc-8QO" id="yar-Fz-cwS"/>
                                         </connections>
@@ -681,30 +672,21 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dFl-lq-5iI">
-                                                    <rect key="frame" x="124" y="11.333333333333336" width="164" height="21"/>
+                                                    <rect key="frame" x="124" y="11.333333333333336" width="274" height="21"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                                                 </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text=" @ MoSticker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7lr-lL-HKX">
-                                                    <rect key="frame" x="296" y="11.333333333333336" width="102" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="7lr-lL-HKX" firstAttribute="centerY" secondItem="N1O-Bk-Skr" secondAttribute="centerY" id="2v2-F9-W67"/>
+                                                <constraint firstAttribute="trailing" secondItem="dFl-lq-5iI" secondAttribute="trailing" constant="16" id="1ND-hb-Kng"/>
                                                 <constraint firstItem="UBl-0K-SBr" firstAttribute="centerY" secondItem="N1O-Bk-Skr" secondAttribute="centerY" id="8ff-jp-V0Z"/>
                                                 <constraint firstItem="dFl-lq-5iI" firstAttribute="leading" secondItem="UBl-0K-SBr" secondAttribute="trailing" constant="8" id="9VM-0v-MAF"/>
                                                 <constraint firstItem="UBl-0K-SBr" firstAttribute="leading" secondItem="N1O-Bk-Skr" secondAttribute="leading" constant="16" id="9zl-D7-9cg"/>
                                                 <constraint firstItem="dFl-lq-5iI" firstAttribute="centerY" secondItem="N1O-Bk-Skr" secondAttribute="centerY" id="FM9-sv-TMv"/>
-                                                <constraint firstItem="7lr-lL-HKX" firstAttribute="leading" secondItem="dFl-lq-5iI" secondAttribute="trailing" constant="8" id="buy-OW-hTh"/>
-                                                <constraint firstAttribute="trailing" secondItem="7lr-lL-HKX" secondAttribute="trailing" constant="16" id="kYd-g7-KBx"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="suffixLabel" destination="7lr-lL-HKX" id="odk-1w-rCT"/>
                                             <outlet property="textField" destination="dFl-lq-5iI" id="0Nw-Lu-sfO"/>
                                             <outlet property="titleLabel" destination="UBl-0K-SBr" id="6WQ-Mj-jgT"/>
                                         </connections>

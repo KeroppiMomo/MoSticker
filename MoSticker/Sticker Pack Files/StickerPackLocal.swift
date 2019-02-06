@@ -80,8 +80,6 @@ class StickerPackLocal: StickerPackBase {
             return dict
         }
         resultPack.name = query["name"]
-        resultPack.id = query["id"]
-        resultPack.publisher = query["publisher"]
         resultPack.lastEdit = StickerPackLocal.dateFormatter.date(from: query["lastedit"] ?? "")
         resultPack.savingID = savingID
         
@@ -127,8 +125,6 @@ class StickerPackLocal: StickerPackBase {
             components.path = "mostickerpack"
             components.queryItems = [
                 URLQueryItem(name: "name", value: name),
-                URLQueryItem(name: "id", value: id),
-                URLQueryItem(name: "publisher", value: publisher),
                 URLQueryItem(name: "lastedit", value: lastEdit == nil ? nil : StickerPackLocal.dateFormatter.string(from: lastEdit!)),
                 URLQueryItem(name: "noofstickers", value: String(stickerWebP.count)),
                 URLQueryItem(name: "_version", value: getAppVersion())
@@ -192,13 +188,16 @@ class StickerPackLocal: StickerPackBase {
         }
     }
     
+    // MARK: - Send to WhatsApp
+    func sendToWhatsApp(completion: @escaping (Bool) -> Void) throws {
+        try super.sendToWhatsApp(id: self.savingID!, publisher: R.Common.publisherLocal, completion: completion)
+    }
+    
     // MARK: - Type Convertion
     func toPackDB() -> StickerPackDB {
         let result = StickerPackDB()
-        result.id = self.id
         result.lastEdit = self.lastEdit
         result.name = self.name
-        result.publisher = self.publisher
         result.stickerPNGData = self.stickerPNGData
         result.stickerWebP = self.stickerWebP
         result.trayData = self.trayData
