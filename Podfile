@@ -4,7 +4,7 @@ platform :ios, '9.0'
 target 'MoSticker' do
   use_frameworks!
 
-  # Pods for MeSticker
+  # Pods for MoSticker
 
   # YYImage
   pod 'YYImage'

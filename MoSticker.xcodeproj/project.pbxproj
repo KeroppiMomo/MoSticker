@@ -215,10 +215,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0BB5CBA05197264727FEEE58 /* Pods-MeSticker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeSticker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeSticker/Pods-MeSticker.debug.xcconfig"; sourceTree = "<group>"; };
+		0BB5CBA05197264727FEEE58 /* Pods-MoSticker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoSticker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoSticker/Pods-MoSticker.debug.xcconfig"; sourceTree = "<group>"; };
 		26E3F91938F9AA3CD185AE9F /* Pods-MoSticker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoSticker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoSticker/Pods-MoSticker.debug.xcconfig"; sourceTree = "<group>"; };
 		82687678932674B23B752D47 /* Pods-MoSticker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoSticker.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoSticker/Pods-MoSticker.release.xcconfig"; sourceTree = "<group>"; };
-		946DAC54495135ECE8915706 /* Pods-MeSticker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeSticker.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeSticker/Pods-MeSticker.release.xcconfig"; sourceTree = "<group>"; };
+		946DAC54495135ECE8915706 /* Pods-MoSticker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoSticker.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoSticker/Pods-MoSticker.release.xcconfig"; sourceTree = "<group>"; };
 		A601AC7621EF66F200E9CC7A /* LocalSelectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSelectionVC.swift; sourceTree = "<group>"; };
 		A601AC7821EF67A500E9CC7A /* LocalSelectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSelectionDelegate.swift; sourceTree = "<group>"; };
 		A610B11521CA827E00BD3272 /* StickerPackLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPackLocal.swift; sourceTree = "<group>"; };
@@ -523,8 +523,8 @@
 		68BF0C12D382AAB06AEF87C9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0BB5CBA05197264727FEEE58 /* Pods-MeSticker.debug.xcconfig */,
-				946DAC54495135ECE8915706 /* Pods-MeSticker.release.xcconfig */,
+				0BB5CBA05197264727FEEE58 /* Pods-MoSticker.debug.xcconfig */,
+				946DAC54495135ECE8915706 /* Pods-MoSticker.release.xcconfig */,
 				26E3F91938F9AA3CD185AE9F /* Pods-MoSticker.debug.xcconfig */,
 				82687678932674B23B752D47 /* Pods-MoSticker.release.xcconfig */,
 			);
@@ -1053,7 +1053,7 @@
 			dependencies = (
 			);
 			name = MoSticker;
-			productName = MeSticker;
+			productName = MoSticker;
 			productReference = A6F52D6921AFBA3700264105 /* MoSticker.app */;
 			productType = "com.apple.product-type.application";
 		};
