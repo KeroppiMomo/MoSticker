@@ -16,7 +16,6 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         reloadTableView()
     }
     override func viewWillAppear(_ animated: Bool) {

@@ -26,8 +26,6 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 _isEditingMode = newValue
                 
                 if #available(iOS 11.0, *) {
-                    //                    tableView?.beginUpdates()
-                    //                    tableView?.endUpdates()
                     tableView?.performBatchUpdates({
                         if newValue {
                             tableView?.insertRows(at: [IndexPath(row: 0, section: 2)], with: .fade)
@@ -38,8 +36,6 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                             tableView?.reloadSections([0, 1, 2], with: .fade)
                             tableView?.insertSections([3], with: .fade)
                         }
-                        //                        tableView?.reloadSections([0, 1], with: .fade)
-                        //                        tableView.reloadData()
                     }, completion: { _ in
                         self.tableView?.reloadData()
                     })
@@ -47,14 +43,14 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                     tableView?.beginUpdates()
                     if newValue {
                         tableView?.insertRows(at: [IndexPath(row: 0, section: 2)], with: .fade)
+                        tableView?.reloadSections([0, 1, 2], with: .fade)
                         tableView?.deleteSections([3], with: .fade)
                     } else {
                         tableView?.deleteRows(at: [IndexPath(row: 0, section: 2)], with: .fade)
+                        tableView?.reloadSections([0, 1, 2], with: .fade)
                         tableView?.insertSections([3], with: .fade)
                     }
-                    tableView?.reloadSections([0, 1], with: .fade)
                     tableView?.endUpdates()
-                    //                    tableView?.reloadData()
                 }
             }
         }
@@ -120,13 +116,6 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             guard let cell = tableView.dequeueReusableCell(withIdentifier: R.EPVCs.DB.propertyCellID, for: indexPath) as? PropertyEditTableViewCell else { return UITableViewCell() }
             var propertyName: String?
             var propertyValue: String?
-//            switch EditPackDBVC.PACKAGE_PROPERTIES[indexPath.row] {
-//            case "Name":        propertyValue = stickerPack.name
-//            case "Identifier":  propertyValue = stickerPack.id
-//            case "Publisher":   propertyValue = stickerPack.publisher
-//            case "Owner":       propertyValue = stickerPack.owner!
-//            default:            break
-//            }
             switch indexPath.row {
             case 0:     propertyName = R.EPVCs.nameProperty
                         propertyValue = stickerPack.name
@@ -174,12 +163,6 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
         case 3:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: R.EPVCs.DB.buttonCellID, for: indexPath) as? ButtonTableViewCell else { return UITableViewCell() }
-            //            let title: String
-            //            switch indexPath.row {
-            //            case 0:     title = "Send to WhatsApp"
-            //            case 1:     title = "Share"
-            //            default:    return UITableViewCell()
-            //            }
             cell.setup(title: R.EPVCs.sendWhatsApp)
             return cell
         default:

@@ -8,7 +8,6 @@
 
 import UIKit
 import FirebaseDatabase
-//import iOS_WebP
 
 class EditPackLocalVC: UIViewController, UITableViewDelegate, UITableViewDataSource, PEDelegate {
     
@@ -115,12 +114,6 @@ class EditPackLocalVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             guard let cell = tableView.dequeueReusableCell(withIdentifier: R.EPVCs.Local.propertyCellID, for: indexPath) as? PropertyEditTableViewCell else { return UITableViewCell() }
             var propertyName: String?
             var propertyValue: String?
-//            switch EditPackLocalVC.PACKAGE_PROPERTIES[indexPath.row] {
-//            case "Name":        propertyValue = stickerPack.name
-//            case "Identifier":  propertyValue = stickerPack.id
-//            case "Publisher":   propertyValue = stickerPack.publisher
-//            default:            break
-//            }
             switch indexPath.row {
             case 0:     propertyName = R.EPVCs.nameProperty
                         propertyValue = stickerPack.name
@@ -167,12 +160,6 @@ class EditPackLocalVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         case 3:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: R.EPVCs.Local.buttonCellID, for: indexPath) as? ButtonTableViewCell else { return UITableViewCell() }
-//            let title: String
-//            switch indexPath.row {
-//            case 0:     title = "Send to WhatsApp"
-//            case 1:     title = "Share"
-//            default:    return UITableViewCell()
-//            }
             cell.setup(title: R.EPVCs.sendWhatsApp)
             return cell
         default:
@@ -225,10 +212,8 @@ class EditPackLocalVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isEditingMode {
             if indexPath.section == 1 && indexPath.row == 0 {
-//                performSegue(withIdentifier: R.EPVCs.Local.toPECropSegueID, sender: R.EPVCs.trayIconRes)
                 performSegue(withIdentifier: R.EPVCs.Local.toPECropScrollSegueID, sender: R.EPVCs.trayIconRes)
             } else if indexPath.section == 2 && indexPath.row == 0 {
-//                performSegue(withIdentifier: R.EPVCs.Local.toPECropSegueID, sender: R.EPVCs.stickerRes)
                 performSegue(withIdentifier: R.EPVCs.Local.toPECropScrollSegueID, sender: R.EPVCs.stickerRes)
             }
         } else {

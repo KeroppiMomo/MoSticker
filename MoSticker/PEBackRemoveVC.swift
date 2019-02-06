@@ -66,8 +66,6 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
     
     var lastScrollZoom: CGFloat = 1.0
     
-//    static let TO_PETAGGING_SEGUE_ID = "PEBackRemove-PETagging"
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -174,8 +172,7 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
             
             let brushSize = self.calculateBrushSize()
             if sender.state == .changed {
-//                let brushSize = self.calculateBrushSize() / (curImage.size.width / cachedImg.size.width)
-                let (resultImg, resultMask) = mask(brushSize: brushSize, sourceImg: cachedImg, maskImg: maskImage)
+            let (resultImg, resultMask) = mask(brushSize: brushSize, sourceImg: cachedImg, maskImg: maskImage)
                 maskImage = resultMask
                 
                 self.imageView.image = resultImg
@@ -201,7 +198,6 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
         }
         
         if let resultImg = imageMasking(curImage, maskImage: maskImage) {
-//            delegate?.pe?(didFinish: resultImg)
             let loadingVC = LoadingVC.setup(withMessage: R.PE.BRVC.processingMessage)
             resultImg.pngquant { (data) in
                 if let pngData = data {
@@ -225,12 +221,4 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
             failed()
         }
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier ==  PEBackRemoveVC.TO_PETAGGING_SEGUE_ID,
-//            let dvc = segue.destination as? PETaggingVC {
-//
-//            dvc.curImage = imageMasking(curImage, maskImage: maskImage)
-//        }
-//    }
 }

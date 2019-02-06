@@ -20,24 +20,15 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
         
         setBarItemsEnabled(false)
         tableView.backgroundView = createLoadingBackgroundView()
-//        reloadData {
-//        if StickerPackDB.getUserPackRef() == nil {
-//            tableView.backgroundView = createLabelView(R.Helper.noAuthLabelText)
-//        }
         updateTableView()
         StickerPackDB.observe(self.observe)
         StickerPackDB.getAllPacks { (error, packs) in
-//            if let error = error {
-//                self.showErrorMessage(title: R.ProVC.retrievePackErrorTitle, message: R.ProVC.retrievePackErrorMessage)
-//                printError(error)
-//            }
             if let packs = packs {
                 if packs.count == 0 {
                     self.tableView.backgroundView = createLabelView(R.Helper.emptyLabelText)
                 }
             }
         }
-//        }
     }
     func reloadData(completion: @escaping () -> ()) {
         StickerPackDB.getAllPacks({ (error, packs) in
@@ -127,7 +118,6 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
             
             removeDuplicate()
         }
-//        tableView.reloadSections([1], with: .automatic)
         self.updateTableView()
     }
     func updateTableView() {

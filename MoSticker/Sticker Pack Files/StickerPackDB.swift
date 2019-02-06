@@ -190,25 +190,15 @@ class StickerPackDB: StickerPackBase {
             packObserveRefs.removeAll()
             
             changes(nil, .all, nil)
-//            for pack in curPacks {
-//                changes(nil, .removed, pack)
-//            }
-//            curPacks.removeAll()
-//            initial.removeAll()
             userPackRef = StickerPackDB.getUserPackRef()
             StickerPackDB.getUserPackRef()?.observe(.childAdded, with: { (snapshot) in
                 guard let packID = snapshot.value as? String else {
                     changes(PackDBError.dbFormatError, .added, nil)
                     return
                 }
-//                if curPacks.contains(where: { $0.packID == packID }) && !initial.contains(packID) {
-//                    initial.append(packID)
-//                } else {
                 getPack(packID, completion: { (error, pack) in
                     changes(error, .added, pack)
-//                    if let pack = pack { curPacks.append(pack) }
                 })
-//                }
                 let packRef = Database.database().reference(withPath: "sticker_packs/" + packID)
                 packRef.observe(.childChanged) { (snapshot) in
                     getPack(packID, completion: { (error, pack) in
@@ -234,10 +224,6 @@ class StickerPackDB: StickerPackBase {
                 let removedPack = StickerPackDB()
                 removedPack.packID = packID
                 changes(nil, .removed, removedPack)
-//
-//                if let index = curPacks.firstIndex(where: { $0.packID == packID }) {
-//                    curPacks.remove(at: index)
-//                }
             })
         }
     }

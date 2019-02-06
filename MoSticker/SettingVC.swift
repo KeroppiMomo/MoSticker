@@ -66,11 +66,4 @@ class SettingVC: UIViewController, UITableViewDelegate, UITableViewDataSource, F
             }
         }
     }
-    
-//    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
-//        if let error = error {
-//            self.showErrorMessage(title: "Error: Failed to Log In", message: "An error has occured when logging in.")
-//            printError(error)
-//        }
-//    }
 }

@@ -82,16 +82,7 @@ class PECropVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                 }) { _ in
                     self.imageScale = R.PE.CroVC.minImageScale
                 }
-            } /*else {
-                let maxScale = view.frame.width / CGFloat(resultResolution)
-                if imageScale > maxScale {
-                    UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
-                        self.mainImageView.transform = CGAffineTransform(translationX: self.imageTranslation.x, y: self.imageTranslation.y).scaledBy(x: maxScale, y: maxScale)
-                    }) { _ in
-                        self.imageScale = maxScale
-                    }
-                }
-            }*/
+            }
         }
     }
     @IBAction func panGesture(_ sender: UIPanGestureRecognizer) {
@@ -110,67 +101,6 @@ class PECropVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             printError("Failed to crop image: cropImage() returns nil.")
         }
     }
-    
-    // Attempt on cropImage
-    /*
-    func cropImage() -> UIImage? {
-        let tfedOrigin = mainImageView.tfedOrigin.sub(with: CGPoint(x: 0, y: self.calculateTopDistance()))
-        let tfedSize = mainImageView.tfedSize
-        let imgSize = curImage.size
-        let oriImgViewSize = mainImageView.frame
-        let croppedRect: CGRect
-        if oriImgViewSize.width / oriImgViewSize.height < imgSize.width / imgSize.height {
-            let imgScreenSize = CGSize(width: tfedSize.width, height: imgSize.height / imgSize.width * tfedSize.width)
-            let imgScreenPosition = CGPoint(x: tfedOrigin.x, y: tfedOrigin.y + (tfedSize.height - imgScreenSize.height) / 2.0)
-            let cropLeft = fractionInRange(min: imgScreenPosition.x, width: imgScreenSize.width, x: 0) * imgSize.width
-            let cropRight = fractionInRange(min: imgScreenPosition.x, width: imgScreenSize.width, x: view.frame.width) * imgSize.width
-            let cropTop = fractionInRange(min: imgScreenPosition.y, width: imgScreenSize.height, x: highlightView.frame.minY - self.calculateTopDistance()) * imgSize.height
-            let cropBottom = fractionInRange(min: imgScreenPosition.y, width: imgScreenSize.height, x: highlightView.frame.maxY - self.calculateTopDistance()) * imgSize.height
-            croppedRect = CGRect(x: cropLeft, y: cropTop, width: cropRight - cropLeft, height: cropBottom - cropTop)
-        } else {
-            let imgScreenSize = CGSize(width: imgSize.width / imgSize.height * tfedSize.height, height: tfedSize.height)
-            let imgScreenPosition = CGPoint(x: (tfedSize.width - imgScreenSize.width) / 2.0, y: tfedOrigin.y)
-            let cropLeft = fractionInRange(min: imgScreenPosition.x, width: imgScreenSize.width, x: 0) * imgSize.width
-            let cropRight = fractionInRange(min: imgScreenPosition.x, width: imgScreenSize.width, x: view.frame.width) * imgSize.width
-            let cropTop = fractionInRange(min: imgScreenPosition.y, width: imgScreenSize.height, x: highlightView.frame.minY - self.calculateTopDistance()) * imgSize.height
-            let cropBottom = fractionInRange(min: imgScreenPosition.y, width: imgScreenSize.height, x: highlightView.frame.maxY - self.calculateTopDistance()) * imgSize.height
-            croppedRect = CGRect(x: cropLeft, y: cropTop, width: cropRight - cropLeft, height: cropBottom - cropTop)
-        }
-        if let cgImg = curImage.cgImage,
-            let croppedImg = cgImg.cropping(to: croppedRect) {
-            let uiImage = UIImage(cgImage: croppedImg)
-            UIGraphicsBeginImageContextWithOptions(CGSize(width: resultResolution, height: resultResolution), false, 0.0)
-            UIColor(white: 0, alpha: 0).setFill()
-            UIRectFill(CGRect(x: 0, y: 0, width: resultResolution, height: resultResolution))
-            let imgSize = uiImage.size
-//            let drawingRect: CGRect
-//            if imgSize.width > imgSize.height {
-//                drawingRect =
-//                    CGRect(x: 0,
-//                           y: (CGFloat(resultResolution) - imgSize.height / imgSize.width * CGFloat(resultResolution)) / 2,
-//                           width: CGFloat(resultResolution),
-//                           height: imgSize.height / imgSize.width * CGFloat(resultResolution))
-//            } else {
-//                drawingRect =
-//                    CGRect(x: (CGFloat(resultResolution) - imgSize.width / imgSize.width * CGFloat(resultResolution)) / 2,
-//                           y: 0,
-//                           width: imgSize.width / imgSize.height * CGFloat(resultResolution),
-//                           height: CGFloat(resultResolution))
-//            }
-            let drawingRect = CGRect(x: croppedRect.x, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
-            let result = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return result
-        } else {
-            UIGraphicsBeginImageContextWithOptions(croppedRect.size, false, 0.0)
-            UIColor(white: 0, alpha: 0).setFill()
-            UIRectFill(croppedRect)
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return image
-        }
-    }
-    */
     
     func cropImage() -> UIImage? {
         let tfedOrigin = mainImageView.tfedOrigin.sub(with: CGPoint(x: 0, y: self.calculateTopDistance()))
