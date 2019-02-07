@@ -172,6 +172,7 @@
 		A64D2BF421F404D600828646 /* EditPackDBVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64D2BF321F404D600828646 /* EditPackDBVC.swift */; };
 		A650264A21E4B631002E8BDF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A650264921E4B631002E8BDF /* GoogleService-Info.plist */; };
 		A655130D21FB1BD600A07E84 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = A655130C21FB1BD600A07E84 /* Resources.swift */; };
+		A6588E99220BD88A007E2C3C /* 512empty.webp in Resources */ = {isa = PBXBuildFile; fileRef = A6588E98220BD88A007E2C3C /* 512empty.webp */; };
 		A660BA8622070AC300B43A65 /* DBPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = A660BA8522070AC300B43A65 /* DBPaths.swift */; };
 		A669D3FB21BB59DC001BCAEA /* PEBackRemoveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A669D3FA21BB59DC001BCAEA /* PEBackRemoveVC.swift */; };
 		A669D3FF21BBBF81001BCAEA /* transparent_pattern.png in Resources */ = {isa = PBXBuildFile; fileRef = A669D3FE21BBBF81001BCAEA /* transparent_pattern.png */; };
@@ -449,6 +450,7 @@
 		A64D2BF321F404D600828646 /* EditPackDBVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPackDBVC.swift; sourceTree = "<group>"; };
 		A650264921E4B631002E8BDF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A655130C21FB1BD600A07E84 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		A6588E98220BD88A007E2C3C /* 512empty.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = 512empty.webp; sourceTree = "<group>"; };
 		A660BA8522070AC300B43A65 /* DBPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBPaths.swift; sourceTree = "<group>"; };
 		A669D3FA21BB59DC001BCAEA /* PEBackRemoveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEBackRemoveVC.swift; sourceTree = "<group>"; };
 		A669D3FE21BBBF81001BCAEA /* transparent_pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent_pattern.png; sourceTree = "<group>"; };
@@ -981,6 +983,7 @@
 		A646DC74220B23E10054DC70 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A6588E98220BD88A007E2C3C /* 512empty.webp */,
 				A669D3FE21BBBF81001BCAEA /* transparent_pattern.png */,
 				A6F52D7021AFBA3700264105 /* Main.storyboard */,
 				A63C107721BCE868006160F8 /* Assets.xcassets */,
@@ -1132,6 +1135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A669D3FF21BBBF81001BCAEA /* transparent_pattern.png in Resources */,
+				A6588E99220BD88A007E2C3C /* 512empty.webp in Resources */,
 				A6F52D7721AFBA3800264105 /* LaunchScreen.storyboard in Resources */,
 				A6F52D7221AFBA3700264105 /* Main.storyboard in Resources */,
 				A63C107821BCE868006160F8 /* Assets.xcassets in Resources */,

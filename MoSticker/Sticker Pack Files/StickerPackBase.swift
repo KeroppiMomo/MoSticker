@@ -49,7 +49,7 @@ class StickerPackBase: CustomStringConvertible {
         // Check name and id character limit
         guard name!.count < Limits.MaxCharLimit128 else { return WhatsAppPackError.fieldCharCountError(field: "Name", count: name!.count, max: Limits.MaxCharLimit128)}
         // Check sticker images number
-        guard stickerWebP.count <= 30 && stickerWebP.count >= 3 else { return WhatsAppPackError.stickerNoError(count: stickerWebP.count) }
+        guard stickerWebP.count <= 30 && stickerWebP.count >= 1 else { return WhatsAppPackError.stickerNoError(count: stickerWebP.count) }
         
         return nil
     }
@@ -59,6 +59,10 @@ class StickerPackBase: CustomStringConvertible {
         
         for stickerData in stickerWebP {
             try pack.addSticker(imageData: stickerData, type: .webp, emojis: nil)
+        }
+        
+        while pack.stickers.count < 3 {
+            try pack.addSticker(contentsOfFile: "512empty.webp", emojis: nil)
         }
         
         pack.sendToWhatsApp(completionHandler: completion)

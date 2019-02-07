@@ -261,7 +261,7 @@ extension UIViewController {
         case WhatsAppPackError.trayImagePNGError:
             self.showErrorMessage(title: "Error: Icon PNG Generation", message: "Failed to create sticker pack. The tray image cannot be generated a PNG file.")
         case let WhatsAppPackError.stickerNoError(count: count):
-            self.showErrorMessage(title: "Error: Sticker Number Outside Allowable Range", message: "Failed to create sticker pack. A sticker pack must have at least 3 stickers and at most 30 stickers, but it currently has \(count) sticker\(count != 1 ? "s" : "").")
+            self.showErrorMessage(title: "Error: Sticker Number Outside Allowable Range", message: "Failed to create sticker pack. A sticker pack must have at least 1 stickers and at most 30 stickers, but it currently has \(count) sticker\(count != 1 ? "s" : "").")
         case StickerPackError.animatedImagesNotSupported:
             self.showErrorMessage(title: "Error: Animated Images Not Supported", message: "Failed to create sticker pack. Stickers or pack icon must not be an animated images.")
         case let StickerPackError.imageTooBig(size):
