@@ -155,6 +155,8 @@ class R {
     
     /// Resources used by Photo Editing (PE) classes.
     class PE {
+        static let cachedImgRes = 96
+
         class CroVC {
             static let toBackRemoveSegueID = "PECrop-PEBackRemove"
             static let minImageScale: CGFloat = 0.6
@@ -174,7 +176,7 @@ class R {
             static let cropErrorMessage = "An error has occurred when cropping image."
         }
         class BRVC {
-            static let cachedImgRes = 96
+            static let toTagSegueID = "peBackRemove-tag"
             
             static let enableScrollIcon = UIImage(named: "move_arrows_enabled")
             static let disableScrollIcon = UIImage(named: "move_arrows_disabled")
@@ -186,6 +188,19 @@ class R {
             static let processingMessage = "Processing Sticker..."
             static let processErrorTitle = "Error: Failed to Process Sticker"
             static let processErrorMessage = "An error has occurred when processing sticker."
+        }
+        class TagVC {
+            static let disableScrollIcon = UIImage(named: "move_arrows_disabled")
+            static let enableScrollIcon = UIImage(named: "move_arrows_enabled")
+            static let disableBrushIcon = UIImage(named: "brush_disabled")
+            static let enableBrushIcon = UIImage(named: "brush_enabled")
+            static let disableEraserIcon = UIImage(named: "eraser_disabled")
+            static let enableEraserIcon = UIImage(named: "eraser_enabled")
+            static let disableTextIcon = UIImage(named: "text_insert_disabled")
+            static let enableTextIcon = UIImage(named: "text_insert_enabled")
+            
+            static let toToolOptSegueID = "PETagging-PEToolOpt"
+            static let toColorPickerSegueID = "peTagVC-colorPicker"
         }
     }
     

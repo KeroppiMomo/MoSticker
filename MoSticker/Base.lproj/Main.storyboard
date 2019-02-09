@@ -1212,9 +1212,9 @@
                                 <action selector="cancelPressed:" destination="o5Z-KD-caK" id="U7e-cM-be6"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="MeZ-ob-CDd">
+                        <barButtonItem key="rightBarButtonItem" title="Next" style="done" id="MeZ-ob-CDd">
                             <connections>
-                                <action selector="donePressed:" destination="o5Z-KD-caK" id="f0D-Ow-Pyy"/>
+                                <action selector="nextPressed:" destination="o5Z-KD-caK" id="f0D-Ow-Pyy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1227,6 +1227,7 @@
                         <outlet property="brushSizeSlider" destination="gnl-4y-kuX" id="vf3-Qp-Wbn"/>
                         <outlet property="imageView" destination="KTU-zp-dWP" id="chI-cC-g5F"/>
                         <outlet property="scrollView" destination="U6W-zM-ugK" id="Mzu-Zh-4qC"/>
+                        <segue destination="9VZ-tq-Kp4" kind="show" identifier="peBackRemove-tag" id="WED-sl-KdI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1QT-8g-1Qt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1352,7 +1353,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xlc-NX-ftV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6344.9275362318849" y="-1163.1696428571429"/>
+            <point key="canvasLocation" x="4977" y="-1406"/>
         </scene>
         <!--Tagging-->
         <scene sceneID="XqI-kZ-nZa">
@@ -1363,15 +1364,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" maximumZoomScale="10" translatesAutoresizingMaskIntoConstraints="NO" id="ypY-us-i4l">
-                                <rect key="frame" x="0.0" y="44" width="414" height="734"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="641"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rss-Gd-tMR">
-                                        <rect key="frame" x="0.0" y="160" width="414" height="414"/>
+                                        <rect key="frame" x="0.0" y="113.66666666666663" width="414" height="414"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transparent_pattern.png" translatesAutoresizingMaskIntoConstraints="NO" id="hRw-Oo-gPd">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                             </imageView>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ByH-pV-5Go" customClass="PanningImageView" customModule="MoSticker" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q94-rP-UWE">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                             </imageView>
                                         </subviews>
@@ -1383,10 +1387,14 @@
                                             <constraint firstAttribute="trailing" secondItem="ByH-pV-5Go" secondAttribute="trailing" id="DPl-ah-ctL"/>
                                             <constraint firstAttribute="trailing" secondItem="hRw-Oo-gPd" secondAttribute="trailing" id="ETk-jk-utt"/>
                                             <constraint firstItem="ByH-pV-5Go" firstAttribute="leading" secondItem="rss-Gd-tMR" secondAttribute="leading" id="McS-Vq-fSj"/>
+                                            <constraint firstItem="Q94-rP-UWE" firstAttribute="leading" secondItem="rss-Gd-tMR" secondAttribute="leading" id="Vn0-Pl-nX7"/>
                                             <constraint firstAttribute="width" secondItem="rss-Gd-tMR" secondAttribute="height" multiplier="1:1" id="bPB-Rw-9iD"/>
                                             <constraint firstItem="ByH-pV-5Go" firstAttribute="top" secondItem="rss-Gd-tMR" secondAttribute="top" id="c0v-sw-D8V"/>
                                             <constraint firstItem="hRw-Oo-gPd" firstAttribute="leading" secondItem="rss-Gd-tMR" secondAttribute="leading" id="sAK-TT-eMA"/>
+                                            <constraint firstItem="Q94-rP-UWE" firstAttribute="top" secondItem="rss-Gd-tMR" secondAttribute="top" id="sxi-ah-yaZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="Q94-rP-UWE" secondAttribute="trailing" id="wrn-a4-g85"/>
                                             <constraint firstAttribute="bottom" secondItem="hRw-Oo-gPd" secondAttribute="bottom" id="x3Y-2Z-88r"/>
+                                            <constraint firstAttribute="bottom" secondItem="Q94-rP-UWE" secondAttribute="bottom" id="x6X-ne-2bE"/>
                                         </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="3I0-Ex-R5F" appends="YES" id="eSe-yY-TA3"/>
@@ -1405,11 +1413,11 @@
                                 </connections>
                             </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iZ2-HO-zPk">
-                                <rect key="frame" x="0.0" y="778" width="414" height="84"/>
+                                <rect key="frame" x="0.0" y="729" width="414" height="84"/>
                                 <items>
                                     <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="3Sh-NI-ONs"/>
                                     <barButtonItem title="Undo" image="undo" id="BnQ-Be-9xp"/>
-                                    <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="yvw-I8-UbZ"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="yvw-I8-UbZ"/>
                                     <barButtonItem title="Scroll" image="move_arrows_enabled" id="Yir-xb-NHn">
                                         <connections>
                                             <action selector="modeBarButtonPressed:" destination="9VZ-tq-Kp4" id="muk-h0-7zl"/>
@@ -1421,12 +1429,6 @@
                                             <action selector="modeBarButtonPressed:" destination="9VZ-tq-Kp4" id="KR5-d9-ZTJ"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="d3e-TU-wrd"/>
-                                    <barButtonItem title="Eraser" image="eraser_disabled" id="u3A-WI-Tkx">
-                                        <connections>
-                                            <action selector="modeBarButtonPressed:" destination="9VZ-tq-Kp4" id="cLO-uw-974"/>
-                                        </connections>
-                                    </barButtonItem>
                                     <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="Qxv-Af-NKg"/>
                                     <barButtonItem title="Text" image="text_insert_disabled" id="oqE-a9-1PP">
                                         <connections>
@@ -1434,10 +1436,41 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Fq1-5B-0zh"/>
-                                    <barButtonItem title="Actions" image="three_dots" id="E5D-RI-Bgi">
-                                        <connections>
-                                            <segue destination="OIf-cm-cDZ" kind="show" identifier="PETagging-PEToolOpt" id="rOd-mN-FUB"/>
-                                        </connections>
+                                    <barButtonItem width="20" style="plain" id="M4N-6U-YDE">
+                                        <view key="customView" userInteractionEnabled="NO" contentMode="scaleToFill" id="9M5-ve-DKs">
+                                            <rect key="frame" x="154" y="10.666666666666664" width="240" height="62.999999999999993"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Of8-7w-Y3c" customClass="UIButton">
+                                                    <rect key="frame" x="102.66666666666667" y="8" width="35.000000000000014" height="35"/>
+                                                    <color key="backgroundColor" red="0.99607843139999996" green="0.20000000000000001" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="5dj-wO-Mdw"/>
+                                                        <constraint firstAttribute="width" secondItem="Of8-7w-Y3c" secondAttribute="height" id="aoo-oJ-VDu"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="colorPressed:" destination="9VZ-tq-Kp4" eventType="touchUpInside" id="pWf-zN-eSK"/>
+                                                    </connections>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Of8-7w-Y3c" firstAttribute="centerX" secondItem="9M5-ve-DKs" secondAttribute="centerX" id="1fn-t9-x2o"/>
+                                                <constraint firstItem="Of8-7w-Y3c" firstAttribute="top" secondItem="9M5-ve-DKs" secondAttribute="top" constant="8" id="Hk2-gX-do4"/>
+                                                <constraint firstAttribute="bottom" secondItem="Of8-7w-Y3c" secondAttribute="bottom" constant="8" id="XYl-Rb-ANM"/>
+                                                <constraint firstItem="Of8-7w-Y3c" firstAttribute="centerY" secondItem="9M5-ve-DKs" secondAttribute="centerY" id="XvP-pM-gYl"/>
+                                            </constraints>
+                                        </view>
                                     </barButtonItem>
                                     <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="JvE-ZB-Vc2"/>
                                 </items>
@@ -1461,15 +1494,21 @@
                                 <action selector="cancelPressed:" destination="9VZ-tq-Kp4" id="d8q-Fa-xAr"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="tWm-bO-tra"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="tWm-bO-tra">
+                            <connections>
+                                <action selector="donePressed:" destination="9VZ-tq-Kp4" id="9nB-Mb-mXD"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="allowScrollButton" destination="Yir-xb-NHn" id="flC-sh-IOE"/>
                         <outlet property="brushButton" destination="nIk-75-aOa" id="koJ-I0-lxM"/>
-                        <outlet property="eraserButton" destination="u3A-WI-Tkx" id="7Zc-Xa-5Se"/>
+                        <outlet property="curColorButton" destination="Of8-7w-Y3c" id="kab-Kn-W4f"/>
                         <outlet property="imageView" destination="ByH-pV-5Go" id="5Qe-gv-Epy"/>
+                        <outlet property="layerImageView" destination="Q94-rP-UWE" id="70K-iJ-2NK"/>
                         <outlet property="scrollView" destination="ypY-us-i4l" id="PVQ-UT-0EK"/>
                         <outlet property="textButton" destination="oqE-a9-1PP" id="fP3-KS-U0A"/>
+                        <segue destination="QKO-Zg-RfW" kind="presentation" identifier="peTagVC-colorPicker" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Ij2-mE-c8M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DdA-k3-chM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1480,6 +1519,149 @@
                 </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="6344.9275362318849" y="-458.03571428571428"/>
+        </scene>
+        <!--Color PickerVC-->
+        <scene sceneID="gEL-4Y-mpN">
+            <objects>
+                <viewController id="QKO-Zg-RfW" customClass="PEColorPickerVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0ng-H4-f5h">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uHZ-Ak-Psr">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8Kc-BT-EbS">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DtW-Zn-2Sl">
+                                            <rect key="frame" x="16" y="316.66666666666669" width="382" height="263.00000000000006"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jiZ-Fc-hoq" customClass="GradientSlider" customModule="MoSticker" customModuleProvider="target">
+                                                    <rect key="frame" x="14" y="-4" width="354" height="36"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="thickness">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="minimumValue">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="maximumValue">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="sliderValueChanged:" destination="QKO-Zg-RfW" eventType="valueChanged" id="928-4n-pYt"/>
+                                                    </connections>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wcP-VB-wpH" customClass="GradientSlider" customModule="MoSticker" customModuleProvider="target">
+                                                    <rect key="frame" x="14" y="40" width="354" height="36"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="thickness">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="minimumValue">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="maximumValue">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="sliderValueChanged:" destination="QKO-Zg-RfW" eventType="valueChanged" id="nmK-vs-Dp4"/>
+                                                    </connections>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u5A-bX-XaS" customClass="GradientSlider" customModule="MoSticker" customModuleProvider="target">
+                                                    <rect key="frame" x="14" y="84" width="354" height="36"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="thickness">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="minimumValue">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="maximumValue">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="sliderValueChanged:" destination="QKO-Zg-RfW" eventType="valueChanged" id="A04-kO-9CY"/>
+                                                    </connections>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ldb-jA-YIe">
+                                                    <rect key="frame" x="166" y="148" width="50" height="50"/>
+                                                    <color key="backgroundColor" red="0.99607843139999996" green="0.20000000000000001" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="g8V-hT-xsg"/>
+                                                        <constraint firstAttribute="width" secondItem="Ldb-jA-YIe" secondAttribute="height" id="gB1-2d-agk"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c19-DZ-XkP">
+                                                    <rect key="frame" x="0.0" y="229.99999999999994" width="382" height="33"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <state key="normal" title="Done"/>
+                                                    <connections>
+                                                        <action selector="donePressed:" destination="QKO-Zg-RfW" eventType="touchUpInside" id="cIi-wC-WI9"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="wcP-VB-wpH" firstAttribute="leading" secondItem="DtW-Zn-2Sl" secondAttribute="leading" constant="16" id="7dR-GX-lOr"/>
+                                                <constraint firstItem="c19-DZ-XkP" firstAttribute="top" secondItem="Ldb-jA-YIe" secondAttribute="bottom" constant="32" id="9pG-RY-AQD"/>
+                                                <constraint firstAttribute="trailing" secondItem="jiZ-Fc-hoq" secondAttribute="trailing" constant="16" id="B0c-5x-Ijc"/>
+                                                <constraint firstItem="c19-DZ-XkP" firstAttribute="leading" secondItem="DtW-Zn-2Sl" secondAttribute="leading" id="Cdt-ul-M1p"/>
+                                                <constraint firstItem="u5A-bX-XaS" firstAttribute="top" secondItem="wcP-VB-wpH" secondAttribute="bottom" constant="16" id="Iko-Wr-s8s"/>
+                                                <constraint firstItem="Ldb-jA-YIe" firstAttribute="top" secondItem="u5A-bX-XaS" secondAttribute="bottom" constant="32" id="JvX-Vb-PVv"/>
+                                                <constraint firstAttribute="trailing" secondItem="u5A-bX-XaS" secondAttribute="trailing" constant="16" id="NzJ-ri-zMe"/>
+                                                <constraint firstItem="Ldb-jA-YIe" firstAttribute="centerX" secondItem="DtW-Zn-2Sl" secondAttribute="centerX" id="UPK-yg-0pf"/>
+                                                <constraint firstItem="wcP-VB-wpH" firstAttribute="top" secondItem="jiZ-Fc-hoq" secondAttribute="bottom" constant="16" id="Wmg-up-j7G"/>
+                                                <constraint firstAttribute="trailing" secondItem="wcP-VB-wpH" secondAttribute="trailing" constant="16" id="coZ-6E-lxW"/>
+                                                <constraint firstAttribute="trailing" secondItem="c19-DZ-XkP" secondAttribute="trailing" id="lSX-7z-HYn"/>
+                                                <constraint firstItem="u5A-bX-XaS" firstAttribute="leading" secondItem="DtW-Zn-2Sl" secondAttribute="leading" constant="16" id="rYu-Nn-Vvw"/>
+                                                <constraint firstItem="jiZ-Fc-hoq" firstAttribute="top" secondItem="DtW-Zn-2Sl" secondAttribute="top" id="t20-6F-AcR"/>
+                                                <constraint firstItem="jiZ-Fc-hoq" firstAttribute="leading" secondItem="DtW-Zn-2Sl" secondAttribute="leading" constant="16" id="tbQ-3n-eLG"/>
+                                                <constraint firstAttribute="bottom" secondItem="c19-DZ-XkP" secondAttribute="bottom" id="zFB-DF-WCm"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="DtW-Zn-2Sl" firstAttribute="leading" secondItem="8Kc-BT-EbS" secondAttribute="leading" constant="16" id="2oq-PA-55S"/>
+                                        <constraint firstItem="DtW-Zn-2Sl" firstAttribute="centerY" secondItem="8Kc-BT-EbS" secondAttribute="centerY" id="9R4-dH-OSE"/>
+                                        <constraint firstAttribute="trailing" secondItem="DtW-Zn-2Sl" secondAttribute="trailing" constant="16" id="hhQ-Fe-m58"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="uHZ-Ak-Psr" firstAttribute="leading" secondItem="OY8-yQ-4Oa" secondAttribute="leading" id="Jeg-lX-Yx2"/>
+                            <constraint firstItem="uHZ-Ak-Psr" firstAttribute="top" secondItem="0ng-H4-f5h" secondAttribute="top" id="Pba-oi-RrN"/>
+                            <constraint firstAttribute="bottom" secondItem="uHZ-Ak-Psr" secondAttribute="bottom" id="XJi-0T-PSA"/>
+                            <constraint firstItem="OY8-yQ-4Oa" firstAttribute="trailing" secondItem="uHZ-Ak-Psr" secondAttribute="trailing" id="dGZ-Vx-UFd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="OY8-yQ-4Oa"/>
+                    </view>
+                    <connections>
+                        <outlet property="brightnessSlider" destination="u5A-bX-XaS" id="WVa-d6-gLn"/>
+                        <outlet property="colorPreviewView" destination="Ldb-jA-YIe" id="aVO-Tl-adU"/>
+                        <outlet property="hueSlider" destination="jiZ-Fc-hoq" id="vxy-iS-bha"/>
+                        <outlet property="saturationSlider" destination="wcP-VB-wpH" id="nDO-FT-YRT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rWo-D9-Z6s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6344.9275362318849" y="-1406.25"/>
         </scene>
         <!--Packs-->
         <scene sceneID="oXh-ZD-QM0">
@@ -1929,7 +2111,6 @@
         <image name="settings" width="75" height="75"/>
         <image name="sticker" width="25" height="25"/>
         <image name="text_insert_disabled" width="84" height="84"/>
-        <image name="three_dots" width="84" height="84"/>
         <image name="transparent_pattern.png" width="1000" height="1000"/>
         <image name="undo" width="19.440000534057617" height="19.440000534057617"/>
     </resources>

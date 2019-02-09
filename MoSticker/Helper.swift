@@ -139,6 +139,27 @@ extension UIView {
         get { return self.layer.borderWidth }
         set { self.layer.borderWidth = newValue }
     }
+    @IBInspectable var cornerRadius: CGFloat {
+        get { return self.layer.cornerRadius }
+        set { self.layer.cornerRadius = newValue }
+    }
+    @IBInspectable var shadowColor: UIColor? {
+        get {
+            guard let color = self.layer.shadowColor else { return nil }
+            return UIColor(cgColor: color)
+        }
+        set {
+            self.layer.shadowColor = newValue?.cgColor
+        }
+    }
+    @IBInspectable var shadowOpacity: CGFloat {
+        get { return CGFloat(self.layer.shadowOpacity) }
+        set { self.layer.shadowOpacity = Float(newValue) }
+    }
+    @IBInspectable var shadowRadius: CGFloat {
+        get { return self.layer.shadowRadius }
+        set { self.layer.shadowRadius = newValue }
+    }
     
     /// Helper to get pre transform frame
     var originalFrame: CGRect {

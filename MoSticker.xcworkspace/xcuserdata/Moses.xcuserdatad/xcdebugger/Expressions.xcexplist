@@ -25,7 +25,7 @@
          contextName = "PEBackRemoveVC.panGesture(_:):PEBackRemoveVC.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.curImage">
+               value = "self.maskImage">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

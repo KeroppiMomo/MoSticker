@@ -77,7 +77,7 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
         maskImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        let cachedSize = CGSize(width: R.PE.BRVC.cachedImgRes, height: R.PE.BRVC.cachedImgRes)
+        let cachedSize = CGSize(width: R.PE.cachedImgRes, height: R.PE.cachedImgRes)
         UIGraphicsBeginImageContextWithOptions(cachedSize, true, 0.0)
         UIColor.black.setFill()
         UIRectFill(CGRect(origin: CGPoint.zero, size: cachedSize))
@@ -85,8 +85,6 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
         UIGraphicsEndImageContext()
         
         UIGraphicsBeginImageContextWithOptions(cachedSize, false, 0.0)
-        UIColor.clear.setFill()
-        UIRectFill(CGRect(origin: .zero, size: cachedSize))
         curImage.draw(in: CGRect(origin: .zero, size: cachedSize))
         cachedImg = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -137,6 +135,7 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
         }
     }
     
+    var panPathPts = [(CGPoint, CGFloat)]()
     @IBAction func panGesture(_ sender: UIPanGestureRecognizer) {
         if modeIndex != 0,
            let startingPoint = imageView.panningStartPoint {
@@ -146,6 +145,7 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
                 
                 let touchingPoint = startingPoint.added(with: sender.translation(in: imageView))
                 let pointOnImg = touchingPoint.mul(factor: maskImg.size.width / view.frame.width)
+                panPathPts.append((pointOnImg.mul(factor: curImage.size.width / cachedImg.size.width), brushSize * (curImage.size.width / cachedImg.size.width)))
                 
                 let maskColor = self.modeIndex == 1 ? UIColor.black : UIColor.white
                 UIGraphicsBeginImageContextWithOptions(maskImg.size, false, 0.0)
@@ -170,18 +170,30 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
                 return (resultImg, resultMask)
             }
             
-            let brushSize = self.calculateBrushSize()
             if sender.state == .changed {
-            let (resultImg, resultMask) = mask(brushSize: brushSize, sourceImg: cachedImg, maskImg: maskImage)
-                maskImage = resultMask
+                let brushSize = self.calculateBrushSize() / (maskImage.size.width / cachedImg.size.width)
+                let (resultImg, resultMask) = mask(brushSize: brushSize, sourceImg: cachedImg, maskImg: maskCachedImage)
+                maskCachedImage = resultMask
                 
                 self.imageView.image = resultImg
             } else if sender.state == .ended {
-                let (resultImg, resultMask) = mask(brushSize: brushSize, sourceImg: curImage, maskImg: maskImage)
-                maskImage = resultMask
-                
-                self.imageView.image = resultImg
+                let maskColor = self.modeIndex == 1 ? UIColor.black : UIColor.white
 
+                UIGraphicsBeginImageContextWithOptions(curImage.size, false, 0.0)
+                maskImage.draw(at: .zero)
+                for (pt, brushSize) in panPathPts {
+                    createCirlce(radius: brushSize, color: maskColor)!.draw(at: pt.added(with: CGPoint(x: -brushSize / 2, y: -brushSize / 2)))
+                }
+                maskImage = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                
+                if let maskedImage = imageMasking(curImage, maskImage: maskImage) {
+                    imageView.image = maskedImage
+                } else {
+                    printError("Masking fail: imageMasking(_:maskImage:) returns nil")
+                }
+                
+                panPathPts = []
             }
             
         }
@@ -191,34 +203,23 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
         showPopConfirmation()
     }
     
-    @IBAction func donePressed(_ sender: UIBarButtonItem) {
-        func failed() {
+    @IBAction func nextPressed(_ sender: UIBarButtonItem) {
+        if let resultImg = imageMasking(curImage, maskImage: maskImage) {
+            self.performSegue(withIdentifier: R.PE.BRVC.toTagSegueID, sender: resultImg)
+        } else {
+            printError("Masking failed: imageMasking(_:maskImage:) returns nil.")
             self.showErrorMessage(title: R.PE.BRVC.processErrorTitle, message: R.PE.BRVC.processErrorMessage)
             self.dismiss(animated: true, completion: nil)
         }
-        
-        if let resultImg = imageMasking(curImage, maskImage: maskImage) {
-            let loadingVC = LoadingVC.setup(withMessage: R.PE.BRVC.processingMessage)
-            resultImg.pngquant { (data) in
-                if let pngData = data {
-                    resultImg.webpData(targetSize: Limits.MaxStickerFileSize) { (data) in
-                        if let webpData = data {
-                            self.dismiss(animated: true, completion: nil)
-                            self.delegate?.pe?(didFinish: webpData, pngData: pngData)
-                        } else {
-                            printError("Failed to webp the image: data in webpData(targetSize:completion:) is nil.")
-                            failed()
-                        }
-                    }
-                } else {
-                    printError("Failed to pngquant the image: data in pngquant(_:) is nil.")
-                    failed()
-                }
-            }
-            self.present(loadingVC, animated: true, completion: nil)
-        } else {
-            printError("Masking failed: imageMasking(_:maskImage:) returns nil.")
-            failed()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == R.PE.BRVC.toTagSegueID,
+            let dvc = segue.destination as? PETaggingVC,
+            let image = sender as? UIImage {
+            
+            dvc.curImage = image
+            dvc.delegate = self.delegate
         }
     }
 }

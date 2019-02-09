@@ -8,19 +8,22 @@
 
 import UIKit
 
-class PETaggingVC: UIViewController, UIScrollViewDelegate, PEToolOptVCDelegate {
+class PETaggingVC: UIViewController, UIScrollViewDelegate {
     
+    var delegate: PEDelegate?
     var curImage: UIImage!
     var brushLayer: UIImage!
+    var brushCached: UIImage!
     
-    var toolOptions = PEToolOptions()
+    var curColor = UIColor.red
     
     @IBOutlet weak var imageView: PanningImageView!
+    @IBOutlet weak var layerImageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var allowScrollButton: UIBarButtonItem!
     @IBOutlet weak var brushButton: UIBarButtonItem!
-    @IBOutlet weak var eraserButton: UIBarButtonItem!
     @IBOutlet weak var textButton: UIBarButtonItem!
+    @IBOutlet weak var curColorButton: UIButton!
 
     var _modeIndex = 0
     var modeIndex: Int {
@@ -28,39 +31,26 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate, PEToolOptVCDelegate {
         set {
             _modeIndex = newValue
             
-            allowScrollButton.image = UIImage(named: PETaggingVC.DISABLE_SCROLL_ICON_NAME)
-            brushButton.image = UIImage(named: PETaggingVC.DISABLE_BRUSH_ICON_NAME)
-            eraserButton.image = UIImage(named: PETaggingVC.DISABLE_ERASER_ICON_NAME)
-            textButton.image = UIImage(named: PETaggingVC.DISABLE_TEXT_ICON_NAME)
+            allowScrollButton.image = R.PE.TagVC.disableScrollIcon
+            brushButton.image = R.PE.TagVC.disableBrushIcon
+            textButton.image = R.PE.TagVC.disableTextIcon
             scrollView.isScrollEnabled = false
             scrollView.pinchGestureRecognizer?.isEnabled = false
 
             switch _modeIndex {
             case 0:
-                allowScrollButton.image = UIImage(named: PETaggingVC.ENABLE_SCROLL_ICON_NAME)
+                allowScrollButton.image = R.PE.TagVC.enableScrollIcon
                 scrollView.isScrollEnabled = true
                 scrollView.pinchGestureRecognizer?.isEnabled = true
             case 1:
-                brushButton.image = UIImage(named: PETaggingVC.ENABLE_BRUSH_ICON_NAME)
+                brushButton.image = R.PE.TagVC.enableBrushIcon
             case 2:
-                eraserButton.image = UIImage(named: PETaggingVC.ENABLE_ERASER_ICON_NAME)
-            case 3:
-                textButton.image = UIImage(named: PETaggingVC.ENABLE_TEXT_ICON_NAME)
+                textButton.image = R.PE.TagVC.enableTextIcon
             default:
                 printError("Unknown index: newValue is \(newValue).")
             }
         }
     }
-    
-    static let DISABLE_SCROLL_ICON_NAME = "move_arrows_disabled"
-    static let ENABLE_SCROLL_ICON_NAME = "move_arrows_enabled"
-    static let DISABLE_BRUSH_ICON_NAME = "brush_disabled"
-    static let ENABLE_BRUSH_ICON_NAME = "brush_enabled"
-    static let ENABLE_ERASER_ICON_NAME = "eraser_enabled"
-    static let DISABLE_ERASER_ICON_NAME = "eraser_disabled"
-    static let DISABLE_TEXT_ICON_NAME = "text_insert_disabled"
-    static let ENABLE_TEXT_ICON_NAME = "text_insert_enabled"
-    static let TO_PETOOLOPT_SEGUE_ID = "PETagging-PEToolOpt"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,9 +58,13 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate, PEToolOptVCDelegate {
         imageView.image = curImage
         
         UIGraphicsBeginImageContextWithOptions(curImage.size, false, 0.0)
-        UIColor.clear.setFill()
-        UIRectFill(CGRect(origin: CGPoint.zero, size: curImage.size))
         brushLayer = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let cachedSize = CGSize(width: R.PE.cachedImgRes, height: R.PE.cachedImgRes)
+        
+        UIGraphicsBeginImageContextWithOptions(cachedSize, false, 0.0)
+        brushCached = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -84,56 +78,111 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate, PEToolOptVCDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return scrollView.subviews.first
     }
-    func options(_ toolOpt: PEToolOptVC) -> PEToolOptions {
-        return toolOptions
-    }
-    func toolOpt(_ toolOpt: PEToolOptVC, didFinish options: PEToolOptions) {
-        toolOptions = options
-    }
     @IBAction func modeBarButtonPressed(_ sender: UIBarButtonItem) {
         switch sender {
         case allowScrollButton:
             modeIndex = 0
         case brushButton:
             modeIndex = 1
-        case eraserButton:
-            modeIndex = 2
         case textButton:
-            modeIndex = 3
+            modeIndex = 2
         default:
             print("Unknown sender: sender is \(sender).")
         }
     }
+    @IBAction func colorPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: R.PE.TagVC.toColorPickerSegueID, sender: curColor)
+    }
+    func colorPickerCompletion(_ color: UIColor) {
+        curColor = color
+        curColorButton.backgroundColor = curColor
+        self.dismiss(animated: true, completion: nil)
+    }
     
+    func calculateBrushSize() -> CGFloat {
+        return 30 / scrollView.zoomScale
+    }
+    
+    var panPathPts = [CGPoint]()
     @IBAction func panGesture(_ sender: UIPanGestureRecognizer) {
-//        if modeIndex != 0 || modeIndex != 3,
-//            let startingPoint = imageView.panningStartPoint {
-//            let touchingPoint = startingPoint.added(with: sender.translation(in: imageView))
-//            let pointOnImg = touchingPoint.mul(factor: curImage.size.width / view.frame.width)
-//
-//            if modeIndex == 1 {
-//                UIGraphicsBeginImageContextWithOptions(curImage.size, false, 0.0)
-//                brushLayer.draw(in: CGRect(origin: CGPoint.zero, size: maskImage.size))
-//
-//                let brushColor = // TODO:
-//                let brushSize = calculateBrushSize()
-//                createCirlce(radius: brushSize, color: brushColor)!.draw(at: pointOnImg.added(with: CGPoint(x: -brushSize / 2, y: -brushSize / 2)))
-//                maskImage = UIGraphicsGetImageFromCurrentImageContext()
-//
-//                UIGraphicsEndImageContext()
-//            }
-//        }
+        if modeIndex == 1,
+            let startingPoint = imageView.panningStartPoint {
+            
+            func draw(brushSize: CGFloat, image: UIImage) -> UIImage {
+                let result: UIImage!
+                
+                let touchingPoint = startingPoint.added(with: sender.translation(in: imageView))
+                let pointOnImg = touchingPoint.mul(factor: image.size.width / view.frame.width)
+                panPathPts.append(pointOnImg.mul(factor: brushLayer.size.width / brushCached.size.width))
+                
+                UIGraphicsBeginImageContextWithOptions(image.size, false, 0.0)
+                image.draw(at: .zero)
+                createCirlce(radius: brushSize, color: curColor)!.draw(at: pointOnImg.added(with: CGPoint(x: -brushSize / 2, y: -brushSize / 2)))
+                result = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                
+                return result
+            }
+            
+            if sender.state == .changed {
+                let brushSize = self.calculateBrushSize() / (brushLayer.size.width / brushCached.size.width)
+                let resultLayer = draw(brushSize: brushSize, image: brushCached)
+                brushCached = resultLayer
+                
+                layerImageView.image = brushCached
+            } else if sender.state == .ended {
+                let brushSize = self.calculateBrushSize()
+                
+                UIGraphicsBeginImageContextWithOptions(curImage.size, false, 0.0)
+                brushLayer.draw(at: .zero)
+                for pt in panPathPts {
+                    createCirlce(radius: brushSize, color: curColor)!.draw(at: pt.added(with: CGPoint(x: -brushSize / 2, y: -brushSize / 2)))
+                }
+                brushLayer = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                
+                layerImageView.image = brushLayer
+                
+                panPathPts = []
+            }
+        }
     }
     
     @IBAction func cancelPressed(_ sender: UIBarButtonItem) {
         showPopConfirmation()
     }
+    @IBAction func donePressed(_ sender: UIBarButtonItem) {
+        func failed() {
+            self.showErrorMessage(title: R.PE.BRVC.processErrorTitle, message: R.PE.BRVC.processErrorMessage)
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        let loadingVC = LoadingVC.setup(withMessage: R.PE.BRVC.processingMessage)
+        curImage.pngquant { (data) in
+            if let pngData = data {
+                self.curImage.webpData(targetSize: Limits.MaxStickerFileSize) { (data) in
+                    if let webpData = data {
+                        self.dismiss(animated: true, completion: nil)
+                        self.delegate?.pe?(didFinish: webpData, pngData: pngData)
+                    } else {
+                        printError("Failed to webp the image: data in webpData(targetSize:completion:) is nil.")
+                        failed()
+                    }
+                }
+            } else {
+                printError("Failed to pngquant the image: data in pngquant(_:) is nil.")
+                failed()
+            }
+        }
+        self.present(loadingVC, animated: true, completion: nil)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == PETaggingVC.TO_PETOOLOPT_SEGUE_ID,
-            let dvc = segue.destination as? PEToolOptVC {
-            
-            dvc.delegate = self
+        if segue.identifier == R.PE.TagVC.toColorPickerSegueID,
+            let dvc = segue.destination as? PEColorPickerVC,
+            let color = sender as? UIColor {
+            dvc.curColor = color
+            dvc.completion = colorPickerCompletion
         }
     }
 }
