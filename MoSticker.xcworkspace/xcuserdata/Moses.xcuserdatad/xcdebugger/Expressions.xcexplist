@@ -3,7 +3,26 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "PEBackRemoveVC.viewDidLoad():PEBackRemoveVC.swift">
+         contextName = "PEBackRemoveVC.panGesture(_:):PEBackRemoveVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.maskImage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "EditPackVC.donePressed(_:):EditPackVC.swift">
+      </ContextState>
+      <ContextState
+         contextName = "imageMasking(_:maskImage:):Helper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "UIImage(cgImage: originalImg.cgImage!.masking(mask)!).pngData()!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PETaggingVC.donePressed(_:):PETaggingVC.swift">
          <PersistentStrings>
             <PersistentString
                value = "UIGraphicsGetImageFromCurrentImageContext()">
@@ -22,23 +41,20 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "PEBackRemoveVC.panGesture(_:):PEBackRemoveVC.swift">
+         contextName = "PEBackRemoveVC.viewDidLoad():PEBackRemoveVC.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.maskImage">
+               value = "UIGraphicsGetImageFromCurrentImageContext()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "imageMasking(_:maskImage:):Helper.swift">
+         contextName = "PETaggingVC.updateEmojiView():PETaggingVC.swift">
          <PersistentStrings>
             <PersistentString
-               value = "UIImage(cgImage: originalImg.cgImage!.masking(mask)!).pngData()!">
+               value = "label.gestureRecognizers">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "EditPackVC.donePressed(_:):EditPackVC.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

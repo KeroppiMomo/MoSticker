@@ -24,4 +24,6 @@ target 'MoSticker' do
   pod 'Crashlytics'
   pod 'Firebase/Performance'
 
+  # Others
+  pod 'ISEmojiView'
 end

@@ -199,8 +199,11 @@ class R {
             static let disableTextIcon = UIImage(named: "text_insert_disabled")
             static let enableTextIcon = UIImage(named: "text_insert_enabled")
             
-            static let toToolOptSegueID = "PETagging-PEToolOpt"
             static let toColorPickerSegueID = "peTagVC-colorPicker"
+            static let toEmojiSegueID = "peTagVC-emoji"
+            
+            static let removeEmojiMessage = "Remove Emoji"
+            static let removeEmojiAnimationInterval: TimeInterval = 0.2
         }
     }
     

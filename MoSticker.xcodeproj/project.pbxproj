@@ -179,6 +179,7 @@
 		A67F4611220DBD19009896F7 /* PEColorPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67F4610220DBD19009896F7 /* PEColorPickerVC.swift */; };
 		A6A2C06F220D9CDE00EC2029 /* GradientSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2C06E220D9CDE00EC2029 /* GradientSlider.swift */; };
 		A6C6DFA021E5F26200A85EE2 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C6DF9F21E5F26200A85EE2 /* SettingVC.swift */; };
+		A6D2F49B220E8B97003080D5 /* PEEmojiSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D2F49A220E8B97003080D5 /* PEEmojiSelectVC.swift */; };
 		A6D5E8ED21DF9555007F00B9 /* pngget.c in Sources */ = {isa = PBXBuildFile; fileRef = A6D5E8D621DF9554007F00B9 /* pngget.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		A6D5E8EE21DF9555007F00B9 /* pngerror.c in Sources */ = {isa = PBXBuildFile; fileRef = A6D5E8D721DF9554007F00B9 /* pngerror.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		A6D5E8EF21DF9555007F00B9 /* pngrutil.c in Sources */ = {isa = PBXBuildFile; fileRef = A6D5E8D821DF9554007F00B9 /* pngrutil.c */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -458,6 +459,7 @@
 		A6A2C06E220D9CDE00EC2029 /* GradientSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSlider.swift; sourceTree = "<group>"; };
 		A6C6DF9F21E5F26200A85EE2 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		A6C6DFA221E601A100A85EE2 /* MoSticker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoSticker.entitlements; sourceTree = "<group>"; };
+		A6D2F49A220E8B97003080D5 /* PEEmojiSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEEmojiSelectVC.swift; sourceTree = "<group>"; };
 		A6D5E8D421DF9553007F00B9 /* lodepng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lodepng.h; sourceTree = "<group>"; };
 		A6D5E8D521DF9554007F00B9 /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
 		A6D5E8D621DF9554007F00B9 /* pngget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngget.c; sourceTree = "<group>"; };
@@ -577,6 +579,7 @@
 				A67F4610220DBD19009896F7 /* PEColorPickerVC.swift */,
 				A63C107921BD26C8006160F8 /* PanningImageView.swift */,
 				A6DE0D8A21C68BB90071CFBA /* PEDelegate.swift */,
+				A6D2F49A220E8B97003080D5 /* PEEmojiSelectVC.swift */,
 			);
 			name = "Photo Editing";
 			sourceTree = "<group>";
@@ -1221,6 +1224,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/ISEmojiView/ISEmojiView.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -1231,6 +1235,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISEmojiView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -1419,6 +1424,7 @@
 				A63D9BE621E065D1000F84A1 /* rescaler_msa.c in Sources */,
 				A63D9BBE21E065D1000F84A1 /* lossless_enc.c in Sources */,
 				A63D9C5B21E06B50000F84A1 /* mempool.c in Sources */,
+				A6D2F49B220E8B97003080D5 /* PEEmojiSelectVC.swift in Sources */,
 				A63D9B5F21E065B6000F84A1 /* picture_rescale_enc.c in Sources */,
 				A655130D21FB1BD600A07E84 /* Resources.swift in Sources */,
 				A63D9AEF21E0655B000F84A1 /* io_dec.c in Sources */,
