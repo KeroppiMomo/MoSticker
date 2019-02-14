@@ -1001,6 +1001,9 @@
                                     <constraint firstItem="7WO-oZ-d8D" firstAttribute="height" secondItem="Ze0-yj-xw6" secondAttribute="height" id="oMV-DW-JbV"/>
                                     <constraint firstItem="7WO-oZ-d8D" firstAttribute="leading" secondItem="Ze0-yj-xw6" secondAttribute="leading" id="sHF-cm-uD6"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="scrollsToTop" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="delegate" destination="nFs-kM-cFp" id="ygS-nA-hOp"/>
                                 </connections>
