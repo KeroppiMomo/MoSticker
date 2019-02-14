@@ -118,13 +118,13 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
         
         imageView.image = curImage
         
-        UIGraphicsBeginImageContextWithOptions(curImage.size, false, 0.0)
+        UIGraphicsBeginImageContextWithOptions(curImage.size, false, 1.0)
         brushLayer = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         let cachedSize = CGSize(width: R.PE.cachedImgRes, height: R.PE.cachedImgRes)
         
-        UIGraphicsBeginImageContextWithOptions(cachedSize, false, 0.0)
+        UIGraphicsBeginImageContextWithOptions(cachedSize, false, 1.0)
         brushCached = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
@@ -245,7 +245,7 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
             _brushLayer = layer
             layerImageView.image = brushLayer
             
-            UIGraphicsBeginImageContextWithOptions(brushCached.size, false, 0.0)
+            UIGraphicsBeginImageContextWithOptions(brushCached.size, false, 1.0)
             brushLayer.draw(in: CGRect(origin: .zero, size: brushCached.size))
             brushCached = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
@@ -286,7 +286,7 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
                 let pointOnImg = touchingPoint.mul(factor: image.size.width / view.frame.width)
                 panPathPts.append(pointOnImg.mul(factor: brushLayer.size.width / brushCached.size.width))
                 
-                UIGraphicsBeginImageContextWithOptions(image.size, false, 0.0)
+                UIGraphicsBeginImageContextWithOptions(image.size, false, 1.0)
                 image.draw(at: .zero)
                 createCirlce(radius: brushSize, color: curColor)!.draw(at: pointOnImg.added(with: CGPoint(x: -brushSize / 2, y: -brushSize / 2)))
                 result = UIGraphicsGetImageFromCurrentImageContext()
@@ -304,7 +304,7 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
             } else if sender.state == .ended {
                 let brushSize = self.calculateBrushSize()
                 
-                UIGraphicsBeginImageContextWithOptions(curImage.size, false, 0.0)
+                UIGraphicsBeginImageContextWithOptions(curImage.size, false, 1.0)
                 brushLayer.draw(at: .zero)
                 for pt in panPathPts {
                     createCirlce(radius: brushSize, color: curColor)!.draw(at: pt.added(with: CGPoint(x: -brushSize / 2, y: -brushSize / 2)))
@@ -327,7 +327,7 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
         let ratioImgToScreen = curImage.size.width / imageView.bounds.width
         let emojisInImg = emojiEls.map { $0.scale(factor: ratioImgToScreen) }
         
-        UIGraphicsBeginImageContextWithOptions(curImage.size, false, 0.0)
+        UIGraphicsBeginImageContextWithOptions(curImage.size, false, 1.0)
         curImage.draw(at: .zero)
         brushLayer.draw(at: .zero)
         for emojiEl in emojisInImg {
@@ -340,7 +340,7 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
                 return label.bounds.size
             }()
             
-            UIGraphicsBeginImageContextWithOptions(textSize, false, 0.0)
+            UIGraphicsBeginImageContextWithOptions(textSize, false, 1.0)
             let attributes: [NSAttributedString.Key: Any] = [
                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: emojiEl.fontSize)
             ]
@@ -364,10 +364,11 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
             self.dismiss(animated: true, completion: nil)
         }
 
-        let loadingVC = LoadingVC.setup(withMessage: R.PE.BRVC.processingMessage)
-        outputImage.pngquant { (data) in
+        let progressVC = ProgressVC.setup(withMessage: R.PE.BRVC.processingMessage)
+        outputImage.pngquant(progressHandler: { progressVC.update(progress: $0 / 2 ) }) { (data) in
             if let pngData = data {
-                outputImage.webpData(targetSize: Limits.MaxStickerFileSize) { (data) in
+                outputImage.webpData(targetSize: Limits.MaxStickerFileSize,
+                                     progressHandler: { progressVC.update(progress: $0 / 2 + 0.5)}) { (data) in
                     if let webpData = data {
                         self.dismiss(animated: true, completion: nil)
                         self.delegate?.pe?(didFinish: webpData, pngData: pngData)
@@ -381,7 +382,7 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
                 failed()
             }
         }
-        self.present(loadingVC, animated: true, completion: nil)
+        self.present(progressVC, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

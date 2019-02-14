@@ -216,6 +216,7 @@ int pngquant_my_main(int speed, char* inputPath, char* outputPath) {
         .files              = &inputPath,
         .num_files          = 1,
         .output_file_path   = outputPath,
+        .verbose            = true
     };
     
     return pngquant_main(&options);

@@ -17,6 +17,6 @@ void cwebp_wrapper(NSString* inputPath, NSString* outputPath, int targetSize) {
     argv[3] = [outputPath UTF8String];
     argv[4] = "-size";
     argv[5] = [[NSString stringWithFormat:@"%d", targetSize] UTF8String];
-    argv[6] = "-quiet";
+    argv[6] = "-progress";
     cwebp_main(7, argv);
 }

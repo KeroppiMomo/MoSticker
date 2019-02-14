@@ -179,6 +179,8 @@
 		A67F4611220DBD19009896F7 /* PEColorPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67F4610220DBD19009896F7 /* PEColorPickerVC.swift */; };
 		A6A2C06F220D9CDE00EC2029 /* GradientSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2C06E220D9CDE00EC2029 /* GradientSlider.swift */; };
 		A6C6DFA021E5F26200A85EE2 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C6DF9F21E5F26200A85EE2 /* SettingVC.swift */; };
+		A6C991AF2211C27700CD446A /* ProgressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C991AD2211C27700CD446A /* ProgressVC.swift */; };
+		A6C991B02211C27700CD446A /* ProgressVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C991AE2211C27700CD446A /* ProgressVC.xib */; };
 		A6D2F49B220E8B97003080D5 /* PEEmojiSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D2F49A220E8B97003080D5 /* PEEmojiSelectVC.swift */; };
 		A6D5E8ED21DF9555007F00B9 /* pngget.c in Sources */ = {isa = PBXBuildFile; fileRef = A6D5E8D621DF9554007F00B9 /* pngget.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		A6D5E8EE21DF9555007F00B9 /* pngerror.c in Sources */ = {isa = PBXBuildFile; fileRef = A6D5E8D721DF9554007F00B9 /* pngerror.c */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -459,6 +461,8 @@
 		A6A2C06E220D9CDE00EC2029 /* GradientSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSlider.swift; sourceTree = "<group>"; };
 		A6C6DF9F21E5F26200A85EE2 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		A6C6DFA221E601A100A85EE2 /* MoSticker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoSticker.entitlements; sourceTree = "<group>"; };
+		A6C991AD2211C27700CD446A /* ProgressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressVC.swift; sourceTree = "<group>"; };
+		A6C991AE2211C27700CD446A /* ProgressVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressVC.xib; sourceTree = "<group>"; };
 		A6D2F49A220E8B97003080D5 /* PEEmojiSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEEmojiSelectVC.swift; sourceTree = "<group>"; };
 		A6D5E8D421DF9553007F00B9 /* lodepng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lodepng.h; sourceTree = "<group>"; };
 		A6D5E8D521DF9554007F00B9 /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
@@ -977,7 +981,7 @@
 				A64D2BF321F404D600828646 /* EditPackDBVC.swift */,
 				A644328021C90D27003AA333 /* ViewImgVC.swift */,
 				A623FE3F21B3753800D3E885 /* Photo Editing */,
-				A62E133621E8A77500FF5B79 /* LoadingVC */,
+				A6C991AB2211C23800CD446A /* Loading */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -1033,6 +1037,24 @@
 				A601AC7521EF66C500E9CC7A /* Setting */,
 			);
 			name = Tabs;
+			sourceTree = "<group>";
+		};
+		A6C991AB2211C23800CD446A /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				A6C991AC2211C24100CD446A /* ProgressVC */,
+				A62E133621E8A77500FF5B79 /* LoadingVC */,
+			);
+			name = Loading;
+			sourceTree = "<group>";
+		};
+		A6C991AC2211C24100CD446A /* ProgressVC */ = {
+			isa = PBXGroup;
+			children = (
+				A6C991AD2211C27700CD446A /* ProgressVC.swift */,
+				A6C991AE2211C27700CD446A /* ProgressVC.xib */,
+			);
+			name = ProgressVC;
 			sourceTree = "<group>";
 		};
 		A6F52D6021AFBA3700264105 = {
@@ -1150,6 +1172,7 @@
 				A6F52D7721AFBA3800264105 /* LaunchScreen.storyboard in Resources */,
 				A6F52D7221AFBA3700264105 /* Main.storyboard in Resources */,
 				A63C107821BCE868006160F8 /* Assets.xcassets in Resources */,
+				A6C991B02211C27700CD446A /* ProgressVC.xib in Resources */,
 				A62E133A21E8A7AE00FF5B79 /* LoadingVC.xib in Resources */,
 				A650264A21E4B631002E8BDF /* GoogleService-Info.plist in Resources */,
 			);
@@ -1262,6 +1285,7 @@
 				A63D9C2521E06A6C000F84A1 /* pngpriv.h in Sources */,
 				A63D9C5A21E06B50000F84A1 /* kmeans.c in Sources */,
 				A63D9C2621E06A6C000F84A1 /* pngstruct.h in Sources */,
+				A6C991AF2211C27700CD446A /* ProgressVC.swift in Sources */,
 				A63D9BB221E065D1000F84A1 /* alpha_processing_neon.c in Sources */,
 				A63D9BE021E065D1000F84A1 /* lossless_enc_neon.c in Sources */,
 				A637486B2207DE71008E6F64 /* PECropScrollVC.swift in Sources */,

@@ -10,7 +10,7 @@ import UIKit
 
 func createCirlce(radius: CGFloat, color: UIColor) -> UIImage? {
     let rect = CGRect(x: 0, y: 0, width: radius, height: radius)
-    UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+    UIGraphicsBeginImageContextWithOptions(rect.size, false, 1.0)
     let ctx = UIGraphicsGetCurrentContext()
     ctx!.setFillColor(color.cgColor)
     ctx!.fillEllipse(in: rect)
@@ -71,20 +71,20 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
 
         imageView.image = curImage
         
-        UIGraphicsBeginImageContextWithOptions(curImage.size, true, 0.0)
+        UIGraphicsBeginImageContextWithOptions(curImage.size, true, 1.0)
         UIColor.black.setFill()
         UIRectFill(CGRect(origin: CGPoint.zero, size: curImage.size))
         maskImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         let cachedSize = CGSize(width: R.PE.cachedImgRes, height: R.PE.cachedImgRes)
-        UIGraphicsBeginImageContextWithOptions(cachedSize, true, 0.0)
+        UIGraphicsBeginImageContextWithOptions(cachedSize, true, 1.0)
         UIColor.black.setFill()
         UIRectFill(CGRect(origin: CGPoint.zero, size: cachedSize))
         maskCachedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        UIGraphicsBeginImageContextWithOptions(cachedSize, false, 0.0)
+        UIGraphicsBeginImageContextWithOptions(cachedSize, false, 1.0)
         curImage.draw(in: CGRect(origin: .zero, size: cachedSize))
         cachedImg = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -148,14 +148,14 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
                 panPathPts.append((pointOnImg.mul(factor: curImage.size.width / cachedImg.size.width), brushSize * (curImage.size.width / cachedImg.size.width)))
                 
                 let maskColor = self.modeIndex == 1 ? UIColor.black : UIColor.white
-                UIGraphicsBeginImageContextWithOptions(maskImg.size, false, 0.0)
+                UIGraphicsBeginImageContextWithOptions(maskImg.size, false, 1.0)
                 maskImg.draw(in: CGRect(origin: CGPoint.zero, size: maskImg.size))
                 
                 createCirlce(radius: brushSize, color: maskColor)!.draw(at: pointOnImg.added(with: CGPoint(x: -brushSize / 2, y: -brushSize / 2)))
                 resultMask = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
                 
-                UIGraphicsBeginImageContextWithOptions(sourceImg.size, false, 0.0)
+                UIGraphicsBeginImageContextWithOptions(sourceImg.size, false, 1.0)
                 resultMask.draw(in: CGRect(origin: .zero, size: sourceImg.size))
                 let resizedMask = UIGraphicsGetImageFromCurrentImageContext()!
                 UIGraphicsEndImageContext()
@@ -179,7 +179,7 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
             } else if sender.state == .ended {
                 let maskColor = self.modeIndex == 1 ? UIColor.black : UIColor.white
 
-                UIGraphicsBeginImageContextWithOptions(curImage.size, false, 0.0)
+                UIGraphicsBeginImageContextWithOptions(curImage.size, false, 1.0)
                 maskImage.draw(at: .zero)
                 for (pt, brushSize) in panPathPts {
                     createCirlce(radius: brushSize, color: maskColor)!.draw(at: pt.added(with: CGPoint(x: -brushSize / 2, y: -brushSize / 2)))
