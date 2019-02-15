@@ -9,8 +9,8 @@
 
 #import "cwebp_wrapper.h"
 
-void cwebp_wrapper(NSString* inputPath, NSString* outputPath, int targetSize) {
-    char* argv[7];
+void cwebp_wrapper(const NSString* inputPath, const NSString* outputPath, const int targetSize) {
+    const char* argv[7];
     argv[0] = "cwebp";
     argv[1] = [inputPath UTF8String];
     argv[2] = "-o";

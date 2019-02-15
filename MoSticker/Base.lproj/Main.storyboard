@@ -634,7 +634,6 @@
                         <outlet property="doneButton" destination="KBP-l3-cnR" id="gqM-kj-jSv"/>
                         <outlet property="editButton" destination="yZI-1d-Q4i" id="ayY-i3-QRR"/>
                         <outlet property="tableView" destination="qbf-NE-3xJ" id="HZ4-1j-DpY"/>
-                        <segue destination="n2Y-PS-34t" kind="show" identifier="editPackLocal-peCrop" id="f30-5u-cDn"/>
                         <segue destination="84p-Rv-lDA" kind="show" identifier="editPackLocal-viewImg" id="bUA-V8-wJ3"/>
                         <segue destination="nFs-kM-cFp" kind="show" identifier="editPackLocal-peCropScroll" id="SZZ-oG-uw8"/>
                     </connections>
@@ -871,96 +870,12 @@
                         <outlet property="editButton" destination="AiG-Zp-Lix" id="cfF-uH-SS9"/>
                         <outlet property="tableView" destination="uYg-8r-1Jd" id="vpq-pZ-vme"/>
                         <segue destination="84p-Rv-lDA" kind="show" identifier="editPackDB-viewImg" id="3Jg-6q-tnQ"/>
-                        <segue destination="n2Y-PS-34t" kind="show" identifier="editPackDB-peCrop" id="DL8-Im-5t9"/>
                         <segue destination="nFs-kM-cFp" kind="show" identifier="editPackDB-peCropScroll" id="T89-hL-CIJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10v-H6-njF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2990" y="-1864"/>
-        </scene>
-        <!--Cropping-->
-        <scene sceneID="1vb-Zu-oEO">
-            <objects>
-                <viewController id="n2Y-PS-34t" customClass="PECropVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dRz-Dr-NhA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5V0-Xa-yCi">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ZI-B8-SXU">
-                                <rect key="frame" x="0.0" y="243.66666666666663" width="414" height="414"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="5ZI-B8-SXU" secondAttribute="height" id="tdy-lk-DNa"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qIq-fH-TMj">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="243.66666666666666"/>
-                                <color key="backgroundColor" white="0.5" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8V3-gW-HbJ">
-                                <rect key="frame" x="0.0" y="657.66666666666663" width="414" height="238.33333333333337"/>
-                                <color key="backgroundColor" white="0.5" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="qIq-fH-TMj" firstAttribute="leading" secondItem="ufn-iO-P0j" secondAttribute="leading" id="3Ss-qO-yyI"/>
-                            <constraint firstItem="5V0-Xa-yCi" firstAttribute="trailing" secondItem="ufn-iO-P0j" secondAttribute="trailing" id="99e-Jd-Nkp"/>
-                            <constraint firstItem="5ZI-B8-SXU" firstAttribute="trailing" secondItem="ufn-iO-P0j" secondAttribute="trailing" id="9Kk-MM-pa7"/>
-                            <constraint firstItem="qIq-fH-TMj" firstAttribute="trailing" secondItem="ufn-iO-P0j" secondAttribute="trailing" id="AF8-rL-kw6"/>
-                            <constraint firstItem="8V3-gW-HbJ" firstAttribute="leading" secondItem="ufn-iO-P0j" secondAttribute="leading" id="Ac5-YZ-28G"/>
-                            <constraint firstItem="8V3-gW-HbJ" firstAttribute="top" secondItem="5ZI-B8-SXU" secondAttribute="bottom" id="Fof-1P-qhI"/>
-                            <constraint firstItem="8V3-gW-HbJ" firstAttribute="trailing" secondItem="ufn-iO-P0j" secondAttribute="trailing" id="NBW-es-xCG"/>
-                            <constraint firstItem="5ZI-B8-SXU" firstAttribute="top" secondItem="qIq-fH-TMj" secondAttribute="bottom" id="f7j-t9-z8N"/>
-                            <constraint firstItem="5ZI-B8-SXU" firstAttribute="leading" secondItem="ufn-iO-P0j" secondAttribute="leading" id="h0z-W3-jyR"/>
-                            <constraint firstItem="qIq-fH-TMj" firstAttribute="top" secondItem="dRz-Dr-NhA" secondAttribute="top" id="h5n-cI-XPK"/>
-                            <constraint firstItem="5V0-Xa-yCi" firstAttribute="top" secondItem="ufn-iO-P0j" secondAttribute="top" id="hdw-wz-Brv"/>
-                            <constraint firstAttribute="bottom" secondItem="8V3-gW-HbJ" secondAttribute="bottom" id="mZq-3o-A9K"/>
-                            <constraint firstAttribute="bottom" secondItem="5V0-Xa-yCi" secondAttribute="bottom" id="tbE-uD-JsN"/>
-                            <constraint firstItem="5V0-Xa-yCi" firstAttribute="leading" secondItem="ufn-iO-P0j" secondAttribute="leading" id="wJf-Hg-VGR"/>
-                            <constraint firstItem="5ZI-B8-SXU" firstAttribute="centerY" secondItem="dRz-Dr-NhA" secondAttribute="centerYWithinMargins" id="whG-zv-iJf"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="ufn-iO-P0j"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="vEJ-nj-NWq" appends="YES" id="i1t-ks-Zdu"/>
-                            <outletCollection property="gestureRecognizers" destination="myH-1X-haW" appends="YES" id="ZIv-2r-6Pe"/>
-                        </connections>
-                    </view>
-                    <navigationItem key="navigationItem" title="Cropping" id="GYB-FZ-Nxp">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="qyt-Cj-lNH">
-                            <connections>
-                                <action selector="cancelPressed:" destination="n2Y-PS-34t" id="M2I-pI-R8K"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Next" style="done" id="0Vx-pM-Py0">
-                            <connections>
-                                <action selector="nextPressed:" destination="n2Y-PS-34t" id="sI0-Yy-Hvc"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="highlightView" destination="5ZI-B8-SXU" id="NpX-o6-poX"/>
-                        <outlet property="mainImageView" destination="5V0-Xa-yCi" id="6Gg-tI-pRx"/>
-                        <segue destination="o5Z-KD-caK" kind="show" identifier="PECrop-PEBackRemove" id="BIS-HN-Ubh"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CST-Vs-CP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pinchGestureRecognizer id="vEJ-nj-NWq">
-                    <connections>
-                        <action selector="pinchGesture:" destination="n2Y-PS-34t" id="yeJ-s4-P83"/>
-                    </connections>
-                </pinchGestureRecognizer>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="myH-1X-haW">
-                    <connections>
-                        <action selector="panGesture:" destination="n2Y-PS-34t" id="Ugz-Wh-59P"/>
-                    </connections>
-                </panGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="4340.579710144928" y="-458.03571428571428"/>
         </scene>
         <!--Cropping-->
         <scene sceneID="VT1-ql-vfy">
@@ -1072,7 +987,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N7q-ak-Car" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4340.579710144928" y="217.63392857142856"/>
+            <point key="canvasLocation" x="4343" y="-458"/>
         </scene>
         <!--Background Removing-->
         <scene sceneID="2qg-qr-Brx">
@@ -2097,9 +2012,7 @@
         <image name="undo" width="19.440000534057617" height="19.440000534057617"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0UF-eP-Squ"/>
         <segue reference="T89-hL-CIJ"/>
-        <segue reference="DL8-Im-5t9"/>
         <segue reference="IcG-aE-qrK"/>
         <segue reference="DyE-zM-iIp"/>
         <segue reference="3Jg-6q-tnQ"/>

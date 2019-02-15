@@ -8,6 +8,6 @@
 
 #import "pngquant_helper.h"
 
-void pngquant_cli(NSString* inputPath, NSString* outputPath, int speed) {
+void pngquant_cli(const NSString* inputPath, const NSString* outputPath, const int speed) {
     pngquant_my_main(speed, [inputPath UTF8String], [outputPath UTF8String]);
 }
