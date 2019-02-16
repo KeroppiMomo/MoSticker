@@ -228,5 +228,11 @@ class R {
     class Helper {
         static let emptyLabelText = "Press the + button to create a new sticker pack."
         static let noAuthLabelText = "You are not signed in. Please go to the 'Settings' tab, and tap '\(R.SetVC.logInSignUp)' to sign in."
+        static let whiteSearchIcon = UIImage(named: "white_search")!
     }
+}
+
+extension UIColor {
+    static let appLightGreen = UIColor(r: 152, 245, 133, 1)
+    static let appDarkGreen = UIColor(r: 112, 201, 85, 1)
 }

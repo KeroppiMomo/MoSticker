@@ -11,6 +11,7 @@ import UIKit
 class SearchVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    var hasSearchBarSetup = false
     
     var searchResults = [StickerPackDB]()
     
@@ -21,6 +22,9 @@ class SearchVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate, 
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = true
         searchController.searchBar.placeholder = R.SearVC.barPlaceholder
+//        searchController.searchBar.isTranslucent = false
+        
+//        searchController.searchBar.setPlaceholderColor(.red)
 
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
@@ -33,6 +37,13 @@ class SearchVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate, 
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if !hasSearchBarSetup {
+            navigationItem.searchController!.searchBar.setPlaceholderWhiteColor()
+        }
     }
     func filter(searching text: String) {
         StickerPackDB.query(with: text) { results in

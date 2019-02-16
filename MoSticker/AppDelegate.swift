@@ -33,6 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             printError("Failed to get sticker packs saving path")
         }
         
+        if let tabController = window?.rootViewController as? UITabBarController {
+            let tabBar = tabController.tabBar
+            tabBar.unselectedItemTintColor = UIColor.appLightGreen
+        }
+        
         return true
     }
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
