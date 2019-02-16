@@ -283,17 +283,8 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.performSegue(withIdentifier: R.DB.toViewImgSegueID, sender: index)
             }
             let removeAction = UIAlertAction(title: R.removeStickerAction, style: .destructive) { _ in
-                let alert = UIAlertController(title: nil, message: R.removeStickerConfirmMessage, preferredStyle: .alert)
-                let removeAction = UIAlertAction(title: R.removeStickerAction, style: .destructive, handler: { _ in
-                    self.stickerPack.removeSticker(at: index)
-                    self.tableView.reloadSections([2], with: .automatic)
-                })
-                let cancelAction = UIAlertAction(title: Rc.cancel, style: .cancel, handler: nil)
-                
-                alert.addAction(removeAction)
-                alert.addAction(cancelAction)
-                
-                self.present(alert, animated: true, completion: nil)
+                self.stickerPack.removeSticker(at: index)
+                self.tableView.reloadSections([2], with: .automatic)
             }
             let cancelAction = UIAlertAction(title: Rc.cancel, style: .cancel, handler: nil)
             

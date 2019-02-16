@@ -70,23 +70,13 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let alert = UIAlertController(title: nil, message: Rc.removePackConfirmMessage, preferredStyle: .alert)
-            let removeAction = UIAlertAction(title: Rc.removePackAction, style: .destructive, handler: { _ in
-                
-                do {
-                    try self.packs[indexPath.row].deletePack()
-                    self.reloadTableView()
-                } catch {
-                    self.showErrorMessage(title: Rc.removePackErrorTitle, message: Rc.removePackErrorMessage)
-                    printError(error)
-                }
-            })
-            let cancelAction = UIAlertAction(title: Rc.cancel, style: .cancel, handler: nil)
-            
-            alert.addAction(removeAction)
-            alert.addAction(cancelAction)
-            
-            self.present(alert, animated: true, completion: nil)
+            do {
+                try self.packs[indexPath.row].deletePack()
+                self.reloadTableView()
+            } catch {
+                self.showErrorMessage(title: Rc.removePackErrorTitle, message: Rc.removePackErrorMessage)
+                printError(error)
+            }
         }
     }
     

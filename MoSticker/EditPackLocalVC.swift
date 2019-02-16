@@ -291,12 +291,7 @@ class EditPackLocalVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // MARK: Prepare Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == R.Local.toPECropSegueID,
-            let dvc = segue.destination as? PECropVC,
-            let resolution = sender as? Int {
-            dvc.resultResolution = resolution
-            dvc.delegate = self
-        } else if segue.identifier == R.Local.toPECropScrollSegueID,
+        if segue.identifier == R.Local.toPECropScrollSegueID,
             let dvc = segue.destination as? PECropScrollVC,
             let resolution = sender as? Int {
             dvc.resultResolution = resolution

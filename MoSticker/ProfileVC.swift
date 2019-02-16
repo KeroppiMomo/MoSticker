@@ -215,26 +215,17 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let alert = UIAlertController(title: nil, message: Rc.removePackConfirmMessage, preferredStyle: .alert)
-            let removeAction = UIAlertAction(title: Rc.removePackAction, style: .destructive, handler: { _ in
-                let loadingVC = LoadingVC.setup(withMessage: Rc.removingMessage)
-                
-                self.packs[indexPath.row].delete(completion: { (error) in
-                    if let error = error {
-                        self.showErrorMessage(title: Rc.removePackErrorTitle, message: Rc.removePackErrorMessage)
-                        printError(error)
-                    }
-                    self.dismiss(animated: true, completion: nil)
-                })
-                
-                self.present(loadingVC, animated: true, completion: nil)
+            let loadingVC = LoadingVC.setup(withMessage: Rc.removingMessage)
+            
+            self.packs[indexPath.row].delete(completion: { (error) in
+                if let error = error {
+                    self.showErrorMessage(title: Rc.removePackErrorTitle, message: Rc.removePackErrorMessage)
+                    printError(error)
+                }
+                self.dismiss(animated: true, completion: nil)
             })
-            let cancelAction = UIAlertAction(title: Rc.cancel, style: .cancel, handler: nil)
             
-            alert.addAction(removeAction)
-            alert.addAction(cancelAction)
-            
-            self.present(alert, animated: true, completion: nil)
+            self.present(loadingVC, animated: true, completion: nil)
         }
     }
     

@@ -201,7 +201,7 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
     }
     
     @IBAction func cancelPressed(_ sender: UIBarButtonItem) {
-        showPopConfirmation()
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func nextPressed(_ sender: UIBarButtonItem) {

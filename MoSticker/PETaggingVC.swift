@@ -321,7 +321,7 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func cancelPressed(_ sender: UIBarButtonItem) {
-        showPopConfirmation()
+        self.navigationController?.popViewController(animated: true)
     }
     @IBAction func donePressed(_ sender: UIBarButtonItem) {
         
