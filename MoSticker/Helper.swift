@@ -46,7 +46,7 @@ func printInfo(_ message: Any, file: String = #file, function: String = #functio
 }
 
 func ownershipDescription(name: String?, id: String) -> String {
-    return (name ?? R.Common.noOwnerNameMessage) + (id == Auth.auth().currentUser?.uid ? R.Common.ownedMessage : "")
+    return (name ?? Resources.Common.noOwnerNameMessage) + (id == Auth.auth().currentUser?.uid ? Resources.Common.ownedMessage : "")
 }
 
 func imageMasking(_ originalImg: UIImage, maskImage: UIImage) -> UIImage? {
@@ -263,7 +263,7 @@ extension UIViewController {
     }
     func showErrorMessage(title: String?, message: String?, _ completion: @escaping () -> () = {}) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: R.Common.ok, style: .default, handler: { _ in
+        let okAction = UIAlertAction(title: Resources.Common.ok, style: .default, handler: { _ in
             completion()
         })
         
@@ -363,6 +363,6 @@ extension UISearchBar {
         guard let searchImage = textField.subviews[1] as? UIImageView else { return }
         placeholderLabel.textColor = UIColor(white: 1.0, alpha: 0.5)
         textField.textColor = .white
-        searchImage.image = R.Helper.whiteSearchIcon
+        searchImage.image = Resources.Helper.whiteSearchIcon
     }
 }

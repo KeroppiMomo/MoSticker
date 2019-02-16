@@ -8,6 +8,7 @@
 
 import UIKit
 
+fileprivate typealias R = Resources.ProVC
 class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, LocalSelectionDelegate {
     
     @IBOutlet weak var tableView: UITableView!
@@ -25,7 +26,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
         StickerPackDB.getAllPacks { (error, packs) in
             if let packs = packs {
                 if packs.count == 0 {
-                    self.tableView.backgroundView = createLabelView(R.Helper.emptyLabelText)
+                    self.tableView.backgroundView = createLabelView(Rc.emptyLabelText)
                 }
             }
         }
@@ -35,9 +36,9 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
             self.tableView.backgroundView = nil
             if let error = error {
                 if case PackDBError.noAuthError = error {
-                    self.tableView.backgroundView = createLabelView(R.Helper.noAuthLabelText)
+                    self.tableView.backgroundView = createLabelView(Rc.noAuthLabelText)
                 } else {
-                    self.showErrorMessage(title: R.ProVC.retrievePackErrorTitle, message: R.ProVC.retrievePackErrorMessage)
+                    self.showErrorMessage(title: R.retrievePackErrorTitle, message: R.retrievePackErrorMessage)
                     printError(error)
                 }
             } else if let packs = packs {
@@ -46,7 +47,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
                 self.tableView.reloadSections([1], with: .automatic)
                 
                 if packs.count == 0 {
-                    self.tableView.backgroundView = createLabelView(R.Helper.emptyLabelText)
+                    self.tableView.backgroundView = createLabelView(Rc.emptyLabelText)
                 }
             }
             completion()
@@ -62,7 +63,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
         }
         
         if let error = error {
-            self.showErrorMessage(title: R.ProVC.updatePackErrorTitle, message: R.ProVC.updatePackErrorMessage)
+            self.showErrorMessage(title: R.updatePackErrorTitle, message: R.updatePackErrorMessage)
             printError(error)
         } else {
             func removeDuplicate() {
@@ -79,7 +80,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
             }
             
             guard pack != nil || change == .all else {
-                self.showErrorMessage(title: R.ProVC.updatePackErrorTitle, message: R.ProVC.updatePackErrorMessage)
+                self.showErrorMessage(title: R.updatePackErrorTitle, message: R.updatePackErrorMessage)
                 return
             }
             switch change {
@@ -89,14 +90,14 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
                 break
             case .changed:
                 guard let changeIndex = self.packs.firstIndex(where: { $0.packID == pack!.packID }) else {
-                    self.showErrorMessage(title: R.ProVC.updatePackErrorTitle, message: R.ProVC.updatePackErrorMessage)
+                    self.showErrorMessage(title: R.updatePackErrorTitle, message: R.updatePackErrorMessage)
                     return
                 }
                 self.packs[changeIndex] = pack!
                 break
             case .removed:
                 guard let changeIndex = self.packs.firstIndex(where: { $0.packID == pack!.packID }) else {
-                    self.showErrorMessage(title: R.ProVC.updatePackErrorTitle, message: R.ProVC.updatePackErrorMessage)
+                    self.showErrorMessage(title: R.updatePackErrorTitle, message: R.updatePackErrorMessage)
                     return
                 }
                 self.packs.remove(at: changeIndex)
@@ -124,10 +125,10 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
         tableView.reloadSections([0, 1], with: .automatic)
         setBarItemsEnabled(true)
         if StickerPackDB.getUID() == nil {
-            tableView.backgroundView = createLabelView(R.Helper.noAuthLabelText)
+            tableView.backgroundView = createLabelView(Rc.noAuthLabelText)
             setBarItemsEnabled(false)
         } else if packs.count == 0 {
-            tableView.backgroundView = createLabelView(R.Helper.emptyLabelText)
+            tableView.backgroundView = createLabelView(Rc.emptyLabelText)
         } else {
             tableView.backgroundView = nil
         }
@@ -139,7 +140,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
     }
     
     func localSelection(_ vc: LocalSelectionVC, didSelect pack: StickerPackLocal) {
-        let loadingVC = LoadingVC.setup(withMessage: R.Common.uploadingMessage)
+        let loadingVC = LoadingVC.setup(withMessage: Rc.uploadingMessage)
         vc.present(loadingVC, animated: true, completion: nil)
 
         let packDB = pack.toPackDB()
@@ -147,7 +148,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
         packDB.upload { (error) in
             self.dismiss(animated: true, completion: nil)
             if let error = error {
-                vc.showErrorMessage(title: R.Common.uploadPackErrorTitle, message: R.Common.uploadPackErrorMessage)
+                vc.showErrorMessage(title: Rc.uploadPackErrorTitle, message: Rc.uploadPackErrorMessage)
                 printError(error)
             }
         }
@@ -181,16 +182,16 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: R.ProVC.textFieldCellID, for: indexPath) as? PropertyEditTableViewCell else { return UITableViewCell() }
-            cell.setup(property: R.ProVC.displayNameProperty, value: displayName)
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: R.textFieldCellID, for: indexPath) as? PropertyEditTableViewCell else { return UITableViewCell() }
+            cell.setup(property: R.displayNameProperty, value: displayName)
             cell.textField.addTarget(self, action: #selector(nameTextFieldChanged(sender:)), for: .editingDidEnd)
             return cell
         } else if indexPath.section == 1 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: R.ProVC.packCellID, for: indexPath) as? StickerPackTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: R.packCellID, for: indexPath) as? StickerPackTableViewCell else { return UITableViewCell() }
             let pack = packs[indexPath.row]
             
-            let name = (String.isEmpty(pack.name) ? nil : pack.name) ?? R.Common.noNameMessage
-            let detail = pack.lastEdit == nil ? R.Common.noDateMessage : R.Common.userDateFormatter.string(from: pack.lastEdit!)
+            let name = (String.isEmpty(pack.name) ? nil : pack.name) ?? Rc.noNameMessage
+            let detail = pack.lastEdit == nil ? Rc.noDateMessage : Rc.userDateFormatter.string(from: pack.lastEdit!)
             cell.setup(title: name, detailText: detail, galleryImages: pack.getStickerImages())
             cell.setIndicatorHidden(tableView.isEditing, animated: false)
             cell.imageTapAction = { _ in
@@ -204,7 +205,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            self.performSegue(withIdentifier: R.ProVC.editPackSegueID, sender: packs[indexPath.row])
+            self.performSegue(withIdentifier: R.editPackSegueID, sender: packs[indexPath.row])
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
@@ -214,13 +215,13 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let alert = UIAlertController(title: nil, message: R.Common.removePackConfirmMessage, preferredStyle: .alert)
-            let removeAction = UIAlertAction(title: R.Common.removePackAction, style: .destructive, handler: { _ in
-                let loadingVC = LoadingVC.setup(withMessage: R.Common.removingMessage)
+            let alert = UIAlertController(title: nil, message: Rc.removePackConfirmMessage, preferredStyle: .alert)
+            let removeAction = UIAlertAction(title: Rc.removePackAction, style: .destructive, handler: { _ in
+                let loadingVC = LoadingVC.setup(withMessage: Rc.removingMessage)
                 
                 self.packs[indexPath.row].delete(completion: { (error) in
                     if let error = error {
-                        self.showErrorMessage(title: R.Common.removePackErrorTitle, message: R.Common.removePackErrorMessage)
+                        self.showErrorMessage(title: Rc.removePackErrorTitle, message: Rc.removePackErrorMessage)
                         printError(error)
                     }
                     self.dismiss(animated: true, completion: nil)
@@ -228,7 +229,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
                 
                 self.present(loadingVC, animated: true, completion: nil)
             })
-            let cancelAction = UIAlertAction(title: R.Common.cancel, style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: Rc.cancel, style: .cancel, handler: nil)
             
             alert.addAction(removeAction)
             alert.addAction(cancelAction)
@@ -240,7 +241,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
-            return displayName == nil ? nil : R.ProVC.displayNameFooter
+            return displayName == nil ? nil : R.displayNameFooter
         case 1:
             return nil
         default:
@@ -251,13 +252,13 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
     @objc func nameTextFieldChanged(sender: UITextField) {
         let name = sender.text
         guard !String.isEmpty(name) else {
-            self.showErrorMessage(title: R.ProVC.displayNameEmptyTitle, message: R.ProVC.displayNameEmptyMessage) {
+            self.showErrorMessage(title: R.displayNameEmptyTitle, message: R.displayNameEmptyMessage) {
                 sender.becomeFirstResponder()
             }
             return
         }
         
-        let loadingVC = LoadingVC.setup(withMessage: R.ProVC.updatingNameMessage)
+        let loadingVC = LoadingVC.setup(withMessage: R.updatingNameMessage)
         StickerPackDB.updateUserName(name!) { (error) in
             self.dismiss(animated: true, completion: nil)
             self.displayName = name
@@ -267,7 +268,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
             }
             
             if let error = error {
-                self.showErrorMessage(title: R.ProVC.changeNameErrorTitle, message: R.ProVC.changeNameErrorMessage)
+                self.showErrorMessage(title: R.changeNameErrorTitle, message: R.changeNameErrorMessage)
                 printError(error)
             }
         }
@@ -280,17 +281,17 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
             guard let cell = cell as? StickerPackTableViewCell else { return }
             cell.setIndicatorHidden(tableView.isEditing, animated: true)
         }
-        let newItem = UIBarButtonItem(title: tableView.isEditing ? R.Common.done : R.Common.edit, style: tableView.isEditing ? .done : .plain, target: self, action: #selector(editPressed(_:)))
+        let newItem = UIBarButtonItem(title: tableView.isEditing ? Rc.done : Rc.edit, style: tableView.isEditing ? .done : .plain, target: self, action: #selector(editPressed(_:)))
         navigationItem.leftBarButtonItem = newItem
         navigationItem.rightBarButtonItem?.isEnabled = !tableView.isEditing
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == R.ProVC.selectionSegueID,
+        if segue.identifier == R.selectionSegueID,
             let nav = segue.destination as? UINavigationController,
             let dvc = nav.children.first as? LocalSelectionVC {
             dvc.delegate = self
-        } else if segue.identifier == R.ProVC.editPackSegueID,
+        } else if segue.identifier == R.editPackSegueID,
             let dvc = segue.destination as? EditPackDBVC,
             let pack = sender as? StickerPackDB {
             dvc.stickerPack = pack

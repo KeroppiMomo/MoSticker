@@ -8,8 +8,10 @@
 
 import UIKit
 
+/// Common resources.
+typealias Rc = Resources.Common
 /// Resources for the app.
-class R {
+class Resources {
     /// Common resources across different classes.
     class Common {
         static var userDateFormatter: DateFormatter {
@@ -27,6 +29,9 @@ class R {
         static let done = "Done"
         static let edit = "Edit"
         static let ok = "OK"
+        
+        static let emptyLabelText = "Press the + button to create a new sticker pack."
+        static let noAuthLabelText = "You are not signed in. Please go to the 'Settings' tab, and tap '\(Resources.SetVC.logInSignUp)' to sign in."
         
         static let noNameMessage = "<No name>"
         static let noDateMessage = "<No date>"
@@ -226,8 +231,6 @@ class R {
     
     /// Resources used by Helper.
     class Helper {
-        static let emptyLabelText = "Press the + button to create a new sticker pack."
-        static let noAuthLabelText = "You are not signed in. Please go to the 'Settings' tab, and tap '\(R.SetVC.logInSignUp)' to sign in."
         static let whiteSearchIcon = UIImage(named: "white_search")!
     }
 }

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+
+fileprivate typealias R = Resources.VIVCs
 class ViewImgVC: UIViewController {
     
     @IBOutlet weak var pageControl: UIPageControl!
@@ -36,7 +38,7 @@ class ViewImgVC: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == R.VIVCs.pageVCEmbedSegueID,
+        if segue.identifier == R.pageVCEmbedSegueID,
             let dvc = segue.destination as? ViewImgPageVC {
             dvc.images = images
             dvc.index = index

@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseUI
 
+fileprivate typealias R = Resources.SetVC
 class SettingVC: UIViewController, UITableViewDelegate, UITableViewDataSource, FUIAuthDelegate {
     @IBOutlet weak var tableView: UITableView!
     
@@ -16,7 +17,7 @@ class SettingVC: UIViewController, UITableViewDelegate, UITableViewDataSource, F
         get {
             return [
                 [
-                    (Auth.auth().currentUser == nil ? R.SetVC.logInSignUp : R.SetVC.logOut, R.SetVC.disclosureCellID)
+                    (Auth.auth().currentUser == nil ? R.logInSignUp : R.logOut, R.disclosureCellID)
                 ]
             ]
         }
@@ -60,7 +61,7 @@ class SettingVC: UIViewController, UITableViewDelegate, UITableViewDataSource, F
                     try authUI.signOut()
                     tableView.reloadData()
                 } catch {
-                    self.showErrorMessage(title: R.SetVC.signOutErrorTitle, message: R.SetVC.signOutErrorMessage)
+                    self.showErrorMessage(title: R.signOutErrorTitle, message: R.signOutErrorMessage)
                     printError(error)
                 }
             }

@@ -8,6 +8,7 @@
 
 import UIKit
 
+fileprivate typealias R = Resources.EPVCs
 class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource, PEDelegate {
     
     var stickerPack = StickerPackDB()
@@ -113,13 +114,13 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: R.EPVCs.DB.propertyCellID, for: indexPath) as? PropertyEditTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: R.DB.propertyCellID, for: indexPath) as? PropertyEditTableViewCell else { return UITableViewCell() }
             var propertyName: String?
             var propertyValue: String?
             switch indexPath.row {
-            case 0:     propertyName = R.EPVCs.nameProperty
+            case 0:     propertyName = R.nameProperty
                         propertyValue = stickerPack.name
-            case 1:     propertyName = R.EPVCs.ownerProperty
+            case 1:     propertyName = R.ownerProperty
                         propertyValue = ownershipDescription(name: stickerPack.ownerName, id: stickerPack.owner ?? "")
             default:    break
             }
@@ -131,9 +132,9 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.textField.isEnabled = isEditingMode
             return cell
         case 1:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: R.EPVCs.DB.imageSelectionCellID, for: indexPath) as? ImageSelectionTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: R.DB.imageSelectionCellID, for: indexPath) as? ImageSelectionTableViewCell else { return UITableViewCell() }
             
-            cell.setup(property: R.EPVCs.iconProperty, changeText: R.EPVCs.changeIcon, image: stickerPack.getTrayImages())
+            cell.setup(property: R.iconProperty, changeText: R.changeIcon, image: stickerPack.getTrayImages())
             cell.changeButtonLabel.isHidden = !isEditingMode
             cell.selectionStyle = isEditingMode ? .default : .none
             return cell
@@ -141,14 +142,14 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             switch indexPath.row {
             case 0:
                 if isEditingMode {
-                    guard let cell = tableView.dequeueReusableCell(withIdentifier: R.EPVCs.DB.buttonCellID, for: indexPath) as? ButtonTableViewCell else { return UITableViewCell() }
-                    cell.setup(title: R.EPVCs.addSticker)
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: R.DB.buttonCellID, for: indexPath) as? ButtonTableViewCell else { return UITableViewCell() }
+                    cell.setup(title: R.addSticker)
                     return cell
                 } else {
                     fallthrough
                 }
             case 1:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: R.EPVCs.DB.galleryCellID, for: indexPath) as? GalleryTableViewCell else { return UITableViewCell() }
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: R.DB.galleryCellID, for: indexPath) as? GalleryTableViewCell else { return UITableViewCell() }
                 
                 cell.setup(images: stickerPack.getStickerImages())
                 cell.imageTapAction = stickerImagePressed(_:)
@@ -157,8 +158,8 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 return UITableViewCell()
             }
         case 3:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: R.EPVCs.DB.buttonCellID, for: indexPath) as? ButtonTableViewCell else { return UITableViewCell() }
-            cell.setup(title: R.EPVCs.sendWhatsApp)
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: R.DB.buttonCellID, for: indexPath) as? ButtonTableViewCell else { return UITableViewCell() }
+            cell.setup(title: R.sendWhatsApp)
             return cell
         default:
             return UITableViewCell()
@@ -182,17 +183,17 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         if isEditingMode {
             switch section {
             case 0:
-                return R.EPVCs.nameIDFooter
+                return R.nameIDFooter
             case 1:
-                return R.EPVCs.iconFooter
+                return R.iconFooter
             case 2:
-                return R.EPVCs.stickerEditFooter
+                return R.stickerEditFooter
             default:
                 return nil
             }
         } else {
             if section == 2 {
-                return R.EPVCs.stickerNonEditFooter
+                return R.stickerNonEditFooter
             } else {
                 return nil
             }
@@ -203,9 +204,9 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isEditingMode {
             if indexPath.section == 1 && indexPath.row == 0 {
-                performSegue(withIdentifier: R.EPVCs.DB.toPECropScrollSegueID, sender: R.EPVCs.trayIconRes)
+                performSegue(withIdentifier: R.DB.toPECropScrollSegueID, sender: R.trayIconRes)
             } else if indexPath.section == 2 && indexPath.row == 0 {
-                performSegue(withIdentifier: R.EPVCs.DB.toPECropScrollSegueID, sender: R.EPVCs.stickerRes)
+                performSegue(withIdentifier: R.DB.toPECropScrollSegueID, sender: R.stickerRes)
             }
         } else {
             if indexPath.section == 3 {
@@ -233,7 +234,7 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             try self.stickerPack.sendToWhatsAppWithStats { (success) in
                 self.dismiss(animated: true, completion: nil)
                 if !success {
-                    self.showErrorMessage(title: R.EPVCs.unknownError, message: R.EPVCs.sendWhatsAppErrorMessage)
+                    self.showErrorMessage(title: R.unknownError, message: R.sendWhatsAppErrorMessage)
                 }
             }
         } catch {
@@ -257,10 +258,10 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         isEditingMode = false
         
-        let loadingVC = LoadingVC.setup(withMessage: R.Common.uploadingMessage)
+        let loadingVC = LoadingVC.setup(withMessage: Rc.uploadingMessage)
         stickerPack.upload { (error) in
             if let error = error {
-                loadingVC.showErrorMessage(title: R.Common.uploadPackErrorTitle, message: R.Common.uploadPackErrorMessage) {
+                loadingVC.showErrorMessage(title: Rc.uploadPackErrorTitle, message: Rc.uploadPackErrorMessage) {
                     self.dismiss(animated: true, completion: nil)
                 }
                 printError(error)
@@ -278,23 +279,23 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @objc func stickerImagePressed(_ index: Int) {
         if isEditingMode {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            let viewAction = UIAlertAction(title: R.EPVCs.viewStickerAction, style: .default) { _ in
-                self.performSegue(withIdentifier: R.EPVCs.DB.toViewImgSegueID, sender: index)
+            let viewAction = UIAlertAction(title: R.viewStickerAction, style: .default) { _ in
+                self.performSegue(withIdentifier: R.DB.toViewImgSegueID, sender: index)
             }
-            let removeAction = UIAlertAction(title: R.EPVCs.removeStickerAction, style: .destructive) { _ in
-                let alert = UIAlertController(title: nil, message: R.EPVCs.removeStickerConfirmMessage, preferredStyle: .alert)
-                let removeAction = UIAlertAction(title: R.EPVCs.removeStickerAction, style: .destructive, handler: { _ in
+            let removeAction = UIAlertAction(title: R.removeStickerAction, style: .destructive) { _ in
+                let alert = UIAlertController(title: nil, message: R.removeStickerConfirmMessage, preferredStyle: .alert)
+                let removeAction = UIAlertAction(title: R.removeStickerAction, style: .destructive, handler: { _ in
                     self.stickerPack.removeSticker(at: index)
                     self.tableView.reloadSections([2], with: .automatic)
                 })
-                let cancelAction = UIAlertAction(title: R.Common.cancel, style: .cancel, handler: nil)
+                let cancelAction = UIAlertAction(title: Rc.cancel, style: .cancel, handler: nil)
                 
                 alert.addAction(removeAction)
                 alert.addAction(cancelAction)
                 
                 self.present(alert, animated: true, completion: nil)
             }
-            let cancelAction = UIAlertAction(title: R.Common.cancel, style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: Rc.cancel, style: .cancel, handler: nil)
             
             alert.addAction(viewAction)
             alert.addAction(removeAction)
@@ -302,18 +303,18 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             present(alert, animated: true, completion: nil)
         } else {
-            self.performSegue(withIdentifier: R.EPVCs.DB.toViewImgSegueID, sender: index)
+            self.performSegue(withIdentifier: R.DB.toViewImgSegueID, sender: index)
         }
     }
     
     // MARK: Prepare Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == R.EPVCs.DB.toPECropScrollSegueID,
+        if segue.identifier == R.DB.toPECropScrollSegueID,
             let dvc = segue.destination as? PECropScrollVC,
             let resolution = sender as? Int {
             dvc.resultResolution = resolution
             dvc.delegate = self
-        } else if segue.identifier == R.EPVCs.DB.toViewImgSegueID,
+        } else if segue.identifier == R.DB.toViewImgSegueID,
             let dvc = segue.destination as? ViewImgVC,
             let index = sender as? Int {
 

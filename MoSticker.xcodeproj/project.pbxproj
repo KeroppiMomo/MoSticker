@@ -11,7 +11,6 @@
 		A601AC7921EF67A500E9CC7A /* LocalSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A601AC7821EF67A500E9CC7A /* LocalSelectionDelegate.swift */; };
 		A610B11621CA827E00BD3272 /* StickerPackLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A610B11521CA827E00BD3272 /* StickerPackLocal.swift */; };
 		A623A4C321C2A1850033FB95 /* PETaggingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A623A4C221C2A1850033FB95 /* PETaggingVC.swift */; };
-		A623FE4121B3757A00D3E885 /* PECropVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A623FE4021B3757A00D3E885 /* PECropVC.swift */; };
 		A62BB9A721E96DFF00F56FCC /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62BB9A621E96DFF00F56FCC /* ProfileVC.swift */; };
 		A62BB9A921E9CAD800F56FCC /* StickerPackDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62BB9A821E9CAD800F56FCC /* StickerPackDB.swift */; };
 		A62BB9AC21E9CB4D00F56FCC /* StickerPackBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62BB9AB21E9CB4D00F56FCC /* StickerPackBase.swift */; };
@@ -229,7 +228,6 @@
 		A601AC7821EF67A500E9CC7A /* LocalSelectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSelectionDelegate.swift; sourceTree = "<group>"; };
 		A610B11521CA827E00BD3272 /* StickerPackLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPackLocal.swift; sourceTree = "<group>"; };
 		A623A4C221C2A1850033FB95 /* PETaggingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PETaggingVC.swift; sourceTree = "<group>"; };
-		A623FE4021B3757A00D3E885 /* PECropVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PECropVC.swift; sourceTree = "<group>"; };
 		A62BB9A621E96DFF00F56FCC /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		A62BB9A821E9CAD800F56FCC /* StickerPackDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPackDB.swift; sourceTree = "<group>"; };
 		A62BB9AB21E9CB4D00F56FCC /* StickerPackBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPackBase.swift; sourceTree = "<group>"; };
@@ -580,7 +578,6 @@
 		A623FE3F21B3753800D3E885 /* Photo Editing */ = {
 			isa = PBXGroup;
 			children = (
-				A623FE4021B3757A00D3E885 /* PECropVC.swift */,
 				A637486A2207DE71008E6F64 /* PECropScrollVC.swift */,
 				A669D3FA21BB59DC001BCAEA /* PEBackRemoveVC.swift */,
 				A623A4C221C2A1850033FB95 /* PETaggingVC.swift */,
@@ -1430,7 +1427,6 @@
 				A63D9B5021E065B6000F84A1 /* syntax_enc.c in Sources */,
 				A63D9BCC21E065D1000F84A1 /* lossless_enc_mips_dsp_r2.c in Sources */,
 				A63D9B5621E065B6000F84A1 /* analysis_enc.c in Sources */,
-				A623FE4121B3757A00D3E885 /* PECropVC.swift in Sources */,
 				A63D9BC921E065D1000F84A1 /* filters_msa.c in Sources */,
 				A63D9BDD21E065D1000F84A1 /* yuv_mips_dsp_r2.c in Sources */,
 				A63D9BC721E065D1000F84A1 /* cost.c in Sources */,

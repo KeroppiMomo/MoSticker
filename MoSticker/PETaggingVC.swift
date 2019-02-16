@@ -8,6 +8,7 @@
 
 import UIKit
 
+fileprivate typealias R = Resources.PE.TagVC
 class PETaggingVC: UIViewController, UIScrollViewDelegate {
     enum UndoAction {
         case emojis
@@ -93,20 +94,20 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
         set {
             _modeIndex = newValue
             
-            allowScrollButton.image = R.PE.TagVC.disableScrollIcon
-            brushButton.image = R.PE.TagVC.disableBrushIcon
+            allowScrollButton.image = R.disableScrollIcon
+            brushButton.image = R.disableBrushIcon
             scrollView.isScrollEnabled = false
             scrollView.pinchGestureRecognizer?.isEnabled = false
             emojiLayerView.isUserInteractionEnabled = false
 
             switch _modeIndex {
             case 0:
-                allowScrollButton.image = R.PE.TagVC.enableScrollIcon
+                allowScrollButton.image = R.enableScrollIcon
                 scrollView.isScrollEnabled = true
                 scrollView.pinchGestureRecognizer?.isEnabled = true
                 emojiLayerView.isUserInteractionEnabled = true
             case 1:
-                brushButton.image = R.PE.TagVC.enableBrushIcon
+                brushButton.image = R.enableBrushIcon
             default:
                 printError("Unknown index: newValue is \(newValue).")
             }
@@ -122,7 +123,7 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
         brushLayer = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        let cachedSize = CGSize(width: R.PE.cachedImgRes, height: R.PE.cachedImgRes)
+        let cachedSize = CGSize(width: Resources.PE.cachedImgRes, height: Resources.PE.cachedImgRes)
         
         UIGraphicsBeginImageContextWithOptions(cachedSize, false, 1.0)
         brushCached = UIGraphicsGetImageFromCurrentImageContext()
@@ -178,15 +179,15 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
     @objc func emojiTapGesture(_ sender: UITapGestureRecognizer) {
         guard let emojiView = sender.view else { return }
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let removeAction = UIAlertAction(title: R.PE.TagVC.removeEmojiMessage, style: .destructive) { _ in
+        let removeAction = UIAlertAction(title: R.removeEmojiMessage, style: .destructive) { _ in
             
-            UIView.animate(withDuration: R.PE.TagVC.removeEmojiAnimationInterval, animations: {
+            UIView.animate(withDuration: R.removeEmojiAnimationInterval, animations: {
                 emojiView.alpha = 0
             }) { _ in
                 self.emojiEls.remove(at: emojiView.tag)
             }
         }
-        let cancelAction = UIAlertAction(title: R.Common.cancel, style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: Rc.cancel, style: .cancel, handler: nil)
         alert.addAction(removeAction)
         alert.addAction(cancelAction)
         
@@ -254,10 +255,10 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
         undoHistory.removeLast()
     }
     @IBAction func emojiPressed(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: R.PE.TagVC.toEmojiSegueID, sender: nil)
+        performSegue(withIdentifier: R.toEmojiSegueID, sender: nil)
     }
     @IBAction func colorPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: R.PE.TagVC.toColorPickerSegueID, sender: curColor)
+        performSegue(withIdentifier: R.toColorPickerSegueID, sender: curColor)
     }
     func colorPickerCompletion(_ color: UIColor) {
         curColor = color
@@ -359,7 +360,7 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
         let outputImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        let progressVC = ProgressVC.setup(withMessage: R.PE.BRVC.processingMessage)
+        let progressVC = ProgressVC.setup(withMessage: Resources.PE.BRVC.processingMessage)
 
         let group = DispatchGroup()
         var pngData: Data?
@@ -368,7 +369,7 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
         var webpProgress: Float = 0
         
         func failed() {
-            self.showErrorMessage(title: R.PE.BRVC.processErrorTitle, message: R.PE.BRVC.processErrorMessage)
+            self.showErrorMessage(title: Resources.PE.BRVC.processErrorTitle, message: Resources.PE.BRVC.processErrorMessage)
             self.dismiss(animated: true, completion: nil)
         }
         func updateProgress() {
@@ -416,12 +417,12 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == R.PE.TagVC.toColorPickerSegueID,
+        if segue.identifier == R.toColorPickerSegueID,
             let dvc = segue.destination as? PEColorPickerVC,
             let color = sender as? UIColor {
             dvc.curColor = color
             dvc.completion = colorPickerCompletion
-        } else if segue.identifier == R.PE.TagVC.toEmojiSegueID,
+        } else if segue.identifier == R.toEmojiSegueID,
             let dvc = segue.destination as? PEEmojiSelectVC {
             dvc.completion = emojiPickerCompletion
         }

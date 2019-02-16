@@ -43,7 +43,7 @@ class ViewImgPageVC: UIPageViewController, UIPageViewControllerDataSource, UIPag
     func getContentVC(at index: Int) -> ViewImgPageContentVC? {
         guard index >= 0 && index < images.count else { return nil }
         
-        let storyboard = UIStoryboard(name: R.Common.storyboardName, bundle: nil)
+        let storyboard = UIStoryboard(name: Rc.storyboardName, bundle: nil)
         guard let contentVC = storyboard.instantiateViewController(
             withIdentifier: String(describing: ViewImgPageContentVC.self))
             as? ViewImgPageContentVC else { return nil }

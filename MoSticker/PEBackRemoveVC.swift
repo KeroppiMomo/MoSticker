@@ -8,6 +8,7 @@
 
 import UIKit
 
+fileprivate typealias R = Resources.PE.BRVC
 func createCirlce(radius: CGFloat, color: UIColor) -> UIImage? {
     let rect = CGRect(x: 0, y: 0, width: radius, height: radius)
     UIGraphicsBeginImageContextWithOptions(rect.size, false, 1.0)
@@ -43,21 +44,21 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
         set {
             _modeIndex = newValue
             
-            allowScrollBarButton.image = R.PE.BRVC.disableScrollIcon
-            allowIncludeBarButton.image = R.PE.BRVC.disableIncludeIcon
-            allowExcludeBarButton.image = R.PE.BRVC.disableExcludeIcon
+            allowScrollBarButton.image = R.disableScrollIcon
+            allowIncludeBarButton.image = R.disableIncludeIcon
+            allowExcludeBarButton.image = R.disableExcludeIcon
             scrollView.isScrollEnabled = false
             scrollView.pinchGestureRecognizer?.isEnabled = false
 
             switch modeIndex {
             case 0:
-                allowScrollBarButton.image = R.PE.BRVC.enableScrollIcon
+                allowScrollBarButton.image = R.enableScrollIcon
                 scrollView.isScrollEnabled = true
                 scrollView.pinchGestureRecognizer?.isEnabled = true
             case 1:
-                allowIncludeBarButton.image = R.PE.BRVC.enableIncludeIcon
+                allowIncludeBarButton.image = R.enableIncludeIcon
             case 2:
-                allowExcludeBarButton.image = R.PE.BRVC.enableExcludeIcon
+                allowExcludeBarButton.image = R.enableExcludeIcon
             default:
                 printError("Unknown index: newValue is \(newValue).")
             }
@@ -77,7 +78,7 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
         maskImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        let cachedSize = CGSize(width: R.PE.cachedImgRes, height: R.PE.cachedImgRes)
+        let cachedSize = CGSize(width: Resources.PE.cachedImgRes, height: Resources.PE.cachedImgRes)
         UIGraphicsBeginImageContextWithOptions(cachedSize, true, 1.0)
         UIColor.black.setFill()
         UIRectFill(CGRect(origin: CGPoint.zero, size: cachedSize))
@@ -205,16 +206,16 @@ class PEBackRemoveVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate 
     
     @IBAction func nextPressed(_ sender: UIBarButtonItem) {
         if let resultImg = imageMasking(curImage, maskImage: maskImage) {
-            self.performSegue(withIdentifier: R.PE.BRVC.toTagSegueID, sender: resultImg)
+            self.performSegue(withIdentifier: R.toTagSegueID, sender: resultImg)
         } else {
             printError("Masking failed: imageMasking(_:maskImage:) returns nil.")
-            self.showErrorMessage(title: R.PE.BRVC.processErrorTitle, message: R.PE.BRVC.processErrorMessage)
+            self.showErrorMessage(title: R.processErrorTitle, message: R.processErrorMessage)
             self.dismiss(animated: true, completion: nil)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == R.PE.BRVC.toTagSegueID,
+        if segue.identifier == R.toTagSegueID,
             let dvc = segue.destination as? PETaggingVC,
             let image = sender as? UIImage {
             

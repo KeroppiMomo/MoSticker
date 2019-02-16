@@ -8,6 +8,7 @@
 
 import UIKit
 
+fileprivate typealias R = Resources.SearVC
 class SearchVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
@@ -21,7 +22,7 @@ class SearchVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate, 
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = true
-        searchController.searchBar.placeholder = R.SearVC.barPlaceholder
+        searchController.searchBar.placeholder = R.barPlaceholder
 //        searchController.searchBar.isTranslucent = false
         
 //        searchController.searchBar.setPlaceholderColor(.red)
@@ -51,7 +52,7 @@ class SearchVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate, 
             self.tableView.reloadSections([0], with: .automatic)
             
             if self.searchResults.count == 0 {
-                self.tableView.backgroundView = createLabelView(R.SearVC.noResults)
+                self.tableView.backgroundView = createLabelView(R.noResults)
             } else {
                 self.tableView.backgroundView = nil
             }
@@ -82,30 +83,30 @@ class SearchVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate, 
         return searchResults.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.SearVC.packCellID, for: indexPath) as? StickerPackTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.packCellID, for: indexPath) as? StickerPackTableViewCell else { return UITableViewCell() }
         let pack = searchResults[indexPath.row]
-        cell.setup(title: pack.name ?? R.Common.noNameMessage, detailText: ownershipDescription(name: pack.ownerName, id: pack.owner ?? ""), galleryImages: pack.getStickerImages())
+        cell.setup(title: pack.name ?? Rc.noNameMessage, detailText: ownershipDescription(name: pack.ownerName, id: pack.owner ?? ""), galleryImages: pack.getStickerImages())
         
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let pack = searchResults[indexPath.row]
-        performSegue(withIdentifier: R.SearVC.toEditPackSegueID, sender: pack)
+        performSegue(withIdentifier: R.toEditPackSegueID, sender: pack)
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if searchResults.count == 0 {
             return nil
         } else if searchResults.count == 100 {
-            return R.SearVC.limitReachedFooter
+            return R.limitReachedFooter
         } else {
-            return R.SearVC.nothingMoreFooter
+            return R.nothingMoreFooter
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == R.SearVC.toEditPackSegueID,
+        if segue.identifier == R.toEditPackSegueID,
             let dvc = segue.destination as? EditPackDBVC,
             let pack = sender as? StickerPackDB {
             

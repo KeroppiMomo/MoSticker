@@ -315,7 +315,7 @@ class StickerPackDB: StickerPackBase {
     
     // MARK: - Stats
     func sendToWhatsAppWithStats(completion: @escaping (Bool) -> Void) throws {
-        try self.sendToWhatsApp(id: self.packID, publisher: (self.ownerName ?? "") + R.Common.publisherSuffix, completion: completion)
+        try self.sendToWhatsApp(id: self.packID, publisher: (self.ownerName ?? "") + Rc.publisherSuffix, completion: completion)
         
         let downloadsRef = Database.database().reference(withPath: "pack_download_counts/" + packID)
         downloadsRef.runTransactionBlock({ curData -> TransactionResult in

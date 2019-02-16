@@ -190,7 +190,7 @@ class StickerPackLocal: StickerPackBase {
     
     // MARK: - Send to WhatsApp
     func sendToWhatsApp(completion: @escaping (Bool) -> Void) throws {
-        try super.sendToWhatsApp(id: self.savingID!, publisher: R.Common.publisherLocal, completion: completion)
+        try super.sendToWhatsApp(id: self.savingID!, publisher: Rc.publisherLocal, completion: completion)
     }
     
     // MARK: - Type Convertion

@@ -8,6 +8,7 @@
 
 import UIKit
 
+fileprivate typealias R = Resources.LSVC
 class LocalSelectionVC: HomeVC {
     
     var delegate: LocalSelectionDelegate?
@@ -15,7 +16,7 @@ class LocalSelectionVC: HomeVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         if packs.count == 0 {
-            self.showErrorMessage(title: R.LSVC.emptyTitle, message: R.LSVC.emptyMessage) {
+            self.showErrorMessage(title: R.emptyTitle, message: R.emptyMessage) {
                 self.delegate?.cancelled(self)
             }
         }

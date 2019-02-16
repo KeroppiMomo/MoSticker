@@ -34,7 +34,7 @@ class StickerPackTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
         return images.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.Cells.SPackTVC.imageCellID, for: indexPath) as? GalleryImgCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Resources.Cells.SPackTVC.imageCellID, for: indexPath) as? GalleryImgCollectionViewCell else { return UICollectionViewCell() }
         cell.setup(image: images[indexPath.row])
         cell.imageButton.tag = indexPath.row
         cell.imageButton.removeTarget(nil, action: #selector(tapPressed(_:)), for: .touchUpInside)
@@ -155,7 +155,7 @@ class GalleryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         return images.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.Cells.GalTVC.imageCellID, for: indexPath) as? GalleryImgCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Resources.Cells.GalTVC.imageCellID, for: indexPath) as? GalleryImgCollectionViewCell else { return UICollectionViewCell() }
         cell.setup(image: images[indexPath.row])
         cell.imageButton.tag = indexPath.row
         cell.imageButton.removeTarget(nil, action: #selector(tapPressed(_:)), for: .touchUpInside)

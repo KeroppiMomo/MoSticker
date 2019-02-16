@@ -8,6 +8,7 @@
 
 import UIKit
 
+fileprivate typealias R = Resources.HoVC
 class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
@@ -30,7 +31,7 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         tableView.reloadSections([0], with: .none)
         if packs.count == 0 {
-            tableView.backgroundView = createLabelView(R.Helper.emptyLabelText)
+            tableView.backgroundView = createLabelView(Rc.emptyLabelText)
             if tableView.isEditing {
                 editPressed(UIBarButtonItem())
             }
@@ -46,11 +47,11 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return packs.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.HoVC.packCellID, for: indexPath) as? StickerPackTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.packCellID, for: indexPath) as? StickerPackTableViewCell else { return UITableViewCell() }
         let pack = packs[indexPath.row]
         
-        let name = (pack.name == "" ? nil : pack.name) ?? R.Common.noNameMessage
-        let detail = pack.lastEdit == nil ? R.Common.noDateMessage : R.Common.userDateFormatter.string(from: pack.lastEdit!)
+        let name = (pack.name == "" ? nil : pack.name) ?? Rc.noNameMessage
+        let detail = pack.lastEdit == nil ? Rc.noDateMessage : Rc.userDateFormatter.string(from: pack.lastEdit!)
         cell.setup(title: name, detailText: detail, galleryImages: pack.getStickerImages())
         cell.setIndicatorHidden(tableView.isEditing, animated: false)
         cell.imageTapAction = { _ in
@@ -60,7 +61,7 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: R.HoVC.cellToEditPackSegueID, sender: packs[indexPath.row])
+        performSegue(withIdentifier: R.cellToEditPackSegueID, sender: packs[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -69,18 +70,18 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let alert = UIAlertController(title: nil, message: R.Common.removePackConfirmMessage, preferredStyle: .alert)
-            let removeAction = UIAlertAction(title: R.Common.removePackAction, style: .destructive, handler: { _ in
+            let alert = UIAlertController(title: nil, message: Rc.removePackConfirmMessage, preferredStyle: .alert)
+            let removeAction = UIAlertAction(title: Rc.removePackAction, style: .destructive, handler: { _ in
                 
                 do {
                     try self.packs[indexPath.row].deletePack()
                     self.reloadTableView()
                 } catch {
-                    self.showErrorMessage(title: R.Common.removePackErrorTitle, message: R.Common.removePackErrorMessage)
+                    self.showErrorMessage(title: Rc.removePackErrorTitle, message: Rc.removePackErrorMessage)
                     printError(error)
                 }
             })
-            let cancelAction = UIAlertAction(title: R.Common.cancel, style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: Rc.cancel, style: .cancel, handler: nil)
             
             alert.addAction(removeAction)
             alert.addAction(cancelAction)
@@ -95,19 +96,19 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             guard let cell = cell as? StickerPackTableViewCell else { return }
             cell.setIndicatorHidden(tableView.isEditing, animated: true)
         }
-        let newItem = UIBarButtonItem(title: tableView.isEditing ? R.Common.done : R.Common.edit, style: tableView.isEditing ? .done : .plain, target: self, action: #selector(editPressed(_:)))
+        let newItem = UIBarButtonItem(title: tableView.isEditing ? Rc.done : Rc.edit, style: tableView.isEditing ? .done : .plain, target: self, action: #selector(editPressed(_:)))
         navigationItem.leftBarButtonItem = newItem
         navigationItem.rightBarButtonItem?.isEnabled = !tableView.isEditing
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == R.HoVC.addToEditPackSegueID,
+        if segue.identifier == R.addToEditPackSegueID,
             let dvc = segue.destination as? EditPackLocalVC {
             let stickerPack = StickerPackLocal()
             stickerPack.savingID = try? StickerPackLocal.generateID()
             dvc.stickerPack = stickerPack
             dvc.isEditingMode = true
-        } else if segue.identifier == R.HoVC.cellToEditPackSegueID,
+        } else if segue.identifier == R.cellToEditPackSegueID,
             let dvc = segue.destination as? EditPackLocalVC,
             let pack = sender as? StickerPackLocal {
             dvc.stickerPack = pack

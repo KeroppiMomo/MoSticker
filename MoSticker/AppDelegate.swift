@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         #if DEBUG
-        Bundle(path: R.AD.injectionPath)?.load()
+        Bundle(path: Resources.AD.injectionPath)?.load()
         #endif
         
         FirebaseApp.configure()

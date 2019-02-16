@@ -8,6 +8,7 @@
 
 import UIKit
 
+fileprivate typealias R = Resources.PE.CroSVC
 class PECropScrollVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
     
     // MARK: - Variable Declaration
@@ -33,16 +34,16 @@ class PECropScrollVC: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.delegate = self
         imagePicker.allowsEditing = false
         
-        let alert = UIAlertController(title: nil, message: R.PE.CroSVC.selectSourceMessage, preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: R.PE.CroSVC.fromCameraMessage, style: .default) { _ in
+        let alert = UIAlertController(title: nil, message: R.selectSourceMessage, preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: R.fromCameraMessage, style: .default) { _ in
             imagePicker.sourceType = .camera
             self.present(imagePicker, animated: true, completion: nil)
         }
-        let libraryAction = UIAlertAction(title: R.PE.CroSVC.fromLibraryMessage, style: .default) { _ in
+        let libraryAction = UIAlertAction(title: R.fromLibraryMessage, style: .default) { _ in
             imagePicker.sourceType = .photoLibrary
             self.present(imagePicker, animated: true, completion: nil)
         }
-        let cancelAction = UIAlertAction(title: R.Common.cancel, style: .cancel) { _ in
+        let cancelAction = UIAlertAction(title: Rc.cancel, style: .cancel) { _ in
             self.delegate?.peDidCancel?()
         }
         
@@ -89,12 +90,12 @@ class PECropScrollVC: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     @IBAction func nextPressed(_ sender: UIBarButtonItem) {
         guard let image = cropImage() else {
-            self.showErrorMessage(title: R.PE.CroSVC.cropErrorTitle, message: R.PE.CroSVC.cropErrorMessage)
+            self.showErrorMessage(title: R.cropErrorTitle, message: R.cropErrorMessage)
             printError("cropImage() returns nil")
             return
         }
         
-        performSegue(withIdentifier: R.PE.CroSVC.toBackRemoveSegueID, sender: image)
+        performSegue(withIdentifier: R.toBackRemoveSegueID, sender: image)
     }
     
     func aspectFittedRect(frame: CGSize, content: CGSize) -> CGRect {
@@ -133,7 +134,7 @@ class PECropScrollVC: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == R.PE.CroSVC.toBackRemoveSegueID,
+        if segue.identifier == R.toBackRemoveSegueID,
             let dvc = segue.destination as? PEBackRemoveVC,
             let image = sender as? UIImage {
             dvc.curImage = image
