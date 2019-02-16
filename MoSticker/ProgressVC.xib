@@ -40,8 +40,9 @@
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="RRF-2r-Z0G">
                                         <rect key="frame" x="32" y="42" width="20" height="20"/>
                                     </activityIndicatorView>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KdK-Bg-0BE">
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KdK-Bg-0BE">
                                         <rect key="frame" x="68" y="51" width="314" height="2"/>
+                                        <color key="tintColor" red="0.43904143569999998" green="0.78895872830000002" blue="0.33316701650000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </progressView>
                                 </subviews>
                                 <constraints>

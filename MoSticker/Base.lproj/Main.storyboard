@@ -1112,6 +1112,7 @@
                                     </barButtonItem>
                                     <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="wgX-aJ-AMN"/>
                                 </items>
+                                <color key="tintColor" red="0.43904143569999998" green="0.78895872830000002" blue="0.33316701650000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <outlet property="delegate" destination="o5Z-KD-caK" id="fY0-3g-aPv"/>
                                 </connections>
@@ -1344,6 +1345,7 @@
                                     </barButtonItem>
                                     <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="JvE-ZB-Vc2"/>
                                 </items>
+                                <color key="tintColor" red="0.43904143569999998" green="0.78895872830000002" blue="0.33316701650000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
