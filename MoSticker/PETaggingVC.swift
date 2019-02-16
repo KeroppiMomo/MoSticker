@@ -359,28 +359,58 @@ class PETaggingVC: UIViewController, UIScrollViewDelegate {
         let outputImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
+        let progressVC = ProgressVC.setup(withMessage: R.PE.BRVC.processingMessage)
+
+        let group = DispatchGroup()
+        var pngData: Data?
+        var webpData: Data?
+        var pngProgress: Float = 0
+        var webpProgress: Float = 0
+        
         func failed() {
             self.showErrorMessage(title: R.PE.BRVC.processErrorTitle, message: R.PE.BRVC.processErrorMessage)
             self.dismiss(animated: true, completion: nil)
         }
+        func updateProgress() {
+            progressVC.update(progress: (pngProgress + webpProgress * 2) / 3)
+        }
 
-        let progressVC = ProgressVC.setup(withMessage: R.PE.BRVC.processingMessage)
-        outputImage.pngquant(progressHandler: { progressVC.update(progress: $0 / 2 ) }) { (data) in
-            if let pngData = data {
-                outputImage.webpData(targetSize: Limits.MaxStickerFileSize,
-                                     progressHandler: { progressVC.update(progress: $0 / 2 + 0.5)}) { (data) in
-                    if let webpData = data {
-                        self.dismiss(animated: true, completion: nil)
-                        self.delegate?.pe?(didFinish: webpData, pngData: pngData)
-                    } else {
-                        printError("Failed to webp the image: data in webpData(targetSize:completion:) is nil.")
-                        failed()
-                    }
-                }
+        group.enter()
+        outputImage.pngquant(progressHandler: { progress in
+            pngProgress = progress
+            updateProgress()
+        }) { (data) in
+            if let data = data {
+                pngData = data
+                pngProgress = 1.0
+                updateProgress()
+                
+                group.leave()
             } else {
                 printError("Failed to pngquant the image: data in pngquant(_:) is nil.")
                 failed()
             }
+        }
+        group.enter()
+        outputImage.webpData(targetSize: Limits.MaxStickerFileSize, progressHandler: { progress in
+            webpProgress = progress
+            updateProgress()
+        }) { (data) in
+            if let data = data {
+                webpData = data
+                webpProgress = 1.0
+                updateProgress()
+                
+                group.leave()
+            } else {
+                printError("Failed to webp the image: data in webpData(targetSize:completion:) is nil.")
+                failed()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            self.dismiss(animated: true, completion: nil)
+            self.delegate?.pe?(didFinish: webpData!, pngData: pngData!)
         }
         self.present(progressVC, animated: true, completion: nil)
     }
