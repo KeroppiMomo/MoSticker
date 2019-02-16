@@ -179,6 +179,8 @@
 		A67F4611220DBD19009896F7 /* PEColorPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67F4610220DBD19009896F7 /* PEColorPickerVC.swift */; };
 		A6A2C06F220D9CDE00EC2029 /* GradientSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2C06E220D9CDE00EC2029 /* GradientSlider.swift */; };
 		A6C6DFA021E5F26200A85EE2 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C6DF9F21E5F26200A85EE2 /* SettingVC.swift */; };
+		A6C8E9E12216FB8A00C618A0 /* ViewImgPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8E9E02216FB8A00C618A0 /* ViewImgPageVC.swift */; };
+		A6C8E9E32216FBF900C618A0 /* ViewImgPageContentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8E9E22216FBF900C618A0 /* ViewImgPageContentVC.swift */; };
 		A6C991AF2211C27700CD446A /* ProgressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C991AD2211C27700CD446A /* ProgressVC.swift */; };
 		A6C991B02211C27700CD446A /* ProgressVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C991AE2211C27700CD446A /* ProgressVC.xib */; };
 		A6D2F49B220E8B97003080D5 /* PEEmojiSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D2F49A220E8B97003080D5 /* PEEmojiSelectVC.swift */; };
@@ -461,6 +463,8 @@
 		A6A2C06E220D9CDE00EC2029 /* GradientSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSlider.swift; sourceTree = "<group>"; };
 		A6C6DF9F21E5F26200A85EE2 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		A6C6DFA221E601A100A85EE2 /* MoSticker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoSticker.entitlements; sourceTree = "<group>"; };
+		A6C8E9E02216FB8A00C618A0 /* ViewImgPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewImgPageVC.swift; sourceTree = "<group>"; };
+		A6C8E9E22216FBF900C618A0 /* ViewImgPageContentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewImgPageContentVC.swift; sourceTree = "<group>"; };
 		A6C991AD2211C27700CD446A /* ProgressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressVC.swift; sourceTree = "<group>"; };
 		A6C991AE2211C27700CD446A /* ProgressVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressVC.xib; sourceTree = "<group>"; };
 		A6D2F49A220E8B97003080D5 /* PEEmojiSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEEmojiSelectVC.swift; sourceTree = "<group>"; };
@@ -979,7 +983,7 @@
 				A6C6DFA121E5F26A00A85EE2 /* Tabs */,
 				A640B8B321B02EC5000DD30C /* EditPackLocalVC.swift */,
 				A64D2BF321F404D600828646 /* EditPackDBVC.swift */,
-				A644328021C90D27003AA333 /* ViewImgVC.swift */,
+				A6C8E9DF2216FB6D00C618A0 /* ViewImgVC */,
 				A623FE3F21B3753800D3E885 /* Photo Editing */,
 				A6C991AB2211C23800CD446A /* Loading */,
 			);
@@ -1037,6 +1041,16 @@
 				A601AC7521EF66C500E9CC7A /* Setting */,
 			);
 			name = Tabs;
+			sourceTree = "<group>";
+		};
+		A6C8E9DF2216FB6D00C618A0 /* ViewImgVC */ = {
+			isa = PBXGroup;
+			children = (
+				A644328021C90D27003AA333 /* ViewImgVC.swift */,
+				A6C8E9E02216FB8A00C618A0 /* ViewImgPageVC.swift */,
+				A6C8E9E22216FBF900C618A0 /* ViewImgPageContentVC.swift */,
+			);
+			name = ViewImgVC;
 			sourceTree = "<group>";
 		};
 		A6C991AB2211C23800CD446A /* Loading */ = {
@@ -1282,6 +1296,7 @@
 				A63D9C2221E06A6C000F84A1 /* pngdebug.h in Sources */,
 				A63D9C2321E06A6C000F84A1 /* pnginfo.h in Sources */,
 				A63D9C2421E06A6C000F84A1 /* pnglibconf.h in Sources */,
+				A6C8E9E32216FBF900C618A0 /* ViewImgPageContentVC.swift in Sources */,
 				A63D9C2521E06A6C000F84A1 /* pngpriv.h in Sources */,
 				A63D9C5A21E06B50000F84A1 /* kmeans.c in Sources */,
 				A63D9C2621E06A6C000F84A1 /* pngstruct.h in Sources */,
@@ -1443,6 +1458,7 @@
 				A63D9BB821E065D1000F84A1 /* ssim.c in Sources */,
 				A62BB9A721E96DFF00F56FCC /* ProfileVC.swift in Sources */,
 				A63D9C6221E06B50000F84A1 /* nearest.c in Sources */,
+				A6C8E9E12216FB8A00C618A0 /* ViewImgPageVC.swift in Sources */,
 				A6D5E8F421DF9555007F00B9 /* pngrtran.c in Sources */,
 				A63D9AF021E0655B000F84A1 /* quant_dec.c in Sources */,
 				A63D9BE621E065D1000F84A1 /* rescaler_msa.c in Sources */,

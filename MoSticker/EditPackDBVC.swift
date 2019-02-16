@@ -279,7 +279,7 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         if isEditingMode {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let viewAction = UIAlertAction(title: R.EPVCs.viewStickerAction, style: .default) { _ in
-                self.performSegue(withIdentifier: R.EPVCs.DB.toViewImgSegueID, sender: self.stickerPack.getStickerImages()[index])
+                self.performSegue(withIdentifier: R.EPVCs.DB.toViewImgSegueID, sender: index)
             }
             let removeAction = UIAlertAction(title: R.EPVCs.removeStickerAction, style: .destructive) { _ in
                 let alert = UIAlertController(title: nil, message: R.EPVCs.removeStickerConfirmMessage, preferredStyle: .alert)
@@ -302,7 +302,7 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             present(alert, animated: true, completion: nil)
         } else {
-            self.performSegue(withIdentifier: R.EPVCs.DB.toViewImgSegueID, sender: self.stickerPack.getStickerImages()[index])
+            self.performSegue(withIdentifier: R.EPVCs.DB.toViewImgSegueID, sender: index)
         }
     }
     
@@ -315,9 +315,10 @@ class EditPackDBVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             dvc.delegate = self
         } else if segue.identifier == R.EPVCs.DB.toViewImgSegueID,
             let dvc = segue.destination as? ViewImgVC,
-            let image = sender as? UIImage? {
-            
-            dvc.image = image
+            let index = sender as? Int {
+
+            dvc.index = index
+            dvc.images = stickerPack.getStickerImages()
         }
     }
 }

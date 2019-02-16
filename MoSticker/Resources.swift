@@ -21,6 +21,8 @@ class R {
             }
         }
         
+        static let storyboardName = "Main"
+        
         static let cancel = "Cancel"
         static let done = "Done"
         static let edit = "Edit"
@@ -151,6 +153,11 @@ class R {
             static let toPECropScrollSegueID = "editPackDB-peCropScroll"
             static let toViewImgSegueID = "editPackDB-viewImg"
         }
+    }
+    
+    /// Resouces used by ViewImgVC and its related classes.
+    class VIVCs {
+        static let pageVCEmbedSegueID = "viewImgPageEmbed"
     }
     
     /// Resources used by Photo Editing (PE) classes.

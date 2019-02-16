@@ -9,20 +9,40 @@
 import UIKit
 class ViewImgVC: UIViewController {
     
-    var image: UIImage?
+    @IBOutlet weak var pageControl: UIPageControl!
     
+    var images = [UIImage?]()
+    var index = 0
     
-    @IBOutlet weak var imageView: UIImageView!
+    var pageVC: ViewImgPageVC!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        imageView.image = image
+        pageControl.numberOfPages = images.count
     }
     
     @IBAction func sharePressed(_ sender: UIBarButtonItem) {
+        let image = images[pageVC.index]
         let activityVC = UIActivityViewController(activityItems: [(image ?? UIImage()).pngData()!], applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC, animated: true, completion: nil)
+    }
+    @IBAction func pageControlChanged(_ sender: UIPageControl) {
+        let index = sender.currentPage
+        pageVC.goToVC(at: index)
+    }
+    func pageIndexChanged(_ index: Int) {
+        pageControl.currentPage = index
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == R.VIVCs.pageVCEmbedSegueID,
+            let dvc = segue.destination as? ViewImgPageVC {
+            dvc.images = images
+            dvc.index = index
+            
+            dvc.indexChangedAction = pageIndexChanged(_:)
+            self.pageVC = dvc
+        }
     }
 }
