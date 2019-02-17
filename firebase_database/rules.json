@@ -1,0 +1,61 @@
+{
+    "rules": {
+        "users": {
+            "$uid": {
+                ".read": true,
+                ".write": "auth.uid === $uid",
+                "name": {
+                    ".validate": "newData.isString()"
+                },
+                "photo": {
+                    ".validate": "newData.isString() && newData.val().matches(/^[a-zA-Z0-9+/]+={0,2}$/)"
+                },
+                "sticker_packs": {
+                    "$pack_item": {
+                        ".validate": "newData.isString() && root.child('sticker_packs').child(newData.val()).exists() && root.child('sticker_packs').child(newData.val()).child('owner').val() === $uid"
+                    }
+                }
+            }
+        },
+        "sticker_packs": {
+            ".read": true,
+            ".indexOn": "last_edit",
+            "$pack_id": {
+                ".write": "auth != null && ((data.exists() && newData.exists() && auth.uid === newData.child('owner').val() && data.child('owner').val() === newData.child('owner').val()) || (!data.exists() && newData.exists() && auth.uid === newData.child('owner').val()) || (data.exists() && !newData.exists() && auth.uid === data.child('owner').val()))",
+                ".validate": "newData.hasChildren(['name', 'name_lowercased', 'tray', 'sticker_webp', 'sticker_png', 'last_edit', 'owner'])",
+                "name": {
+                    ".validate": "newData.isString() && newData.val().length < 128"
+                },
+                "name_lowercased": {
+                    ".validate": "newData.isString() && newData.val() === newData.parent().child('name').val().toLowerCase()"
+                },
+                "tray": {
+                    ".validate": "newData.isString() && newData.val().matches(/^[a-zA-Z0-9+/]+={0,2}$/)"
+                },
+                "last_edit": {
+                    ".validate": "newData.isNumber() && newData.val() < now"
+                },
+                "sticker_webp": {
+                    "$sticker_no": {
+                        ".validate": "newData.isString() && newData.val().matches(/^[a-zA-Z0-9+/]+={0,2}$/) && newData.parent().parent().child('sticker_png').child($sticker_no).exists()"
+                    }
+                },
+                "sticker_png": {
+                    "$sticker_no": {
+                        ".validate": "newData.isString() && newData.val().matches(/^[a-zA-Z0-9+/]+={0,2}$/) && newData.parent().parent().child('sticker_webp').child($sticker_no).exists()"
+                    }
+                },
+                "downloads": {
+                    ".validate": false
+                }
+            }
+        },
+        "pack_download_counts": {
+            ".write": true,
+            ".read": true,
+            "$pack_id": {
+                ".validate": "newData.isNumber() && newData.exists() && ((data.exists() && (newData.val() === data.val() + 1 || newData.val() === data.val())) || (!data.exists() && newData.val() === 1))"
+            }
+        }
+    }
+}

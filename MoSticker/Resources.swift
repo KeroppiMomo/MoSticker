@@ -92,6 +92,12 @@ class Resources {
         static let emptyTitle = "No Existing Packs"
         static let emptyMessage = "You have not created any sticker packs in the 'Packs' tab."
     }
+    /// Resources used by WorldVC.
+    class WoVC {
+        static let headerCellID = "headerCell"
+        static let packCellID = "packCell"
+        static let loadingCellID = "loadingCell"
+    }
     /// Resources used by SearchVC.
     class SearVC {
         static let packCellID = "packCell"

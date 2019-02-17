@@ -129,7 +129,7 @@ class StickerPackDB: StickerPackBase {
             return result
         }
         
-        guard let dataDict = snapshot.value as? [String: Any],
+        guard var dataDict = snapshot.value as? [String: Any],
             let lastEditTimestamp = dataDict["last_edit"] as? Int,
             let name = dataDict["name"] as? String,
             let owner = dataDict["owner"] as? String,
@@ -160,15 +160,20 @@ class StickerPackDB: StickerPackBase {
             dispatchGroup.leave()
         }
         
-        let downloadCountsRef = Database.database().reference(withPath: "pack_download_counts/" + pack.packID)
-        dispatchGroup.enter()
-        downloadCountsRef.observeSingleEvent(of: .value) { (snapshot) in
-            guard let downloads = snapshot.value as? Int else {
-                dispatchGroup.leave()
-                return
-            }
+        if dataDict["downloads"] == nil { dataDict["downloads"] = 0 }
+        if let downloads = dataDict["downloads"] as? Int {
             pack.downloads = downloads
-            dispatchGroup.leave()
+        } else {
+            let downloadCountsRef = Database.database().reference(withPath: "pack_download_counts/" + pack.packID)
+            dispatchGroup.enter()
+            downloadCountsRef.observeSingleEvent(of: .value) { (snapshot) in
+                guard let downloads = snapshot.value as? Int else {
+                    dispatchGroup.leave()
+                    return
+                }
+                pack.downloads = downloads
+                dispatchGroup.leave()
+            }
         }
         
         dispatchGroup.notify(queue: .main) {
@@ -311,6 +316,9 @@ class StickerPackDB: StickerPackBase {
                 completion(results)
             })
         })
+    }
+    static func getMostDownloaded(_ completion: @escaping ([StickerPackDB]) -> ()) {
+        
     }
     
     // MARK: - Stats

@@ -96,51 +96,12 @@ class ButtonTableViewCell: UITableViewCell {
     }
 }
 
-//class GalleryTableViewCell: UITableViewCell {
-//    var imageTapAction: ((Int) -> (Void))?
-//
-//    @IBOutlet weak var stackView: UIStackView!
-//    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapPressed(_:)))
-//
-//    func setup(images: [UIImage]) {
-//        func createOffsetView() -> UIView {
-//            let view = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: self.frame.height - 16))
-//            view.backgroundColor = UIColor(r: 0, 0, 0, 0)
-//            return view
-//        }
-//
-//        tapRecognizer.delegate = self
-//
-//        stackView.arrangedSubviews.forEach({stackView.removeArrangedSubview($0)})
-//
-//        var i = 0
-//        stackView.addArrangedSubview(createOffsetView())
-//        for img in images {
-//            let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.height - 16, height: self.frame.height - 16))
-//            button.heightAnchor.constraint(equalToConstant: self.frame.height - 16).isActive = true
-//            button.widthAnchor.constraint(equalToConstant: self.frame.height - 16).isActive = true
-//            button.tag = i
-//            button.setBackgroundImage(img, for: .normal)
-//            button.addTarget(self, action: #selector(tapPressed(_:)), for: .touchUpInside)
-//
-//            stackView.addArrangedSubview(button)
-//
-//            i += 1
-//        }
-//
-//        stackView.addArrangedSubview(createOffsetView())
-//    }
-//    @objc func tapPressed(_ sender: UIButton) {
-//        imageTapAction?(sender.tag)
-//    }
-//}
 class GalleryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
     var images = [UIImage?]()
     var imageTapAction: ((Int) -> (Void))?
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var emptyLabel: UILabel!
-//    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapPressed(_:)))
     
     func setup(images: [UIImage?]) {
         self.images = images
@@ -212,5 +173,15 @@ class SliderTableViewCell: UITableViewCell {
     func setup(text: String, sliderValue: CGFloat) {
         mainLabel.text = text
         slider.value = Float(sliderValue)
+    }
+}
+
+class BoldHeaderTableViewCell: UITableViewCell {
+    @IBOutlet weak var mainLabel: UILabel!
+    @IBOutlet weak var buttonLabel: UILabel!
+    
+    func setup(text: String, buttonText: String) {
+        mainLabel.text = text
+        buttonLabel.text = buttonText
     }
 }

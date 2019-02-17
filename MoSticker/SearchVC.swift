@@ -9,7 +9,7 @@
 import UIKit
 
 fileprivate typealias R = Resources.SearVC
-class SearchVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource {
+class SearchVC: UIViewController, UISearchResultsUpdating, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     var hasSearchBarSetup = false
@@ -21,11 +21,10 @@ class SearchVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate, 
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = true
+        searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = R.barPlaceholder
-//        searchController.searchBar.isTranslucent = false
+        searchController.searchBar.delegate = self
         
-//        searchController.searchBar.setPlaceholderColor(.red)
 
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
@@ -72,9 +71,15 @@ class SearchVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate, 
         tableView.scrollIndicatorInsets = tableView.contentInset
     }
     
-    func updateSearchResults(for searchController: UISearchController) {
-        filter(searching: searchController.searchBar.text ?? "")
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        filter(searching: searchBar.text ?? "")
     }
+    func updateSearchResults(for searchController: UISearchController) {
+        if !searchController.searchBar.isFirstResponder {
+            filter(searching: searchController.searchBar.text ?? "")
+        }
+    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

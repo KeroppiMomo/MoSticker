@@ -169,6 +169,7 @@
 		A640B8B821B03649000DD30C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A640B8B721B03649000DD30C /* Helper.swift */; };
 		A644328121C90D27003AA333 /* ViewImgVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A644328021C90D27003AA333 /* ViewImgVC.swift */; };
 		A64D2BF421F404D600828646 /* EditPackDBVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64D2BF321F404D600828646 /* EditPackDBVC.swift */; };
+		A64D70C222191C1400164858 /* WorldVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64D70C122191C1400164858 /* WorldVC.swift */; };
 		A650264A21E4B631002E8BDF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A650264921E4B631002E8BDF /* GoogleService-Info.plist */; };
 		A655130D21FB1BD600A07E84 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = A655130C21FB1BD600A07E84 /* Resources.swift */; };
 		A6588E99220BD88A007E2C3C /* 512empty.webp in Resources */ = {isa = PBXBuildFile; fileRef = A6588E98220BD88A007E2C3C /* 512empty.webp */; };
@@ -451,6 +452,7 @@
 		A640B8B721B03649000DD30C /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		A644328021C90D27003AA333 /* ViewImgVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewImgVC.swift; sourceTree = "<group>"; };
 		A64D2BF321F404D600828646 /* EditPackDBVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPackDBVC.swift; sourceTree = "<group>"; };
+		A64D70C122191C1400164858 /* WorldVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldVC.swift; sourceTree = "<group>"; };
 		A650264921E4B631002E8BDF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A655130C21FB1BD600A07E84 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		A6588E98220BD88A007E2C3C /* 512empty.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = 512empty.webp; sourceTree = "<group>"; };
@@ -1021,6 +1023,14 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
+		A64D70C022191C0600164858 /* World */ = {
+			isa = PBXGroup;
+			children = (
+				A64D70C122191C1400164858 /* WorldVC.swift */,
+			);
+			name = World;
+			sourceTree = "<group>";
+		};
 		A6A2C06D220D9CC800EC2029 /* GradientSlider */ = {
 			isa = PBXGroup;
 			children = (
@@ -1034,6 +1044,7 @@
 			children = (
 				A601AC7221EF66B100E9CC7A /* Home */,
 				A601AC7421EF66BE00E9CC7A /* Profile */,
+				A64D70C022191C0600164858 /* World */,
 				A638F14921FF48CA00E83447 /* Search */,
 				A601AC7521EF66C500E9CC7A /* Setting */,
 			);
@@ -1388,6 +1399,7 @@
 				A6D5E8F221DF9555007F00B9 /* lodepng.c in Sources */,
 				A63D9BD621E065D1000F84A1 /* cpu.c in Sources */,
 				A63D9BC521E065D1000F84A1 /* lossless_enc_mips32.c in Sources */,
+				A64D70C222191C1400164858 /* WorldVC.swift in Sources */,
 				A6D5E92321DF95AF007F00B9 /* pngquant_helper.m in Sources */,
 				A63D9BE721E065D1000F84A1 /* alpha_processing.c in Sources */,
 				A63D9BE921E065D1000F84A1 /* rescaler_sse2.c in Sources */,
