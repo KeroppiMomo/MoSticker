@@ -14,6 +14,7 @@ class StickerPackTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noStickerLabel: UILabel!
+    @IBOutlet weak var propertyLabel: UILabel!
     
     var images = [UIImage?]()
     var imageTapAction: ((Int) -> (Void))?
@@ -25,6 +26,9 @@ class StickerPackTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
         
         collectionView.reloadData()
         noStickerLabel.isHidden = images.count != 0
+    }
+    func setPropertyValue(_ str: String) {
+        propertyLabel.text = str
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

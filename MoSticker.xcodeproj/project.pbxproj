@@ -183,6 +183,7 @@
 		A6C8E9E32216FBF900C618A0 /* ViewImgPageContentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8E9E22216FBF900C618A0 /* ViewImgPageContentVC.swift */; };
 		A6C991AF2211C27700CD446A /* ProgressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C991AD2211C27700CD446A /* ProgressVC.swift */; };
 		A6C991B02211C27700CD446A /* ProgressVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C991AE2211C27700CD446A /* ProgressVC.xib */; };
+		A6CF6316221C1C3600436EC4 /* WorldCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CF6315221C1C3600436EC4 /* WorldCategoryVC.swift */; };
 		A6D2F49B220E8B97003080D5 /* PEEmojiSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D2F49A220E8B97003080D5 /* PEEmojiSelectVC.swift */; };
 		A6D5E8ED21DF9555007F00B9 /* pngget.c in Sources */ = {isa = PBXBuildFile; fileRef = A6D5E8D621DF9554007F00B9 /* pngget.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		A6D5E8EE21DF9555007F00B9 /* pngerror.c in Sources */ = {isa = PBXBuildFile; fileRef = A6D5E8D721DF9554007F00B9 /* pngerror.c */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -467,6 +468,7 @@
 		A6C8E9E22216FBF900C618A0 /* ViewImgPageContentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewImgPageContentVC.swift; sourceTree = "<group>"; };
 		A6C991AD2211C27700CD446A /* ProgressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressVC.swift; sourceTree = "<group>"; };
 		A6C991AE2211C27700CD446A /* ProgressVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressVC.xib; sourceTree = "<group>"; };
+		A6CF6315221C1C3600436EC4 /* WorldCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldCategoryVC.swift; sourceTree = "<group>"; };
 		A6D2F49A220E8B97003080D5 /* PEEmojiSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEEmojiSelectVC.swift; sourceTree = "<group>"; };
 		A6D5E8D421DF9553007F00B9 /* lodepng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lodepng.h; sourceTree = "<group>"; };
 		A6D5E8D521DF9554007F00B9 /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
@@ -1027,6 +1029,7 @@
 			isa = PBXGroup;
 			children = (
 				A64D70C122191C1400164858 /* WorldVC.swift */,
+				A6CF6315221C1C3600436EC4 /* WorldCategoryVC.swift */,
 			);
 			name = World;
 			sourceTree = "<group>";
@@ -1474,6 +1477,7 @@
 				A63D9C5B21E06B50000F84A1 /* mempool.c in Sources */,
 				A6D2F49B220E8B97003080D5 /* PEEmojiSelectVC.swift in Sources */,
 				A63D9B5F21E065B6000F84A1 /* picture_rescale_enc.c in Sources */,
+				A6CF6316221C1C3600436EC4 /* WorldCategoryVC.swift in Sources */,
 				A655130D21FB1BD600A07E84 /* Resources.swift in Sources */,
 				A63D9AEF21E0655B000F84A1 /* io_dec.c in Sources */,
 				A63D9BBA21E065D1000F84A1 /* enc_mips32.c in Sources */,

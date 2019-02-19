@@ -16,7 +16,7 @@ class ViewImgPageVC: UIPageViewController, UIPageViewControllerDataSource, UIPag
             indexChangedAction?(index)
         }
     }
-    var indexChangedAction: ((Int) -> ())?
+    var indexChangedAction: ((Int) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()

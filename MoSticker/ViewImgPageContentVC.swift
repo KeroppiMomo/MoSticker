@@ -15,7 +15,7 @@ class ViewImgPageContentVC: UIViewController {
     var image: UIImage?
     var index: Int?
     
-    var appearAction: ((Int?) -> ())?
+    var appearAction: ((Int?) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Packs-->
+        <!--HomeVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="HomeVC" customClass="HomeVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -158,10 +158,10 @@
             </objects>
             <point key="canvasLocation" x="2054" y="-1468"/>
         </scene>
-        <!--Profile-->
+        <!--ProfileVC-->
         <scene sceneID="RVU-TU-bjW">
             <objects>
-                <viewController id="ymE-8B-de3" customClass="ProfileVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ymE-8B-de3" userLabel="ProfileVC" customClass="ProfileVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N5b-U7-QZD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -342,10 +342,10 @@
             </objects>
             <point key="canvasLocation" x="2054" y="-420"/>
         </scene>
-        <!--Settings-->
+        <!--NC for SettingVC-->
         <scene sceneID="TKT-4p-oTd">
             <objects>
-                <navigationController id="LH8-IP-Uax" sceneMemberID="viewController">
+                <navigationController id="LH8-IP-Uax" userLabel="NC for SettingVC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" image="settings" id="igO-j9-ah4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="JHm-IG-EQG">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -367,10 +367,10 @@
             </objects>
             <point key="canvasLocation" x="1048" y="3115"/>
         </scene>
-        <!--View Image-->
+        <!--ViewImgVC-->
         <scene sceneID="nFH-MT-asW">
             <objects>
-                <viewController id="84p-Rv-lDA" customClass="ViewImgVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="84p-Rv-lDA" userLabel="ViewImgVC" customClass="ViewImgVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="heg-uO-LN0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -420,18 +420,18 @@
             </objects>
             <point key="canvasLocation" x="2054" y="-4296"/>
         </scene>
-        <!--View Img PageVC-->
+        <!--ViewImgPageVC-->
         <scene sceneID="nTh-iA-A96">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="30" navigationOrientation="horizontal" spineLocation="none" id="sSS-kA-rCr" customClass="ViewImgPageVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="30" navigationOrientation="horizontal" spineLocation="none" id="sSS-kA-rCr" userLabel="ViewImgPageVC" customClass="ViewImgPageVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AGa-xr-H2D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2880" y="-4296"/>
         </scene>
-        <!--View Img Page ContentVC-->
+        <!--ViewImgPageContentVC-->
         <scene sceneID="944-kj-li6">
             <objects>
-                <viewController storyboardIdentifier="ViewImgPageContentVC" id="M0n-PS-R6H" customClass="ViewImgPageContentVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewImgPageContentVC" id="M0n-PS-R6H" userLabel="ViewImgPageContentVC" customClass="ViewImgPageContentVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1xw-hs-W82">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -464,10 +464,10 @@
             </objects>
             <point key="canvasLocation" x="3777" y="-4296"/>
         </scene>
-        <!--Sticker Pack-->
+        <!--EditPackLocalVC-->
         <scene sceneID="HvB-Ot-82h">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="vhs-Cx-oJg" customClass="EditPackLocalVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="vhs-Cx-oJg" userLabel="EditPackLocalVC" customClass="EditPackLocalVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Aa-10-1Qm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -700,10 +700,10 @@
             </objects>
             <point key="canvasLocation" x="2054" y="-3591"/>
         </scene>
-        <!--Sticker Pack-->
+        <!--EditPackDBVC-->
         <scene sceneID="YhJ-wx-JGr">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="ADp-ZA-AaR" customClass="EditPackDBVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="ADp-ZA-AaR" userLabel="EditPackDBVC" customClass="EditPackDBVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eiQ-0o-KIO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -936,10 +936,10 @@
             </objects>
             <point key="canvasLocation" x="2990" y="-3591"/>
         </scene>
-        <!--Cropping-->
+        <!--PECroppingVC-->
         <scene sceneID="VT1-ql-vfy">
             <objects>
-                <viewController id="nFs-kM-cFp" customClass="PECropScrollVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="nFs-kM-cFp" userLabel="PECroppingVC" customClass="PECropScrollVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="T5O-yH-OBF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1048,10 +1048,10 @@
             </objects>
             <point key="canvasLocation" x="4343" y="-458"/>
         </scene>
-        <!--Background Removing-->
+        <!--PEBackRemoveVC-->
         <scene sceneID="2qg-qr-Brx">
             <objects>
-                <viewController id="o5Z-KD-caK" customClass="PEBackRemoveVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="o5Z-KD-caK" userLabel="PEBackRemoveVC" customClass="PEBackRemoveVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xyf-pE-A3m">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1217,10 +1217,10 @@
             </objects>
             <point key="canvasLocation" x="5344.9275362318849" y="-458.03571428571428"/>
         </scene>
-        <!--Tagging-->
+        <!--PETaggingVC-->
         <scene sceneID="XqI-kZ-nZa">
             <objects>
-                <viewController storyboardIdentifier="peTagging" id="9VZ-tq-Kp4" customClass="PETaggingVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="peTagging" id="9VZ-tq-Kp4" userLabel="PETaggingVC" customClass="PETaggingVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OLC-lT-Jue">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1396,10 +1396,10 @@
             </objects>
             <point key="canvasLocation" x="6344.9275362318849" y="-458.03571428571428"/>
         </scene>
-        <!--Emoji SelectVC-->
+        <!--PEEmojiSelectVC-->
         <scene sceneID="XPy-Ll-23d">
             <objects>
-                <viewController id="hNe-pK-RYq" customClass="PEEmojiSelectVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hNe-pK-RYq" userLabel="PEEmojiSelectVC" customClass="PEEmojiSelectVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KmI-a8-EBR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1467,10 +1467,10 @@
             </objects>
             <point key="canvasLocation" x="5415.9420289855079" y="-1406.25"/>
         </scene>
-        <!--Color PickerVC-->
+        <!--PEColorPickerVC-->
         <scene sceneID="gEL-4Y-mpN">
             <objects>
-                <viewController id="QKO-Zg-RfW" customClass="PEColorPickerVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="QKO-Zg-RfW" userLabel="PEColorPickerVC" customClass="PEColorPickerVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0ng-H4-f5h">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1485,7 +1485,7 @@
                                             <rect key="frame" x="16" y="313.66666666666669" width="382" height="269.00000000000006"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jiZ-Fc-hoq" customClass="GradientSlider" customModule="MoSticker" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="0.0" width="350" height="30"/>
+                                                    <rect key="frame" x="14" y="-4" width="354" height="38"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="1Lk-fL-qCU"/>
                                                     </constraints>
@@ -1505,7 +1505,7 @@
                                                     </connections>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wcP-VB-wpH" customClass="GradientSlider" customModule="MoSticker" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="46" width="350" height="30"/>
+                                                    <rect key="frame" x="14" y="42" width="354" height="38"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="2YG-Hl-An7"/>
                                                     </constraints>
@@ -1525,7 +1525,7 @@
                                                     </connections>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u5A-bX-XaS" customClass="GradientSlider" customModule="MoSticker" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="92" width="350" height="30"/>
+                                                    <rect key="frame" x="14" y="88" width="354" height="38"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="fYJ-sO-EJO"/>
                                                     </constraints>
@@ -1622,10 +1622,10 @@
             </objects>
             <point key="canvasLocation" x="6344.9275362318849" y="-1406.25"/>
         </scene>
-        <!--Packs-->
+        <!--NC for HomeVC-->
         <scene sceneID="oXh-ZD-QM0">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pCD-DX-sHA" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pCD-DX-sHA" userLabel="NC for HomeVC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Packs" image="sticker" id="cvc-WA-HFy"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="B9s-Xf-O4i">
@@ -1649,10 +1649,10 @@
             </objects>
             <point key="canvasLocation" x="1048" y="-1468"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="OOK-xL-dfG">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="e0X-Wu-SoA" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="e0X-Wu-SoA" userLabel="Main Tab Bar Controller" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="p6d-SS-Eak">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -1672,10 +1672,10 @@
             </objects>
             <point key="canvasLocation" x="140.57971014492756" y="778.79464285714278"/>
         </scene>
-        <!--World-->
+        <!--WorldVC-->
         <scene sceneID="LPd-Yh-f3S">
             <objects>
-                <viewController id="8fu-Qm-7wY" customClass="WorldVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8fu-Qm-7wY" userLabel="WorldVC" customClass="WorldVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fry-FZ-iIJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1691,13 +1691,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="69.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QP4-OA-sZr">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QP4-OA-sZr">
                                                     <rect key="frame" x="20" y="29.333333333333332" width="281.66666666666669" height="32.333333333333343"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Show More" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSc-lY-8Ui">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show More" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSc-lY-8Ui">
                                                     <rect key="frame" x="309.66666666666669" y="44.666666666666664" width="72.333333333333314" height="17"/>
                                                     <color key="tintColor" red="1" green="0.99997597930000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1713,18 +1713,18 @@
                                                 <constraint firstAttribute="bottom" secondItem="QP4-OA-sZr" secondAttribute="bottom" constant="8" id="yp1-7v-01N"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="buttonLabel" destination="HSc-lY-8Ui" id="Ndw-XW-fEb"/>
                                             <outlet property="mainLabel" destination="QP4-OA-sZr" id="amw-LG-fP2"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="packCell" rowHeight="138" id="IJV-lI-6uN" customClass="StickerPackTableViewCell" customModule="MoSticker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="98" width="414" height="138"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="packCell" rowHeight="186" id="IJV-lI-6uN" customClass="StickerPackTableViewCell" customModule="MoSticker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="98" width="414" height="186"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IJV-lI-6uN" id="JU0-V0-q5p">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="137.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="185.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUR-Sg-3Bn">
@@ -1740,7 +1740,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Aku-JQ-sfx">
-                                                    <rect key="frame" x="24" y="50.000000000000007" width="374" height="79.666666666666686"/>
+                                                    <rect key="frame" x="24" y="49.999999999999993" width="374" height="99.333333333333314"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1im-bB-Ukz">
                                                         <size key="itemSize" width="80" height="80"/>
@@ -1750,7 +1750,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="6P9-ug-KZA" customClass="GalleryImgCollectionViewCell" customModule="MoSticker" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                                            <rect key="frame" x="0.0" y="9.6666666666666661" width="80" height="80"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -1778,33 +1778,42 @@
                                                     </connections>
                                                 </collectionView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Stickers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sle-gS-CCX">
-                                                    <rect key="frame" x="0.0" y="50.000000000000007" width="414" height="79.666666666666686"/>
+                                                    <rect key="frame" x="0.0" y="49.999999999999993" width="414" height="99.333333333333314"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d4X-20-jZF">
-                                                    <rect key="frame" x="0.0" y="0.0" width="8" height="137.66666666666666"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="8" height="185.66666666666666"/>
                                                     <color key="backgroundColor" red="0.59570646289999996" green="0.96178430319999997" blue="0.52143859859999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="8" id="8i9-Kw-LTi"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQU-aJ-KI1">
+                                                    <rect key="frame" x="24" y="157.33333333333334" width="374" height="20.333333333333343"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.43904143569999998" green="0.78895872830000002" blue="0.33316701650000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="sle-gS-CCX" firstAttribute="leading" secondItem="JU0-V0-q5p" secondAttribute="leading" id="5al-bH-i9c"/>
-                                                <constraint firstAttribute="bottom" secondItem="Aku-JQ-sfx" secondAttribute="bottom" constant="8" id="EEN-Ac-8zj"/>
+                                                <constraint firstAttribute="bottom" secondItem="LQU-aJ-KI1" secondAttribute="bottom" constant="8" id="FSF-3q-o0G"/>
+                                                <constraint firstItem="LQU-aJ-KI1" firstAttribute="leading" secondItem="JU0-V0-q5p" secondAttribute="leading" constant="24" id="G9f-JT-lIv"/>
                                                 <constraint firstItem="d4X-20-jZF" firstAttribute="leading" secondItem="JU0-V0-q5p" secondAttribute="leading" id="HUv-yL-YNy"/>
                                                 <constraint firstItem="Aku-JQ-sfx" firstAttribute="top" secondItem="VUR-Sg-3Bn" secondAttribute="bottom" constant="16" id="Kwt-Ha-LZT"/>
                                                 <constraint firstItem="d4X-20-jZF" firstAttribute="top" secondItem="JU0-V0-q5p" secondAttribute="top" id="NBb-1a-SbK"/>
                                                 <constraint firstAttribute="trailing" secondItem="Uzt-he-aN4" secondAttribute="trailing" constant="16" id="Qgx-VF-tCo"/>
                                                 <constraint firstItem="Uzt-he-aN4" firstAttribute="leading" secondItem="VUR-Sg-3Bn" secondAttribute="trailing" constant="16" id="Qok-gN-hRE"/>
+                                                <constraint firstItem="LQU-aJ-KI1" firstAttribute="top" secondItem="sle-gS-CCX" secondAttribute="bottom" constant="8" id="Vwb-BL-mz4"/>
                                                 <constraint firstAttribute="trailing" secondItem="Aku-JQ-sfx" secondAttribute="trailing" constant="16" id="W9h-7M-VVM"/>
                                                 <constraint firstItem="VUR-Sg-3Bn" firstAttribute="leading" secondItem="JU0-V0-q5p" secondAttribute="leading" constant="24" id="X3l-Hg-m5o"/>
-                                                <constraint firstItem="Aku-JQ-sfx" firstAttribute="bottom" secondItem="sle-gS-CCX" secondAttribute="bottom" id="XD9-Nj-dP2"/>
+                                                <constraint firstAttribute="trailing" secondItem="LQU-aJ-KI1" secondAttribute="trailing" constant="16" id="ZnF-SG-MJ1"/>
                                                 <constraint firstItem="sle-gS-CCX" firstAttribute="top" secondItem="Aku-JQ-sfx" secondAttribute="top" id="ab6-NY-xra"/>
                                                 <constraint firstItem="Uzt-he-aN4" firstAttribute="top" secondItem="JU0-V0-q5p" secondAttribute="top" constant="8" id="f65-AR-2At"/>
                                                 <constraint firstItem="VUR-Sg-3Bn" firstAttribute="top" secondItem="JU0-V0-q5p" secondAttribute="top" constant="8" id="hvI-WM-l3g"/>
+                                                <constraint firstItem="LQU-aJ-KI1" firstAttribute="top" secondItem="Aku-JQ-sfx" secondAttribute="bottom" constant="8" id="iOt-XL-doA"/>
                                                 <constraint firstAttribute="bottom" secondItem="d4X-20-jZF" secondAttribute="bottom" id="ixB-Lo-ie0"/>
                                                 <constraint firstAttribute="trailing" secondItem="sle-gS-CCX" secondAttribute="trailing" id="j8g-gQ-RgD"/>
                                                 <constraint firstItem="Aku-JQ-sfx" firstAttribute="top" secondItem="Uzt-he-aN4" secondAttribute="bottom" constant="16" id="xFy-JI-HGz"/>
@@ -1816,11 +1825,12 @@
                                             <outlet property="detailLabel" destination="Uzt-he-aN4" id="wIf-00-WdY"/>
                                             <outlet property="indicatorView" destination="d4X-20-jZF" id="KnG-Fd-knY"/>
                                             <outlet property="noStickerLabel" destination="sle-gS-CCX" id="hUj-qn-jJe"/>
+                                            <outlet property="propertyLabel" destination="LQU-aJ-KI1" id="opr-J9-twJ"/>
                                             <outlet property="titleLabel" destination="VUR-Sg-3Bn" id="odH-BU-bwg"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="loadingCell" id="TFL-bT-fbf">
-                                        <rect key="frame" x="0.0" y="236" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="284" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TFL-bT-fbf" id="g8q-qP-xIE">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
@@ -1835,6 +1845,30 @@
                                                 <constraint firstItem="AZB-3B-ezq" firstAttribute="centerX" secondItem="g8q-qP-xIE" secondAttribute="centerX" id="j9e-1b-VTh"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="buttonCell" id="cni-ev-Gxn" customClass="ButtonTableViewCell" customModule="MoSticker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="328" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cni-ev-Gxn" id="6pH-mZ-R74">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show More" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dfv-VE-4hp">
+                                                    <rect key="frame" x="164" y="11.333333333333336" width="86" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.43904143569999998" green="0.78895872830000002" blue="0.33316701650000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Dfv-VE-4hp" firstAttribute="centerY" secondItem="6pH-mZ-R74" secondAttribute="centerY" id="Dfs-rY-wbp"/>
+                                                <constraint firstItem="Dfv-VE-4hp" firstAttribute="centerX" secondItem="6pH-mZ-R74" secondAttribute="centerX" id="Rox-43-iyQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="Dfv-VE-4hp" id="ITU-89-RPq"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1855,16 +1889,46 @@
                     <navigationItem key="navigationItem" title="World" id="kSe-Az-oPs"/>
                     <connections>
                         <outlet property="tableView" destination="d1R-cy-PgS" id="OwM-Z1-SWr"/>
+                        <segue destination="ADp-ZA-AaR" kind="show" identifier="worldVC-editPackDB" id="cwc-eS-Kqr"/>
+                        <segue destination="qsw-Y1-gY0" kind="show" id="pce-gv-JZo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="acc-ob-Gm7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2053.6231884057975" y="778.79464285714278"/>
         </scene>
-        <!--Profile-->
+        <!--WorldCategoryVC-->
+        <scene sceneID="r2E-qy-BDx">
+            <objects>
+                <viewController id="qsw-Y1-gY0" userLabel="WorldCategoryVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WTK-zp-cEa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="MKz-i8-1fU">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Pwh-J9-WoV" firstAttribute="trailing" secondItem="MKz-i8-1fU" secondAttribute="trailing" id="Djl-53-x90"/>
+                            <constraint firstItem="MKz-i8-1fU" firstAttribute="leading" secondItem="Pwh-J9-WoV" secondAttribute="leading" id="G6A-cW-lai"/>
+                            <constraint firstItem="MKz-i8-1fU" firstAttribute="top" secondItem="Pwh-J9-WoV" secondAttribute="top" id="jKp-UL-Pih"/>
+                            <constraint firstItem="Pwh-J9-WoV" firstAttribute="bottom" secondItem="MKz-i8-1fU" secondAttribute="bottom" id="k9B-jg-u49"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Pwh-J9-WoV"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Category Name" largeTitleDisplayMode="never" id="AlG-tQ-jX7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A6W-kW-fL8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3131.884057971015" y="778.79464285714278"/>
+        </scene>
+        <!--NC for ProfileVC-->
         <scene sceneID="p0B-bw-1sw">
             <objects>
-                <navigationController id="V8J-a2-XEa" sceneMemberID="viewController">
+                <navigationController id="V8J-a2-XEa" userLabel="NC for ProfileVC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="profile" id="1KH-oZ-O5e"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="20w-Ji-1Ir">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -1886,10 +1950,10 @@
             </objects>
             <point key="canvasLocation" x="1048" y="-420"/>
         </scene>
-        <!--Search-->
+        <!--SearchVC-->
         <scene sceneID="oGD-jR-0y1">
             <objects>
-                <viewController id="iOt-oQ-13E" customClass="SearchVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="iOt-oQ-13E" userLabel="SearchVC" customClass="SearchVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oMm-Kn-Xg4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2032,10 +2096,10 @@
             </objects>
             <point key="canvasLocation" x="2053.6231884057975" y="1869.6428571428571"/>
         </scene>
-        <!--Settings-->
+        <!--SettingsVC-->
         <scene sceneID="SsP-ef-G7l">
             <objects>
-                <viewController id="IFI-7b-Uee" customClass="SettingVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="IFI-7b-Uee" userLabel="SettingsVC" customClass="SettingVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eaD-nA-KWV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2086,10 +2150,10 @@
             </objects>
             <point key="canvasLocation" x="2054" y="3115"/>
         </scene>
-        <!--Existing Packs-->
+        <!--LocalSelectionVC-->
         <scene sceneID="ghu-da-W3z">
             <objects>
-                <viewController id="7dT-7d-0af" customClass="LocalSelectionVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7dT-7d-0af" userLabel="LocalSelectionVC" customClass="LocalSelectionVC" customModule="MoSticker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QQz-6i-hxd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2228,12 +2292,12 @@
             </objects>
             <point key="canvasLocation" x="6747.826086956522" y="778.79464285714278"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--NC for LocalSelectionVC-->
         <scene sceneID="bCN-Jn-OGN">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YeV-Go-VOG" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YeV-Go-VOG" userLabel="NC for LocalSelectionVC" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cc4-LO-Wug">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="cc4-LO-Wug">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="0.99997597930000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2254,10 +2318,10 @@
             </objects>
             <point key="canvasLocation" x="5837.68115942029" y="778.79464285714278"/>
         </scene>
-        <!--Search-->
+        <!--NC for SearchVC-->
         <scene sceneID="QF9-zL-FDC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="thM-gy-oMn" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="thM-gy-oMn" userLabel="NC for SearchVC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search" image="search" id="nUy-hn-4xr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="9TZ-bR-8wo">
@@ -2281,10 +2345,10 @@
             </objects>
             <point key="canvasLocation" x="1048" y="1870"/>
         </scene>
-        <!--World-->
+        <!--NC for WorldVC-->
         <scene sceneID="wrU-ww-1JO">
             <objects>
-                <navigationController id="kvA-Mx-o4k" sceneMemberID="viewController">
+                <navigationController id="kvA-Mx-o4k" userLabel="NC for WorldVC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="World" image="world" id="8UD-ju-jPX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="NFW-EK-KCD">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -2323,7 +2387,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="T89-hL-CIJ"/>
-        <segue reference="IcG-aE-qrK"/>
+        <segue reference="tmA-Rg-fKc"/>
         <segue reference="jy4-oD-0DU"/>
         <segue reference="3Jg-6q-tnQ"/>
     </inferredMetricsTieBreakers>

@@ -31,7 +31,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
             }
         }
     }
-    func reloadData(completion: @escaping () -> ()) {
+    func reloadData(completion: @escaping () -> Void) {
         StickerPackDB.getAllPacks({ (error, packs) in
             self.tableView.backgroundView = nil
             if let error = error {

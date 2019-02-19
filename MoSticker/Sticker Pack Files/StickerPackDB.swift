@@ -34,19 +34,24 @@ class StickerPackDB: StickerPackBase {
         let ref = Database.database().reference(withPath: "users/\(uid)/sticker_packs")
         return ref
     }
+    static func getUserRef() -> DatabaseReference? {
+        guard let uid = getUID() else { return nil }
+        let ref = Database.database().reference(withPath: "users/\(uid)")
+        return ref
+    }
     static func getPackID() -> String {
         let packRef = Database.database().reference(withPath: "sticker_packs").childByAutoId()
         return packRef.key!
     }
     
     // MARK: - User Name
-    static func getUserName(uid: String, _ completion: @escaping (String?) -> ()) {
+    static func getUserName(uid: String, _ completion: @escaping (String?) -> Void) {
         let nameRef = Database.database().reference(withPath: "users/\(uid)/name")
         nameRef.observeSingleEvent(of: .value) { (nameSnap) in
             completion(nameSnap.value as? String)
         }
     }
-    static func updateUserName(_ name: String, _ completion: @escaping (Error?) -> ()) {
+    static func updateUserName(_ name: String, _ completion: @escaping (Error?) -> Void) {
         guard let uid = getUID() else {
             completion(PackDBError.noAuthError)
             return
@@ -59,7 +64,7 @@ class StickerPackDB: StickerPackBase {
     }
     
     // MARK: - Retrieve Packs
-    static func getAllPacks(_ completion: @escaping (Error?, [StickerPackDB]?) -> ()) {
+    static func getAllPacks(_ completion: @escaping (Error?, [StickerPackDB]?) -> Void) {
         guard let userPackRef = getUserPackRef() else {
             completion(PackDBError.noAuthError, nil)
             return
@@ -98,7 +103,7 @@ class StickerPackDB: StickerPackBase {
             })
         })
     }
-    static func getPack(_ packID: String, completion: @escaping (Error?, StickerPackDB?) -> ()) {
+    static func getPack(_ packID: String, completion: @escaping (Error?, StickerPackDB?) -> Void) {
         let packRef = Database.database().reference(withPath: "sticker_packs").child(packID)
         packRef.observeSingleEvent(of: .value) { (snapshot) in
 
@@ -112,7 +117,7 @@ class StickerPackDB: StickerPackBase {
             })
         }
     }
-    static func parseSnapshot(_ snapshot: DataSnapshot, _ completion: @escaping (StickerPackDB?) -> ()) {
+    static func parseSnapshot(_ snapshot: DataSnapshot, _ completion: @escaping (StickerPackDB?) -> Void) {
         func base64Dict2Array(_ dict: [String: String]?) -> [Data]? {
             if dict == nil {
                 return nil
@@ -180,7 +185,7 @@ class StickerPackDB: StickerPackBase {
             completion(pack)
         }
     }
-    static func observe(_ changes: @escaping (Error?, PackChanges, StickerPackDB?) -> ()) {
+    static func observe(_ changes: @escaping (Error?, PackChanges, StickerPackDB?) -> Void) {
         var userPackRef: DatabaseReference?
         var packObserveRefs = [DatabaseReference]()
         Auth.auth().addStateDidChangeListener { (auth, user) in
@@ -230,7 +235,7 @@ class StickerPackDB: StickerPackBase {
     }
     
     // MARK: - Write to DB
-    func upload(completion: @escaping (Error?) -> ()) {
+    func upload(completion: @escaping (Error?) -> Void) {
         guard let userLinkRef = StickerPackDB.getUserPackRef() else {
             completion(PackDBError.noAuthError)
             return
@@ -272,7 +277,7 @@ class StickerPackDB: StickerPackBase {
             })
         }
     }
-    func delete(completion: @escaping (Error?) -> ()) {
+    func delete(completion: @escaping (Error?) -> Void) {
         if let owner = self.owner, owner == Auth.auth().currentUser?.uid {
             let packRef = Database.database().reference(withPath: "sticker_packs").child(self.packID)
             packRef.removeValue { (error, _) in
@@ -288,37 +293,51 @@ class StickerPackDB: StickerPackBase {
     }
     
     // MARK: - Querying
-    static func query(with searchText: String, _ completion: @escaping ([StickerPackDB]) -> ()) {
+    private static func parse(query querySnap: DataSnapshot, sortBy order: @escaping (StickerPackDB, StickerPackDB) -> Bool, _ completion: @escaping ([StickerPackDB]) -> Void) {
+        var results = [StickerPackDB]()
+        
+        let group = DispatchGroup()
+        for case let packSnap as DataSnapshot in querySnap.children {
+            group.enter()
+            parseSnapshot(packSnap, { (pack) in
+                guard let pack = pack else {
+                    printWarning("Ignoring bad pack.")
+                    return
+                }
+                results.append(pack)
+                
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: .main, execute: {
+            results.sort(by: order)
+            completion(results)
+        })
+    }
+    static func query(with searchText: String, _ completion: @escaping ([StickerPackDB]) -> Void) {
         let searchText = searchText.lowercased()
         
         let ref = Database.database().reference(withPath: "sticker_packs")
         let query = ref.queryOrdered(byChild: "name_lowercased").queryStarting(atValue: searchText).queryEnding(atValue: searchText + "\u{f8ff}").queryLimited(toFirst: 100)
         query.removeAllObservers()
-        query.observe(.value, with: { querySnap in
-            var results = [StickerPackDB]()
-            
-            let group = DispatchGroup()
-            for case let packSnap as DataSnapshot in querySnap.children {
-                group.enter()
-                parseSnapshot(packSnap, { (pack) in
-                    guard let pack = pack else {
-                        printWarning("Ignoring bad pack.")
-                        return
-                    }
-                    results.append(pack)
-                    
-                    group.leave()
-                })
-            }
-            
-            group.notify(queue: .main, execute: {
-                results.sort { $0.lastEdit! > $1.lastEdit! }
-                completion(results)
-            })
+        query.observeSingleEvent(of: .value, with: { querySnap in
+            parse(query: querySnap, sortBy: { $0.lastEdit! > $1.lastEdit! }, completion)
         })
     }
-    static func getMostDownloaded(_ completion: @escaping ([StickerPackDB]) -> ()) {
-        
+    static func getMostDownloaded(_ completion: @escaping ([StickerPackDB]) -> Void) {
+        let ref = Database.database().reference(withPath: "sticker_packs")
+        let query = ref.queryOrdered(byChild: "downloads").queryLimited(toLast: 100)
+        query.observeSingleEvent(of: .value) { (querySnap) in
+            parse(query: querySnap, sortBy: { $0.downloads > $1.downloads }, completion)
+        }
+    }
+    static func getMostRecent(_ completion: @escaping ([StickerPackDB]) -> Void) {
+        let ref = Database.database().reference(withPath: "sticker_packs")
+        let query = ref.queryOrdered(byChild: "last_edit").queryLimited(toFirst: 100)
+        query.observeSingleEvent(of: .value) { (querySnap) in
+            parse(query: querySnap, sortBy: { $0.lastEdit! > $1.lastEdit! }, completion)
+        }
     }
     
     // MARK: - Stats

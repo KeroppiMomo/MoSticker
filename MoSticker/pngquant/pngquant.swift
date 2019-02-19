@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIImage {
-    func pngquant(progressHandler: @escaping (Float) -> (), _ completion: @escaping (Data?) -> ()) {
+    func pngquant(progressHandler: @escaping (Float) -> Void, _ completion: @escaping (Data?) -> Void) {
         func callCompletion(_ data: Data?) {
             DispatchQueue.main.sync {
                 completion(data)

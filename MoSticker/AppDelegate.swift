@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
-        StickerPackDB.getUserPackRef()?.keepSynced(true)
+        StickerPackDB.getUserRef()?.keepSynced(true)
         
         do {
             printInfo("Sticker Packs saving path: \(try StickerPackLocal.getPackPath())")

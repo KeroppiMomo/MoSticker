@@ -14,7 +14,7 @@ class PEEmojiSelectVC: UIViewController, EmojiViewDelegate {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var doneButton: UIButton!
     
-    var completion: ((String) -> ())?
+    var completion: ((String) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -261,7 +261,7 @@ extension UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
-    func showErrorMessage(title: String?, message: String?, _ completion: @escaping () -> () = {}) {
+    func showErrorMessage(title: String?, message: String?, _ completion: @escaping () -> Void = {}) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: Resources.Common.ok, style: .default, handler: { _ in
             completion()
@@ -364,5 +364,11 @@ extension UISearchBar {
         placeholderLabel.textColor = UIColor(white: 1.0, alpha: 0.5)
         textField.textColor = .white
         searchImage.image = Resources.Helper.whiteSearchIcon
+    }
+}
+
+extension Comparable {
+    func clamped(to limits: ClosedRange<Self>) -> Self {
+        return min(max(self, limits.lowerBound), limits.upperBound)
     }
 }

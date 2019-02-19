@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIImage {
-    func webpData(targetSize: Int, progressHandler: @escaping (Float) -> (), completion: @escaping (Data?) -> ()) {
+    func webpData(targetSize: Int, progressHandler: @escaping (Float) -> Void, completion: @escaping (Data?) -> Void) {
         func callCompletion(_ data: Data?) {
             DispatchQueue.main.sync {
                 completion(data)

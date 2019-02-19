@@ -11,7 +11,7 @@ import UIKit
 class PEColorPickerVC: UIViewController {
     
     var curColor: UIColor!
-    var completion: ((UIColor) -> ())?
+    var completion: ((UIColor) -> Void)?
     
     @IBOutlet weak var hueSlider: GradientSlider!
     @IBOutlet weak var saturationSlider: GradientSlider!

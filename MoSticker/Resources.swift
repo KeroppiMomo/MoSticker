@@ -97,6 +97,21 @@ class Resources {
         static let headerCellID = "headerCell"
         static let packCellID = "packCell"
         static let loadingCellID = "loadingCell"
+        static let buttonCellID = "buttonCell"
+        
+        static let toEditPackSegueID = "worldVC-editPackDB"
+        
+        static let showMore = "Show More"
+        static let downloadsStrFormat = "%d Downloads"
+        static let recentStrFormat = "Last Edit on %@"
+        
+        static let maxPacksShown = 5
+        
+        typealias QueryCategory = (name: String, getPacks: (@escaping ([StickerPackDB]) -> Void) -> Void, propertyStr: (StickerPackDB) -> String, result: [StickerPackDB]?)
+        static var categories: [QueryCategory] = [
+            (name: "Popular", getPacks: StickerPackDB.getMostDownloaded, propertyStr: { String(format: downloadsStrFormat, $0.downloads) }, result: nil),
+            (name: "Recent", getPacks: StickerPackDB.getMostRecent, propertyStr: { String(format: recentStrFormat, Rc.userDateFormatter.string(from: $0.lastEdit!)) }, result: nil)
+        ]
     }
     /// Resources used by SearchVC.
     class SearVC {
