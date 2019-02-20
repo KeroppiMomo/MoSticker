@@ -17,7 +17,7 @@ class WorldVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         
         for i in 0..<R.categories.count {
-            R.categories[i].getPacks { result in
+            R.categories[i].getPacks(R.maxPacksShown) { result in
                 R.categories[i].result = result
                 self.tableView.reloadSections([i], with: .automatic)
             }
@@ -73,10 +73,15 @@ class WorldVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let packs = R.categories[indexPath.section].result,
+        
+        let category = R.categories[indexPath.section]
+        if let packs = category.result,
             indexPath.row - 1 < min(packs.count, R.maxPacksShown) && indexPath.row - 1 >= 0 {
             let pack = packs[indexPath.row - 1]
             performSegue(withIdentifier: R.toEditPackSegueID, sender: pack)
+        } else if (indexPath.row == 0) ||
+            (indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 && category.result != nil) {
+            performSegue(withIdentifier: R.toCategorySegueID, sender: category)
         }
     }
     
@@ -95,6 +100,12 @@ class WorldVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let pack = sender as? StickerPackDB {
             dvc.stickerPack = pack
             dvc.isEditingMode = false
+        } else if segue.identifier == R.toCategorySegueID,
+            let dvc = segue.destination as? WorldCategoryVC,
+            let cat = sender as? QueryCategory {
+            
+            let catWithoutResult = QueryCategory(name: cat.name, getPacks: cat.getPacks, propertyStr: cat.propertyStr, result: nil)
+            dvc.category = catWithoutResult
         }
     }
 }

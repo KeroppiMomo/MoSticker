@@ -10,6 +10,13 @@ import UIKit
 
 /// Common resources.
 typealias Rc = Resources.Common
+
+struct QueryCategory {
+    var name: String
+    var getPacks: (Int, @escaping ([StickerPackDB]) -> Void) -> Void
+    var propertyStr: (StickerPackDB) -> String
+    var result: [StickerPackDB]?
+}
 /// Resources for the app.
 class Resources {
     /// Common resources across different classes.
@@ -50,6 +57,8 @@ class Resources {
         
         static let publisherSuffix = " @ MoSticker"
         static let publisherLocal = "MoSticker"
+        
+        static let queryItemNo = 100
     }
     
     /// Resources used by AppDelegate.
@@ -100,6 +109,7 @@ class Resources {
         static let buttonCellID = "buttonCell"
         
         static let toEditPackSegueID = "worldVC-editPackDB"
+        static let toCategorySegueID = "worldVC-worldCatVC"
         
         static let showMore = "Show More"
         static let downloadsStrFormat = "%d Downloads"
@@ -107,11 +117,16 @@ class Resources {
         
         static let maxPacksShown = 5
         
-        typealias QueryCategory = (name: String, getPacks: (@escaping ([StickerPackDB]) -> Void) -> Void, propertyStr: (StickerPackDB) -> String, result: [StickerPackDB]?)
-        static var categories: [QueryCategory] = [
-            (name: "Popular", getPacks: StickerPackDB.getMostDownloaded, propertyStr: { String(format: downloadsStrFormat, $0.downloads) }, result: nil),
-            (name: "Recent", getPacks: StickerPackDB.getMostRecent, propertyStr: { String(format: recentStrFormat, Rc.userDateFormatter.string(from: $0.lastEdit!)) }, result: nil)
+        static var categories = [
+            QueryCategory(name: "Popular", getPacks: StickerPackDB.getMostDownloaded, propertyStr: { String(format: downloadsStrFormat, $0.downloads) }, result: nil),
+            QueryCategory(name: "Recent", getPacks: StickerPackDB.getMostRecent, propertyStr: { String(format: recentStrFormat, Rc.userDateFormatter.string(from: $0.lastEdit!)) }, result: nil)
         ]
+        
+        /// Resources used by WorldCategoryVC.
+        class Cat {
+            static let packCellID = "packCell"
+            static let toEditPackSegueID = "worldCatVC-editPackDB"
+        }
     }
     /// Resources used by SearchVC.
     class SearVC {

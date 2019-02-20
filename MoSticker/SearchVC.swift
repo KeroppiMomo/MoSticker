@@ -103,7 +103,7 @@ class SearchVC: UIViewController, UISearchResultsUpdating, UISearchBarDelegate, 
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if searchResults.count == 0 {
             return nil
-        } else if searchResults.count == 100 {
+        } else if searchResults.count == Rc.queryItemNo {
             return R.limitReachedFooter
         } else {
             return R.nothingMoreFooter

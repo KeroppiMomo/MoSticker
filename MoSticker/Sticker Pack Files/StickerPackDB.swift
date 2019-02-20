@@ -319,22 +319,22 @@ class StickerPackDB: StickerPackBase {
         let searchText = searchText.lowercased()
         
         let ref = Database.database().reference(withPath: "sticker_packs")
-        let query = ref.queryOrdered(byChild: "name_lowercased").queryStarting(atValue: searchText).queryEnding(atValue: searchText + "\u{f8ff}").queryLimited(toFirst: 100)
+        let query = ref.queryOrdered(byChild: "name_lowercased").queryStarting(atValue: searchText).queryEnding(atValue: searchText + "\u{f8ff}").queryLimited(toFirst: UInt(Rc.queryItemNo))
         query.removeAllObservers()
         query.observeSingleEvent(of: .value, with: { querySnap in
             parse(query: querySnap, sortBy: { $0.lastEdit! > $1.lastEdit! }, completion)
         })
     }
-    static func getMostDownloaded(_ completion: @escaping ([StickerPackDB]) -> Void) {
+    static func getMostDownloaded(numberOfItems: Int, _ completion: @escaping ([StickerPackDB]) -> Void) {
         let ref = Database.database().reference(withPath: "sticker_packs")
-        let query = ref.queryOrdered(byChild: "downloads").queryLimited(toLast: 100)
+        let query = ref.queryOrdered(byChild: "downloads").queryLimited(toLast: UInt(numberOfItems))
         query.observeSingleEvent(of: .value) { (querySnap) in
             parse(query: querySnap, sortBy: { $0.downloads > $1.downloads }, completion)
         }
     }
-    static func getMostRecent(_ completion: @escaping ([StickerPackDB]) -> Void) {
+    static func getMostRecent(numberOfItems: Int, _ completion: @escaping ([StickerPackDB]) -> Void) {
         let ref = Database.database().reference(withPath: "sticker_packs")
-        let query = ref.queryOrdered(byChild: "last_edit").queryLimited(toFirst: 100)
+        let query = ref.queryOrdered(byChild: "last_edit").queryLimited(toFirst: UInt(numberOfItems))
         query.observeSingleEvent(of: .value) { (querySnap) in
             parse(query: querySnap, sortBy: { $0.lastEdit! > $1.lastEdit! }, completion)
         }
