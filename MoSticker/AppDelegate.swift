@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         
         FirebaseApp.configure()
-        Database.database().isPersistenceEnabled = true
         StickerPackDB.getUserRef()?.keepSynced(true)
         
         do {
