@@ -20,115 +20,30 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
         super.viewDidLoad()
         
         setBarItemsEnabled(false)
-        tableView.backgroundView = createLoadingBackgroundView()
-        updateTableView()
-        StickerPackDB.observe(self.observe)
-        StickerPackDB.getAllPacks { (error, packs) in
+        updateTableView(isInit: true)
+//        StickerPackDB.observe(self.observe)
+        StickerPackDB.getUserAllPacks { (error, packs) in
             if let packs = packs {
-                if packs.count == 0 {
-                    self.tableView.backgroundView = createLabelView(Rc.emptyLabelText)
-                }
+                self.packs = packs
+                self.updateTableView(isInit: false)
             }
         }
-    }
-    func reloadData(completion: @escaping () -> Void) {
-        StickerPackDB.getAllPacks({ (error, packs) in
-            self.tableView.backgroundView = nil
-            if let error = error {
-                if case PackDBError.noAuthError = error {
-                    self.tableView.backgroundView = createLabelView(Rc.noAuthLabelText)
-                } else {
-                    self.showErrorMessage(title: R.retrievePackErrorTitle, message: R.retrievePackErrorMessage)
-                    printError(error)
-                }
-            } else if let packs = packs {
-                self.setBarItemsEnabled(true)
-                self.packs = packs
-                self.tableView.reloadSections([1], with: .automatic)
-                
-                if packs.count == 0 {
-                    self.tableView.backgroundView = createLabelView(Rc.emptyLabelText)
-                }
-            }
-            completion()
-        })
-    }
-    func observe(error: Error?, change: PackChanges, pack: StickerPackDB?) {
+        
         if let uid = StickerPackDB.getUID() {
             StickerPackDB.getUserName(uid: uid) { (displayName) in
                 self.displayName = displayName
+                self.updateTableView(isInit: false)
             }
-        } else {
-            displayName = nil
         }
-        
-        if let error = error {
-            self.showErrorMessage(title: R.updatePackErrorTitle, message: R.updatePackErrorMessage)
-            printError(error)
-        } else {
-            func removeDuplicate() {
-                // Removing duplicate packs because I DON'T WANT TO DEAL WITH DATABASE
-                var allPackIDs = [String]()
-                var results = [StickerPackDB]()
-                for pack in packs {
-                    if !allPackIDs.contains(pack.packID) {
-                        allPackIDs.append(pack.packID)
-                        results.append(pack)
-                    }
-                }
-                packs = results
-            }
-            
-            guard pack != nil || change == .all else {
-                self.showErrorMessage(title: R.updatePackErrorTitle, message: R.updatePackErrorMessage)
-                return
-            }
-            switch change {
-            case .added:
-                self.packs.append(pack!)
-                self.packs.sort(by: { $0.lastEdit! > $1.lastEdit! })
-                break
-            case .changed:
-                guard let changeIndex = self.packs.firstIndex(where: { $0.packID == pack!.packID }) else {
-                    self.showErrorMessage(title: R.updatePackErrorTitle, message: R.updatePackErrorMessage)
-                    return
-                }
-                self.packs[changeIndex] = pack!
-                break
-            case .removed:
-                guard let changeIndex = self.packs.firstIndex(where: { $0.packID == pack!.packID }) else {
-                    self.showErrorMessage(title: R.updatePackErrorTitle, message: R.updatePackErrorMessage)
-                    return
-                }
-                self.packs.remove(at: changeIndex)
-                break
-            case .all:
-                if StickerPackDB.getUID() == nil {
-                    self.packs = []
-                    self.updateTableView()
-                } else {
-                    StickerPackDB.getAllPacks { (error, packs) in
-                        if let packs = packs {
-                            self.packs = packs
-                            removeDuplicate()
-                            self.updateTableView()
-                        }
-                    }
-                }
-            }
-            
-            removeDuplicate()
-        }
-        self.updateTableView()
     }
-    func updateTableView() {
+    func updateTableView(isInit: Bool) {
         tableView.reloadSections([0, 1], with: .automatic)
         setBarItemsEnabled(true)
         if StickerPackDB.getUID() == nil {
             tableView.backgroundView = createLabelView(Rc.noAuthLabelText)
             setBarItemsEnabled(false)
         } else if packs.count == 0 {
-            tableView.backgroundView = createLabelView(Rc.emptyLabelText)
+            tableView.backgroundView = isInit ? createLoadingBackgroundView() : createLabelView(Rc.emptyLabelText)
         } else {
             tableView.backgroundView = nil
         }
@@ -248,6 +163,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
             }
             return
         }
+        guard name != displayName else { return }
         
         let loadingVC = LoadingVC.setup(withMessage: R.updatingNameMessage)
         StickerPackDB.updateUserName(name!) { (error) in

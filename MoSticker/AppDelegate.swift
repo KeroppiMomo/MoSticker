@@ -10,6 +10,7 @@ import UIKit
 import FirebaseCore
 import FirebaseDatabase
 import FirebaseUI
+import FirebaseFirestore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         
         FirebaseApp.configure()
+        
+        let db = Firestore.firestore()
+        let settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
+        
         StickerPackDB.getUserRef()?.keepSynced(true)
         
         do {

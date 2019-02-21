@@ -9,18 +9,12 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseFirestore
 
 // MARK: - Error
 enum PackDBError: Error {
     case noAuthError
     case dbFormatError
-}
-// MARK: - Changes
-enum PackChanges {
-    case added
-    case changed
-    case removed
-    case all
 }
 // MARK: - StickerPackDB
 class StickerPackDB: StickerPackBase {
@@ -46,9 +40,16 @@ class StickerPackDB: StickerPackBase {
     
     // MARK: - User Name
     static func getUserName(uid: String, _ completion: @escaping (String?) -> Void) {
-        let nameRef = Database.database().reference(withPath: "users/\(uid)/name")
-        nameRef.observeSingleEvent(of: .value) { (nameSnap) in
-            completion(nameSnap.value as? String)
+        let userDoc = Firestore.firestore().collection("users").document(uid)
+        userDoc.getDocument { (docSnap, error) in
+            guard error == nil,
+                let docSnap = docSnap,
+                let name = docSnap.get("name") as? String else {
+                
+                completion(nil)
+                return
+            }
+            completion(name)
         }
     }
     static func updateUserName(_ name: String, _ completion: @escaping (Error?) -> Void) {
@@ -57,52 +58,12 @@ class StickerPackDB: StickerPackBase {
             return
         }
         
-        let ref = Database.database().reference(withPath: "users/\(uid)/name")
-        ref.setValue(name) { (error, _) in
-            completion(error)
-        }
+        let userDoc = Firestore.firestore().collection("users").document(uid)
+        userDoc.updateData([ "name": name ], completion: completion)
     }
     
     // MARK: - Retrieve Packs
-    static func getAllPacks(_ completion: @escaping (Error?, [StickerPackDB]?) -> Void) {
-        guard let userPackRef = getUserPackRef() else {
-            completion(PackDBError.noAuthError, nil)
-            return
-        }
-        userPackRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            if !snapshot.exists() {
-                completion(nil, [])
-                return
-            }
-            guard let snapDict = snapshot.value as? [String: String] else {
-                completion(PackDBError.dbFormatError, nil)
-                return
-            }
-            
-            var errorOccurred = false
-            let dispatchGroup = DispatchGroup()
-            var packs = [StickerPackDB]()
-            for (_, packID) in snapDict {
-                dispatchGroup.enter()
-                getPack(packID, completion: { (error, pack) in
-                    if let error = error {
-                        errorOccurred = true
-                        completion(error, nil)
-                    } else if let pack = pack {
-                        packs.append(pack)
-                    }
-                    dispatchGroup.leave()
-                })
-            }
-            
-            dispatchGroup.notify(queue: .main, execute: {
-                if !errorOccurred {
-                    packs.sort(by: { $0.lastEdit! > $1.lastEdit! })
-                    completion(nil, packs)
-                }
-            })
-        })
-    }
+    
     static func getPack(_ packID: String, completion: @escaping (Error?, StickerPackDB?) -> Void) {
         let packRef = Database.database().reference(withPath: "sticker_packs").child(packID)
         packRef.observeSingleEvent(of: .value) { (snapshot) in
@@ -185,71 +146,9 @@ class StickerPackDB: StickerPackBase {
             completion(pack)
         }
     }
-    static func observe(_ changes: @escaping (Error?, PackChanges, StickerPackDB?) -> Void) {
-        var userPackRef: DatabaseReference?
-        var packObserveRefs = [DatabaseReference]()
-        Auth.auth().addStateDidChangeListener { (auth, user) in
-            printInfo("Auth state changed. Attaching observers.")
-
-            userPackRef?.removeAllObservers()
-            packObserveRefs.forEach { $0.removeAllObservers() }
-            packObserveRefs.removeAll()
-            
-            changes(nil, .all, nil)
-            userPackRef = StickerPackDB.getUserPackRef()
-            StickerPackDB.getUserPackRef()?.observe(.childAdded, with: { (snapshot) in
-                guard let packID = snapshot.value as? String else {
-                    changes(PackDBError.dbFormatError, .added, nil)
-                    return
-                }
-                getPack(packID, completion: { (error, pack) in
-                    changes(error, .added, pack)
-                })
-                let packRef = Database.database().reference(withPath: "sticker_packs/" + packID)
-                packRef.observe(.childChanged) { (snapshot) in
-                    getPack(packID, completion: { (error, pack) in
-                        changes(error, .changed, pack)
-                    })
-                }
-                packObserveRefs.append(packRef)
-            })
-            StickerPackDB.getUserPackRef()?.observe(.childChanged, with: { (snapshot) in
-                guard let packID = snapshot.value as? String else {
-                    changes(PackDBError.dbFormatError, .added, nil)
-                    return
-                }
-                getPack(packID, completion: { (error, pack) in
-                    changes(error, .changed, pack)
-                })
-            })
-            StickerPackDB.getUserPackRef()?.observe(.childRemoved, with: { (snapshot) in
-                guard let packID = snapshot.value as? String else {
-                    changes(PackDBError.dbFormatError, .removed, nil)
-                    return
-                }
-                let removedPack = StickerPackDB()
-                removedPack.packID = packID
-                changes(nil, .removed, removedPack)
-            })
-        }
-    }
     
     // MARK: - Write to DB
     func upload(completion: @escaping (Error?) -> Void) {
-        guard let userLinkRef = StickerPackDB.getUserPackRef() else {
-            completion(PackDBError.noAuthError)
-            return
-        }
-        if self.owner == nil { self.owner = Auth.auth().currentUser!.uid }
-        
-        let db = Database.database()
-        let packRef = db.reference(withPath: "sticker_packs").child(packID)
-        
-        if let error = self.validate(WhatsApp: false) {
-            completion(error)
-            return
-        }
-        
         var webpDict = [String: String]()
         var pngDict = [String: String]()
         for i in 0..<self.stickerWebP.count {
@@ -257,42 +156,141 @@ class StickerPackDB: StickerPackBase {
             webpDict[str] = self.stickerWebP[i].base64EncodedString()
             pngDict[str] = self.stickerPNGData[i].base64EncodedString()
         }
-        let dataDict: [String: Any] = [
-            "name": self.name!,
-            "name_lowercased": self.name!.lowercased(),
-            "tray": self.trayData!.base64EncodedString(),
-            "last_edit": Int64(self.lastEdit!.timeIntervalSince1970 * 1000),
-            "sticker_webp": webpDict,
-            "sticker_png": pngDict,
-            "owner": self.owner!
+
+        let data: [String: Any] = [
+            "name":         self.name!,
+            "last_edit":    Timestamp(date: self.lastEdit!),
+            "tray":         self.trayData!.base64EncodedString(),
+            "pngs":         pngDict,
+            "webps":        webpDict,
+            "owner":        self.owner!
         ]
         
-        packRef.updateChildValues(dataDict) { (error, _) in
+        let dispatchGroup = DispatchGroup()
+        
+        func writeCompletion(error: Error?) {
             if let error = error {
                 completion(error)
-                return
+            } else {
+                dispatchGroup.leave()
             }
-            userLinkRef.child(self.packID).setValue(self.packID, withCompletionBlock: { (error, _) in
-                completion(error)
-            })
+        }
+        
+        dispatchGroup.enter()
+        let packDocRef = Firestore.firestore().document("packs/\(self.packID)")
+        packDocRef.setData(data, completion: completion)
+        
+        dispatchGroup.enter()
+        let downloadsDocRef = packDocRef.collection("counters").document("downloads")
+        downloadsDocRef.setData([ "value": self.downloads ], completion: completion)
+        
+        dispatchGroup.notify(queue: .main) {
+            completion(nil)
         }
     }
     func delete(completion: @escaping (Error?) -> Void) {
         if let owner = self.owner, owner == Auth.auth().currentUser?.uid {
-            let packRef = Database.database().reference(withPath: "sticker_packs").child(self.packID)
-            packRef.removeValue { (error, _) in
-                if let error = error {
-                    completion(error)
-                    return
-                }
-                StickerPackDB.getUserPackRef()!.child(self.packID).removeValue(completionBlock: { (error, _) in
-                    completion(error)
-                })
-            }
+            let packDocRef = Firestore.firestore().collection("packs").document(self.packID)
+            packDocRef.delete(completion: completion)
         }
     }
     
     // MARK: - Querying
+    static func parseQuerySnap(_ querySnap: QuerySnapshot, sortBy order: @escaping (StickerPackDB, StickerPackDB) -> Bool, _ completion: @escaping (Error?, [StickerPackDB]?) -> Void) {
+        func base64Dict2Array(_ dict: [String: String]?) -> [Data]? {
+            if dict == nil {
+                return nil
+            }
+            let base64s = dict!.sorted { $0.key < $1.key }.map { $0.value }
+            
+            var result = [Data]()
+            for base64 in base64s {
+                if let data = Data(base64Encoded: base64) {
+                    result.append(data)
+                }
+            }
+            return result
+        }
+        
+        var packs = [StickerPackDB]()
+        let allDisGroup = DispatchGroup()
+        
+        for doc in querySnap.documents {
+            let pack = StickerPackDB()
+            guard let ownerUID = doc.get("owner") as? String,
+                let name = doc.get("name") as? String,
+                let lastEdit = doc.get("last_edit") as? Timestamp,
+                let trayBase64 = doc.get("tray") as? String,
+                let tray = Data(base64Encoded: trayBase64),
+                let pngs = base64Dict2Array(doc.get("pngs") as? [String: String]),
+                let webps = base64Dict2Array(doc.get("webps") as? [String: String]) else {
+                    
+                    printWarning("Ignoring bad database results")
+                    continue
+            }
+            
+            allDisGroup.enter()
+            
+            pack.owner = ownerUID
+            pack.name = name
+            pack.lastEdit = lastEdit.dateValue()
+            pack.trayData = tray
+            pack.stickerPNGData = pngs
+            pack.stickerWebP = webps
+            pack.packID = doc.reference.documentID
+            
+            let packDisGroup = DispatchGroup()
+            packDisGroup.enter()
+            doc.reference.collection("counters").document("downloads").getDocument(completion: { (docSnap, error) in
+                if let error = error {
+                    completion(error, nil)
+                    packDisGroup.leave()
+                    return
+                }
+                guard let docSnap = docSnap, let value = docSnap.get("value") as? Int else {
+                    printWarning("Ignoring bad database results")
+                    packDisGroup.leave()
+                    return
+                }
+                pack.downloads = value
+                packDisGroup.leave()
+            })
+            packDisGroup.enter()
+            StickerPackDB.getUserName(uid: ownerUID, { (userName) in
+                if let userName = userName {
+                    pack.ownerName = userName
+                }
+                packDisGroup.leave()
+            })
+            
+            packDisGroup.notify(queue: .main) {
+                allDisGroup.leave()
+                packs.append(pack)
+            }
+        }
+        
+        allDisGroup.notify(queue: .main) {
+            packs.sort(by: order)
+            completion(nil, packs)
+        }
+    }
+    static func getUserAllPacks(_ completion: @escaping (Error?, [StickerPackDB]?) -> Void) {
+        guard let uid = getUID() else {
+            completion(PackDBError.noAuthError, nil)
+            return
+        }
+        let collection = Firestore.firestore().collection("packs")
+        let query = collection.whereField("owner", isEqualTo: uid)
+        query.addSnapshotListener { (querySnap, error) in
+            if let error = error {
+                completion(error, nil)
+                return
+            }
+            guard let querySnap = querySnap else { return }
+            
+            parseQuerySnap(querySnap, sortBy: { $0.lastEdit! > $1.lastEdit! }, completion)
+        }
+    }
     private static func parse(query querySnap: DataSnapshot, sortBy order: @escaping (StickerPackDB, StickerPackDB) -> Bool, _ completion: @escaping ([StickerPackDB]) -> Void) {
         var results = [StickerPackDB]()
         

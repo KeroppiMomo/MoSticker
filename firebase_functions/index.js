@@ -25,6 +25,28 @@ exports.user_login = functions.auth.user().onCreate((user, context) => {
         console.error(error)
     });
 });
+exports.user_login_firestore = functions.auth.user().onCreate((user, context) => {
+    const uid = user.uid;
+    let name = user.displayName;
+    if (name === "" || name === null) {
+        if (user.email) {
+            name = user.email;
+        } else if (user.phoneNumber) {
+            name = user.phoneNumber;
+        } else {
+            name = uid;
+        }
+    }
+
+    const firestore = admin.firestore();
+    const doc = firestore.doc('users/' + uid);
+    return doc.set({
+        name: name
+    }).catch((error) => {
+        console.error('FUNCTIONS - user_login_firestore ERROR (writing to firestore):');
+        console.error(error)
+    });
+});
 
 exports.downloads_changed = functions.database.ref('pack_download_counts/{pack_id}').onWrite((snapshot, context) => {
     const packID = context.params.pack_id;

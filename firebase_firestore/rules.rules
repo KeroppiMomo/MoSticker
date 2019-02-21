@@ -1,0 +1,48 @@
+service cloud.firestore {
+    function isBase64(str) {
+        return str.matches('[a-zA-Z0-9+/]+={0,2}')
+    }
+    match /databases/{database}/documents {
+        match /users/{uid} {
+            allow read;
+            allow update: if 
+                request.auth.uid == uid &&
+                request.resource.data.name is string;
+        }
+        match /packs/{packID} {
+            function formatMatch() {
+                return
+                    request.resource.data.name is string && request.resource.data.name.size() < 128 &&
+                    request.resource.data.last_edit is timestamp && request.resource.data.last_edit < request.time &&
+                    request.resource.data.tray is string && isBase64(request.resource.data.tray) &&
+                    request.resource.data.pngs is map &&
+                    request.resource.data.webps is map
+            }
+            allow read;
+            allow create: if 
+                request.auth != null &&
+                request.auth.uid == request.resource.data.owner &&
+                formatMatch();
+            allow update: if
+                request.auth != null &&
+                request.auth.uid == request.resource.data.owner &&
+                resource.data.owner == request.resource.data.owner &&
+                formatMatch();
+            allow delete: if 
+                request.auth != null &&
+                request.auth.uid == resource.data.owner;
+
+            match /counters/{counterName} {
+                allow read;
+                allow create: if
+                    request.auth != null &&
+                    request.resource.data.value is number &&
+                    (request.resource.data.value == 0 || request.resource.data.value == 1);
+                allow update: if
+                    request.auth != null &&
+                    request.resource.data.value is number &&
+                    (request.resource.data.value == resource.data.value || request.resource.data.value == resource.data.value + 1);
+            }
+        }
+    }
+}

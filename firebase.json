@@ -7,5 +7,9 @@
   },
   "database": {
     "rules": "firebase_database/rules.json"
+  },
+  "firestore": {
+    "rules": "firebase_firestore/rules.rules",
+    "indexes": "firebase_firestore/indexes.json"
   }
 }

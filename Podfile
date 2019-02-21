@@ -13,6 +13,7 @@ target 'MoSticker' do
   # Firebase Develop
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'Firebase/Firestore'
   
   # Firebase AuthUI
   pod 'FirebaseUI/Auth'

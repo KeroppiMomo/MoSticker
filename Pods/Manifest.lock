@@ -1,4 +1,10 @@
 PODS:
+  - BoringSSL (10.0.6):
+    - BoringSSL/Implementation (= 10.0.6)
+    - BoringSSL/Interface (= 10.0.6)
+  - BoringSSL/Implementation (10.0.6):
+    - BoringSSL/Interface (= 10.0.6)
+  - BoringSSL/Interface (10.0.6)
   - Crashlytics (3.12.0):
     - Fabric (~> 1.9.0)
   - Fabric (1.9.0)
@@ -13,6 +19,9 @@ PODS:
   - Firebase/Database (5.15.0):
     - Firebase/CoreOnly
     - FirebaseDatabase (= 5.0.4)
+  - Firebase/Firestore (5.15.0):
+    - Firebase/CoreOnly
+    - FirebaseFirestore (= 0.16.1)
   - Firebase/Performance (5.15.0):
     - Firebase/Core
     - FirebasePerformance (= 2.2.2)
@@ -40,6 +49,21 @@ PODS:
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.1)
     - leveldb-library (~> 1.18)
+  - FirebaseFirestore (0.16.1):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.1)
+    - FirebaseFirestore/abseil-cpp (= 0.16.1)
+    - "gRPC-C++ (= 0.0.5)"
+    - leveldb-library (~> 1.20)
+    - nanopb (~> 0.3.8)
+    - Protobuf (~> 3.1)
+  - FirebaseFirestore/abseil-cpp (0.16.1):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.1)
+    - "gRPC-C++ (= 0.0.5)"
+    - leveldb-library (~> 1.20)
+    - nanopb (~> 0.3.8)
+    - Protobuf (~> 3.1)
   - FirebaseInstanceID (3.3.0):
     - FirebaseCore (~> 5.1)
     - GoogleUtilities/Environment (~> 5.3)
@@ -110,6 +134,22 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (5.3.6):
     - GoogleUtilities/Logger
+  - "gRPC-C++ (0.0.5)":
+    - "gRPC-C++/Implementation (= 0.0.5)"
+    - "gRPC-C++/Interface (= 0.0.5)"
+  - "gRPC-C++/Implementation (0.0.5)":
+    - "gRPC-C++/Interface (= 0.0.5)"
+    - gRPC-Core (= 1.14.0)
+    - nanopb (~> 0.3)
+  - "gRPC-C++/Interface (0.0.5)"
+  - gRPC-Core (1.14.0):
+    - gRPC-Core/Implementation (= 1.14.0)
+    - gRPC-Core/Interface (= 1.14.0)
+  - gRPC-Core/Implementation (1.14.0):
+    - BoringSSL (~> 10.0)
+    - gRPC-Core/Interface (= 1.14.0)
+    - nanopb (~> 0.3)
+  - gRPC-Core/Interface (1.14.0)
   - GTMSessionFetcher/Core (1.2.1)
   - ISEmojiView (0.1.2)
   - leveldb-library (1.20)
@@ -130,6 +170,7 @@ DEPENDENCIES:
   - Fabric
   - Firebase/Core
   - Firebase/Database
+  - Firebase/Firestore
   - Firebase/Performance
   - FirebaseUI/Auth
   - FirebaseUI/Google
@@ -140,6 +181,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - BoringSSL
     - Crashlytics
     - Fabric
     - Firebase
@@ -149,6 +191,7 @@ SPEC REPOS:
     - FirebaseAuthInterop
     - FirebaseCore
     - FirebaseDatabase
+    - FirebaseFirestore
     - FirebaseInstanceID
     - FirebasePerformance
     - FirebaseRemoteConfig
@@ -157,6 +200,8 @@ SPEC REPOS:
     - GoogleSignIn
     - GoogleToolboxForMac
     - GoogleUtilities
+    - "gRPC-C++"
+    - gRPC-Core
     - GTMSessionFetcher
     - ISEmojiView
     - leveldb-library
@@ -165,6 +210,7 @@ SPEC REPOS:
     - YYImage
 
 SPEC CHECKSUMS:
+  BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
   Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
   Fabric: f988e33c97f08930a413e08123064d2e5f68d655
   Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
@@ -174,6 +220,7 @@ SPEC CHECKSUMS:
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: 35747502d9e8c6ee217385ad04446c7c2aaf9c5c
   FirebaseDatabase: 0621689f77528d62b47e1c06ca737c4c19275d1a
+  FirebaseFirestore: 58043a1c2d2c91efdaa8d8f385cdbaa2ce750cfe
   FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
   FirebasePerformance: 6f77b930f982a54ad487d3de5523ce641db9dcc9
   FirebaseRemoteConfig: 7e11c65f0769c09bff6947997c209515058c5318
@@ -182,6 +229,8 @@ SPEC CHECKSUMS:
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
+  "gRPC-C++": 19eec1ffd34de29453f5fab5b4697ad0f240ad51
+  gRPC-Core: f4836515817c0eb479aeeb9cc27c91c4ba62a9f6
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   ISEmojiView: 5b53bdf057ddf484b92e70064a1cc46b5fedf7ea
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
@@ -189,6 +238,6 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 8a036fc9ce0cd9a11f6663c32567e7a97fb1bc38
+PODFILE CHECKSUM: 25530f12ba8383a1cda3f0bae86b3202e188565b
 
 COCOAPODS: 1.5.3
