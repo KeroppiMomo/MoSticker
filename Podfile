@@ -14,6 +14,7 @@ target 'MoSticker' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Functions'
   
   # Firebase AuthUI
   pod 'FirebaseUI/Auth'

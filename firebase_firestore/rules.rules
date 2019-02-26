@@ -16,33 +16,25 @@ service cloud.firestore {
                     request.resource.data.last_edit is timestamp && request.resource.data.last_edit < request.time &&
                     request.resource.data.tray is string && isBase64(request.resource.data.tray) &&
                     request.resource.data.pngs is map &&
-                    request.resource.data.webps is map
+                    request.resource.data.webps is map &&
+                    request.resource.data.downloads is number
             }
             allow read;
             allow create: if 
                 request.auth != null &&
                 request.auth.uid == request.resource.data.owner &&
-                formatMatch();
+                formatMatch() &&
+                request.resource.data.downloads == 0;
             allow update: if
                 request.auth != null &&
                 request.auth.uid == request.resource.data.owner &&
                 resource.data.owner == request.resource.data.owner &&
-                formatMatch();
+                formatMatch() &&
+                ((request.resource.data.downloads == null && resource.data.downloads == null) ||
+                 (request.resource.data.downloads == resource.data.downloads));
             allow delete: if 
                 request.auth != null &&
                 request.auth.uid == resource.data.owner;
-
-            match /counters/{counterName} {
-                allow read;
-                allow create: if
-                    request.auth != null &&
-                    request.resource.data.value is number &&
-                    (request.resource.data.value == 0 || request.resource.data.value == 1);
-                allow update: if
-                    request.auth != null &&
-                    request.resource.data.value is number &&
-                    (request.resource.data.value == resource.data.value || request.resource.data.value == resource.data.value + 1);
-            }
         }
     }
 }

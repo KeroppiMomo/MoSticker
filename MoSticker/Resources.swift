@@ -13,7 +13,7 @@ typealias Rc = Resources.Common
 
 struct QueryCategory {
     var name: String
-    var getPacks: (Int, @escaping ([StickerPackDB]) -> Void) -> Void
+    var getPacks: (Int, @escaping (Error?, [StickerPackDB]?) -> Void) -> Void
     var propertyStr: (StickerPackDB) -> String
     var result: [StickerPackDB]?
 }
@@ -114,6 +114,9 @@ class Resources {
         static let showMore = "Show More"
         static let downloadsStrFormat = "%d Downloads"
         static let recentStrFormat = "Last Edit on %@"
+
+        static let queryErrorTitle = "Error: Failed to Retrieve Packs"
+        static let queryErrorMessage = "An error has occurred when retrieving sticker packs."
         
         static let maxPacksShown = 5
         
@@ -137,6 +140,9 @@ class Resources {
         static let noResults = "No Results\n\nMake sure all words are spelled correctly, and try different keywords."
         static let nothingMoreFooter = "Nothing More"
         static let limitReachedFooter = "Number of Results Reached Limit\n\nTry to search more specifically."
+        
+        static let searchErrorTitle = "Error: Failed to Retrieve Packs"
+        static let searchErrorMessage = "An error has occurred when retrieving sticker packs."
     }
     /// Resources used by SettingVC.
     class SetVC {

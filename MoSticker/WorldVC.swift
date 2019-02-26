@@ -17,7 +17,13 @@ class WorldVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         
         for i in 0..<R.categories.count {
-            R.categories[i].getPacks(R.maxPacksShown) { result in
+            R.categories[i].getPacks(R.maxPacksShown) { (error, result) in
+                if let error = error {
+                    self.showErrorMessage(title: R.queryErrorTitle, message: R.queryErrorMessage)
+                    printError(error)
+                    return
+                }
+                guard let result = result else { return }
                 R.categories[i].result = result
                 self.tableView.reloadSections([i], with: .automatic)
             }

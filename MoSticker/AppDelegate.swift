@@ -29,9 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let db = Firestore.firestore()
         let settings = db.settings
         settings.areTimestampsInSnapshotsEnabled = true
+        settings.isPersistenceEnabled = true
         db.settings = settings
-        
-        StickerPackDB.getUserRef()?.keepSynced(true)
         
         do {
             printInfo("Sticker Packs saving path: \(try StickerPackLocal.getPackPath())")

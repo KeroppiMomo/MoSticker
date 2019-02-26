@@ -9,6 +9,7 @@
 import UIKit
 
 fileprivate typealias R = Resources.WoVC.Cat
+fileprivate typealias Rs = Resources.WoVC // s = superclass
 class WorldCategoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
@@ -20,7 +21,13 @@ class WorldCategoryVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         navigationItem.title = category.name
         tableView.backgroundView = createLoadingBackgroundView()
         tableView.rowHeight = 186
-        category.getPacks(Rc.queryItemNo) { packs in
+        category.getPacks(Rc.queryItemNo) { (error, packs) in
+            if let error = error {
+                self.showErrorMessage(title: Rs.queryErrorTitle, message: Rs.queryErrorMessage)
+                printError(error)
+                return
+            }
+            guard let packs = packs else { return }
             self.tableView.backgroundView = nil
             self.category.result = packs
             self.tableView.reloadSections([0], with: .automatic)

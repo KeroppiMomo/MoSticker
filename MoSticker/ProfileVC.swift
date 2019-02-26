@@ -22,18 +22,16 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, L
         setBarItemsEnabled(false)
         updateTableView(isInit: true)
 //        StickerPackDB.observe(self.observe)
-        StickerPackDB.getUserAllPacks { (error, packs) in
+        StickerPackDB.observeUserPacks { (error, packs) in
             if let packs = packs {
                 self.packs = packs
                 self.updateTableView(isInit: false)
             }
         }
         
-        if let uid = StickerPackDB.getUID() {
-            StickerPackDB.getUserName(uid: uid) { (displayName) in
-                self.displayName = displayName
-                self.updateTableView(isInit: false)
-            }
+        StickerPackDB.observeCurrentUserName { (displayName) in
+            self.displayName = displayName
+            self.updateTableView(isInit: false)
         }
     }
     func updateTableView(isInit: Bool) {

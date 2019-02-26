@@ -46,7 +46,13 @@ class SearchVC: UIViewController, UISearchResultsUpdating, UISearchBarDelegate, 
         }
     }
     func filter(searching text: String) {
-        StickerPackDB.query(with: text) { results in
+        StickerPackDB.searchPacks(with: text) { (error, results) in
+            if let error = error {
+                self.showErrorMessage(title: R.searchErrorTitle, message: R.searchErrorMessage)
+                printError(error)
+                return
+            }
+            guard let results = results else { return }
             self.searchResults = results
             self.tableView.reloadSections([0], with: .automatic)
             
