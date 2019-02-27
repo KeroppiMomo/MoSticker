@@ -38,6 +38,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "StickerPackBase.sendToWhatsApp(id:publisher:completion:):StickerPackBase.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "UIImage(data: stickerPNGData[0])">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UISearchBar.setPlaceholderColor(_:):Helper.swift">
          <PersistentStrings>
             <PersistentString

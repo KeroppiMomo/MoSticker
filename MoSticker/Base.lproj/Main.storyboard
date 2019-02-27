@@ -1660,6 +1660,11 @@
                         <color key="barTintColor" red="0.43904143569999998" green="0.78895872830000002" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
+                            <integer key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="pCD-DX-sHA" kind="relationship" relationship="viewControllers" id="X3S-Kc-bZI"/>
                         <segue destination="V8J-a2-XEa" kind="relationship" relationship="viewControllers" id="uP8-Fl-fag"/>
